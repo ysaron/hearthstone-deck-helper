@@ -1,0 +1,56 @@
+FROM python:3.10 AS builder
+
+# не записывать .pyc-файлы при импорте исходных модулей
+ENV PYTHONDONTWRITEBYTECODE 1
+# отключение буферизации потоков stdout и stderr
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /usr/src/deck_helper/
+
+RUN apt update \
+    && apt upgrade \
+    && apt install postgresql gcc python3-dev musl-dev -y
+
+RUN pip install --upgrade pip
+
+# настройка линтера: игнорируем E501 (строка кода слишком длинная)
+RUN pip install flake8
+COPY . .
+RUN flake8 --ignore=E501 .
+
+COPY ./req.txt .
+RUN pip install -r req.txt
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/deck_helper/wheels -r req.txt
+
+# ----------------------------------------------------------------------------------------
+
+FROM python:3.10
+
+RUN mkdir -p /home/deck_helper
+
+RUN adduser --system --group deck_helper \
+    && usermod -aG www-data deck_helper \
+    && usermod -aG sudo deck_helper
+
+ENV HOME=/home/deck_helper
+ENV DECKHELPER_HOME=/home/deck_helper/web
+RUN mkdir $DECKHELPER_HOME && mkdir $DECKHELPER_HOME/static && mkdir $DECKHELPER_HOME/media
+WORKDIR $DECKHELPER_HOME
+
+# установка зависимостей из предыдущего этапа (builder)
+RUN apt install libpq-dev
+COPY --from=builder /usr/src/deck_helper/wheels /wheels
+COPY --from=builder /usr/src/deck_helper/req.txt .
+RUN pip install --no-cache /wheels/*
+
+RUN apt update && apt install -y netcat
+
+COPY entrypoint.prod.sh $DECKHELPER_HOME
+
+COPY . $DECKHELPER_HOME
+
+RUN chown -R deck_helper:deck_helper $DECKHELPER_HOME
+
+USER deck_helper
+
+ENTRYPOINT ["/home/deck_helper/web/entrypoint.prod.sh"]

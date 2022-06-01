@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  web:
+    build: ./deck_helper
+    command: python manage.py runserver 0.0.0.0:8000
+    container_name: HS-Deck-Helper
+    volumes:
+      - ./deck_helper/:/usr/src/deck_helper/
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.dev
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=local_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=local_db
+volumes:
+  postgres_data_dev:

@@ -1,0 +1,17 @@
+.idea
+*.pyc
+__pycache__/
+
+venv
+.env.dev
+.env.prod
+.env.prod.db
+
+db.sqlite3
+
+migrations
+
+deck_helper/media/*
+deck_helper/static
+
+deck_helper/tests/temp
