@@ -1,0 +1,274 @@
+{% extends "core/base.html" %}
+{% load custom_filters %}
+{% load deck_object %}
+{% block title %}{{ title|mktitle }}{% endblock %}
+{% load i18n %}
+
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'core/js/multiclass.js' %}?v=2.0.0"></script>
+    <script src="{% static 'core/js/rnd_deckstring.js' %}?v=2.0.0"></script>
+    <script src="{% static 'core/js/deck_list.js' %}?v=2.0.0"></script>
+{% endblock %}
+
+{% block content %}
+{% if not deck.is_named %}
+    <h1>{{ title }}</h1>
+{% endif %}
+
+{% if deckstring_form %}
+<form action="{% url 'decks:index' %}" method="post">
+    {% csrf_token %}
+    <div class="form-error">{{ deckstring_form.non_field_errors }}</div>
+    <p>{{ deckstring_form.deckstring }}</p>
+    <div class="form-error">{{ deckstring_form.deckstring.errors }}</div>
+    <span>
+        <button type="submit" class="form-button">
+            <span class="button-icon"><i class="far fa-check-circle"></i></span>
+            <span class="button-text">{% trans "Decode" %}</span>
+        </button>
+        <button type="button" class="form-button" id="getRandomDeckstring">
+            <span class="button-icon"><i class="far fa-question-circle"></i></span>
+            <span class="button-text">{% trans "Random deck" %}</span>
+        </button>
+        <button type="button" class="form-button" onclick="clearDeckstringField()">
+            <span class="button-icon"><i class="far fa-times-circle"></i></span>
+            <span class="button-text">{% trans "Clear" %}</span>
+        </button>
+    </span>
+</form>
+{% endif %}
+
+{% if deck %}
+<div class="decks-grid" style="padding-bottom: 50px;">
+    <div>
+    <table class="deck {{ deck|dformat }}">
+        <tbody class="deck-header {{ deck|dclass }}">
+        <tr>
+            <td colspan="3" class="deck-name">
+                <span class="deck-name-text">{% if deck.is_named %}{{ deck.name }}{% else %}{{ deck|shortclassname }}-{{ deck.pk }}{% endif %}</span>
+                <br>
+                <span class="deck-caption">{{ deck|shortclassname }}, {{ deck.deck_format }}, {{ deck.created|date:"d.m.Y" }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="deck-control">
+            {% if deck.is_named %}
+                <span id="deckControlButtons">
+                    <button type="button" id="deckRenameButton" onclick="showDeckRenameForm()">
+                        <span class="deck-control-icon" title="{% trans 'Rename the deck' %}">
+                            <i class="far fa-edit"></i>
+                        </span>
+                    </button>
+                    <button type="button" id="deckDeleteButton" onclick="showDeckDeleteForm()">
+                        <span class="deck-control-icon" title="{% trans 'Remove the deck' %}">
+                            <i class="far fa-trash-alt"></i>
+                        </span>
+                    </button>
+                    <span class="mytooltip">
+                      <button type="button" onclick="copyToClipboard()" onmouseover="tooltipFunc()">
+                        <span class="tooltiptext" id="copyTooltip">Copy to clipboard</span>
+                        <span class="deck-control-icon"><i class="far fa-copy"></i></span>
+                      </button>
+                    </span>
+                </span>
+                <form method="post">{% csrf_token %}
+                    <span id="deckRenameForm" class="" style="display: none;">
+                        {{ deck_save_form.deck_name }}
+                        {{ deck_save_form.string_to_save }}
+                        <button type="submit">
+                            <span class="deck-control-icon" title="{% trans 'Accept the new name' %}">
+                                <i class="far fa-check-square"></i>
+                            </span>
+                        </button>
+                        <button type="button" id="deckRenameCancel" onclick="hideDeckRenameForm()">
+                            <span class="deck-control-icon" title="{% trans 'Back' %}">
+                                <i class="far fa-window-close"></i>
+                            </span>
+                        </button>
+                    </span>
+                </form>
+                <form action="{% url 'decks:deck_delete' deck_id=deck.pk %}" method="post">{% csrf_token %}
+                    <span id="deckDeleteForm" class="" style="display: none;">
+                        <button class="" type="submit">
+                            <span class="deck-control-icon" title="{% trans 'Confirm deletion' %}">
+                                <i class="far fa-trash-alt"></i>
+                            </span>
+                        </button>
+                        <button type="button" id="deckDeleteCancel" onclick="hideDeckDeleteForm()">
+                            <span class="deck-control-icon" title="{% trans 'Cancel' %}">
+                                <i class="far fa-window-close"></i>
+                            </span>
+                        </button>
+                    </span>
+                </form>
+            {% else %}
+                <form method="post">{% csrf_token %}
+                <span id="deckControlButtons2" class="">
+                    {% if request.user.is_authenticated %}
+                    <button type="button" id="deckSaveButton" onclick="showDeckSaveForm()">
+                        <span class="deck-control-icon" title="{% trans 'Save the deck' %}">
+                            <i class="far fa-save"></i>
+                        </span>
+                    </button>
+                    {% else %}
+                    <button type="button" class="disabled">
+                        <span class="deck-control-icon" title="{% trans 'Log in to save the deck' %}">
+                            <i class="far fa-save"></i>
+                        </span>
+                    </button>
+                    {% endif %}
+                    <span class="mytooltip">
+                      <button type="button" onclick="copyToClipboard()" onmouseover="tooltipFunc()">
+                        <span class="tooltiptext" id="copyTooltip">Copy to clipboard</span>
+                        <span class="deck-control-icon"><i class="far fa-copy"></i></span>
+                      </button>
+                    </span>
+                </span>
+                <span id="deckSaveForm" style="display: none;" class="">
+                    {{ deck_save_form.deck_name }}
+                    {{ deck_save_form.string_to_save }}
+                    <button type="submit">
+                        <span class="deck-control-icon" title="{% trans 'Save with this name' %}">
+                            <i class="far fa-check-square"></i>
+                        </span>
+                    </button>
+                    <button type="button" id="deckSaveCancel" onclick="hideDeckSaveForm()">
+                        <span class="deck-control-icon" title="{% trans 'Cancel' %}">
+                            <i class="far fa-window-close"></i>
+                        </span>
+                    </button>
+                </span>
+                </form>
+            {% endif %}
+            <form>
+                <span id="deckstringToCopy" style="display: none;">
+                    {{ deck.get_deckstring_form.deckstring }}
+                    <button type="button">
+                        <span class="deck-control-icon" title="{% trans 'Back' %}">
+                            <i class="far fa-window-close"></i>
+                        </span>
+                    </button>
+                </span>
+            </form>
+            </td>
+        </tr>
+        </tbody>
+        <tbody class="deck-cards">
+        {% for card in deck.included_cards %}
+        <tr class="{{ card|cclass }} {{ card|rar }} rartext">
+            <td class="deck-number-cell" style=""><a href="{{ card.get_absolute_url }}">{{ card.cost }}</a></td>
+            <td class="deck-card-cell" style="background: no-repeat 115% 30%/90% url({{ card.thumbnail.url }});">
+                <a href="{{ card.get_absolute_url }}">
+                    {{ card.name|truncatechars:22 }}
+                    <span><img src="{{ card|locrender }}"></span>
+                </a>
+            </td>
+            <td class="deck-number-cell" style="width:10%;"><a href="{{ card.get_absolute_url }}">{% if card.rarity == 'L' %}&#9733;{% else %}{{ card.number }}x{% endif %}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tbody class="deck-footer {{ deck|dclass }}">
+        <tr>
+        <td colspan="3">{% trans 'Craft' %}: {{ deck.craft_cost.basic }} | {{ deck.craft_cost.gold }}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <div id="deckRenderDiv" class="render">
+        <button type="button" id="deckRenderBtn" class="render-button shade" onclick="showRenderForm()">
+            <span><i class="fas fa-file-image"></i></span>
+        </button>
+    </div>
+    <div class="render" id="renderForm" datasrc="{{ deck.pk }}" style="display: none;">
+        <div class="render-form shade">
+            <form>
+                <div>
+                    <label for="renderName">{% trans 'Name' %}</label><br>
+                    <input type="text" class="form-input" id="renderName" name="renderName" value="{{ deck.deck_format }} {{ deck.deck_class }}" maxlength="40"><br>
+                </div>
+                <div>
+                    <input type="radio" id="engRender" name="renderLang" value="en" checked>
+                    <label for="engRender">English</label><br>
+                    <input type="radio" id="rusRender" name="renderLang" value="ru">
+                    <label for="rusRender">Русский</label><br>
+                </div>
+                <div>
+                    <button type="button" class="form-button" onclick="render()">
+                        <span class="button-icon"><i class="fas fa-file-image"></i></span>
+                        <span class="button-text">{% trans "Draw" %}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="deckRenderLoading" class="render render-loading shade" style="display: none;">
+        <span><i class="fas fa-cog fa-spin"></i></span>
+    </div>
+    <div id="deckRenderPlaceholder" class="render render-image-wrapper shade" style="display: none;">
+    </div>
+</div>
+<div class="decks-grid">
+    <div>
+        <div class="info-item info-deck" style="margin-bottom: 40px;">
+            <h4>{% trans 'Types' %}</h4>
+            <ol>
+                {% for ctype in deck.types_statistics %}
+                <li style="margin: 5px 0;"><a class="intext" href="{% url 'cards:card_list' %}?card_type={{ ctype.name }}&collectible=true">{{ ctype.name.label }}</a>: <b>{{ ctype.num_cards }}</b></li>
+                {% empty %}
+                    <li>{% trans 'No data' %}</li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="info-item info-deck">
+            <h4>{% trans 'Rarities' %}</h4>
+            <ol>
+                {% for rar in deck.rarity_statistics %}
+                <li style="margin: 5px 0;"><a class="intext" href="{% url 'cards:card_list' %}?rarity={{ rar.name }}&collectible=true">{{ rar.name.label }}</a>: <b>{{ rar.num_cards }}</b></li>
+                {% empty %}
+                    <li>{% trans 'No data' %}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <div>
+        <div class="info-item info-deck">
+            <h4>{% trans 'Mechanics' %}</h4>
+            <ol>
+                {% for mech in deck.mechanics_statistics %}
+                <li style="margin: 5px 0;"><a class="intext" href="{% url 'cards:card_list' %}?mechanic={{ mech.mech.pk }}&collectible=true">{{ mech.mech.name }}</a>: <b>{{ mech.num_cards }}</b></li>
+                {% empty %}
+                    <li>{% trans 'No data' %}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <div>
+        <div class="info-item info-deck">
+            <h4>{% trans 'Sets' %}</h4>
+            <ol>
+                {% for set in deck.sets_statistics %}
+                    <li style="margin: 5px 0;"><a class="intext" href="{% url 'cards:card_list' %}?card_set={{ set.data.pk }}&collectible=true">{{ set.name }}</a>: <b>{{ set.num_cards }}</b></li>
+                {% empty %}
+                    <li>{% trans 'No data' %}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="center-wrapper"></div>
+
+{% if similar %}
+<h1>{% trans 'Similar decks' %}</h1>
+<div class="decks-grid">
+    {% for deck in similar %}
+        {% deck_obj deck %}
+    {% endfor %}
+</div>
+{% endif %}
+{% else %}
+<div style="padding: 200px 0;"></div>
+{% endif %}
+
+{% endblock %}

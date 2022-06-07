@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% load custom_filters %}
+{% block title %}{{ title|mktitle }}{% endblock %}
+{% load i18n %}
+ 
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div class="center-wrapper">
+    <form method="post">
+        {% csrf_token %}
+        <div class="info-item common-form-item">
+            {% for f in form %}
+                <div class="common-form-field">
+                    <label class="common-form-label">{{ f.label }}{% if f.field.required %}*{% endif %}</label>{{ f }}
+                </div>
+                <div class="form-error common-form-field">{{ f.errors }}</div>
+                {% if not forloop.last %}<hr class="form-separator">{% endif %}
+            {% endfor %}
+            <div class="common-form-field centered">
+                <button type="submit" class="form-button form-button-green">
+                    <span class="button-icon"><i class="fas fa-user-plus"></i></span>
+                    <span class="button-text">{% trans "Sign Up" %}</span>
+                </button>
+            </div>
+            <div class="note">* - {% trans "required fields" %}</div>
+        </div>
+    </form>
+</div>
+{% endblock %}

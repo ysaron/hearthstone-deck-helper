@@ -6,7 +6,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     container_name: HS-Deck-Helper
     volumes:
-      - ./deck_helper/:/usr/src/deck_helper/
+      - media_volume_dev:/usr/src/deck_helper/media
+      - log_volume_dev:/usr/src/deck_helper/logs
     ports:
       - "8000:8000"
     env_file:
@@ -21,3 +22,5 @@ services:
       - POSTGRES_DB=local_db
 volumes:
   postgres_data_dev:
+  media_volume_dev:
+  log_volume_dev:

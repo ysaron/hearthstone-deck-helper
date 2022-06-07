@@ -34,7 +34,16 @@ RUN adduser --system --group deck_helper \
 
 ENV HOME=/home/deck_helper
 ENV DECKHELPER_HOME=/home/deck_helper/web
-RUN mkdir $DECKHELPER_HOME && mkdir $DECKHELPER_HOME/static && mkdir $DECKHELPER_HOME/media
+ENV MEDIA_DIR=/home/deck_helper/web/media
+RUN mkdir $DECKHELPER_HOME \
+    && mkdir $DECKHELPER_HOME/static \
+    && mkdir $MEDIA_DIR \
+    && mkdir $MEDIA_DIR/cards \
+    && mkdir $MEDIA_DIR/cards/en \
+    && mkdir $MEDIA_DIR/cards/ru \
+    && mkdir $MEDIA_DIR/cards/thumbnails \
+    && mkdir $MEDIA_DIR/decks \
+    && mkdir $DECKHELPER_HOME/logs
 WORKDIR $DECKHELPER_HOME
 
 # установка зависимостей из предыдущего этапа (builder)

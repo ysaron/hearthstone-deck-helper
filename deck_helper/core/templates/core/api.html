@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+{% load custom_filters %}
+{% block title %}{{ title|mktitle }}{% endblock %}
+{% load i18n %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<div class="center-wrapper">
+    <div class="info-item">
+        <div>HS Deck Helper provides a simple open API for:</div>
+            <ul>
+                <li>searching cards</li>
+                <li>searching decks</li>
+                <li>decoding deck codes</li>
+            </ul>
+        <br>
+        <h4>Documentation formats</h4>
+        <ul>
+            <li style="margin: 5px;"><a href="{% url 'schema-swagger-ui' %}" class="intext">User interface</a></li>
+            <li style="margin: 5px;"><a href="{% url 'schema-json' format='.json' %}" class="intext">JSON</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

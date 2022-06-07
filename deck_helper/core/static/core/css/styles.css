@@ -1,0 +1,978 @@
+:root {
+  --dark: #333;
+  --grey: #595959;
+  --bcgrnd: #ffffff;
+  --green: #29a329;
+  --red: #B22222;
+  --mage-1: #3377ff;
+  --mage-2: #ccddff;
+  --priest-1: #ffffb3;
+  --priest-2: #ffffff;
+  --warlock-1: #660066;
+  --warlock-2: #cc00cc;
+  --druid-1: #604020;
+  --druid-2: #bf8040;
+  --rogue-1: #001d25;
+  --rogue-2: #b3b3b3;
+  --shaman-1: #000066;
+  --shaman-2: #3333ff;
+  --paladin-1: #ffcc00;
+  --paladin-2: #ffeb99;
+  --warrior-1: #660000;
+  --warrior-2: #cc0000;
+  --hunter-1: #008000;
+  --hunter-2: #47d147;
+  --demonhunter-1: #00664d;
+  --demonhunter-2: #00cc99;
+  --neutral-1: #bfbfbf;
+  --neutral-2: #f2f2f2;
+  --deathknight-1: #1e1e2f;
+  --deathknight-2: #7373a5;
+  --dream-1: #cc33ff;
+  --dream-2: #f9e6ff;
+  --legendary: #ffa31a;
+  --epic: #db4dff;
+  --rare: #3366ff;
+  --common: #ffffff;
+  --standard: rgba(24, 24, 129, 0.6);
+  --wild: rgba(64, 64, 64, 0.7);
+  --classic: rgba(0, 102, 0, 0.6);
+  --deck-width: 310px;
+}
+
+html, body {
+	font-family: "Consolas";
+	font-size: 16px;
+    background-color: var(--bcgrnd);
+	color: var(--dark);
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+
+	scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+hr {color: #ffffff;}
+
+h1 {
+  margin-top: 10px;
+  color: var(--bcgrnd);
+  text-align: center;
+  text-shadow: -2px -2px 2px #000, 1px -2px 2px #000, -2px 1px 2px #000, 1px 1px 2px #000;
+  transition: 0.3s;
+  cursor: default;
+}
+h1:hover {
+  color: white;
+  text-shadow: -2px -2px 5px #000, 1px -2px 5px #000, -2px 1px 5px #000, 1px 1px 5px #000;
+}
+.detailhead {
+  text-align: center;
+  padding: px;
+}
+
+h2 {
+  margin-left: 20px;
+  text-shadow: 2px 2px 5px var(--grey);
+  cursor: default;
+}
+
+h4 {
+  cursor: default;
+}
+
+div.centered {text-align: center;}
+
+.show {display: block;}
+.hide {display: none;}
+
+.shade {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.shade:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  outline: 1px solid black;
+  transition: 0.4s;
+}
+
+#footer {
+  background-color: var(--dark);
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  margin-top: 10px;
+  height: auto;
+  max-height: 80px;
+  box-shadow: 0 50vh 6px 50vh var(--dark);
+}
+#footer .footer-disclaimer {text-align: right;}
+#footer .footer-contact {
+  text-align: center;
+  height: 34px;
+}
+
+.main-row {
+  min-height: 620px;
+}
+
+/* --- Гиперссылки -------------------------------------------------- */
+a:link, a:visited {
+  color: var(--red);
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover, a:active {
+  color: tomato;
+  background-color: transparent;
+  text-decoration: none;
+}
+a[role="button"] {color: inherit;}
+a.intext {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0 5px;
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+}
+a.intext:hover {
+  color: black;
+  box-shadow: inset 0 0 5px #000000;
+  transition: 0.3s;
+}
+
+/* --- Верхнее меню -------------------------------------------------- */
+.topmenu {
+  overflow: hidden;
+  background-color: var(--dark);
+  z-index: 4;
+  top: 0;
+  width: 100%;
+  border: 2px solid var(--dark);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+}
+.topmenu a {
+  float: left;
+  overflow: hidden;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 5px 5px;
+  text-decoration: none;
+  width: 20%;
+}
+.topmenu a:hover {
+  background: var(--bcgrnd);
+  color: black;
+}
+
+.topmenu-dropdown {
+  float: left;
+  overflow: hidden;
+  padding: 0 !important;
+  display: block;
+  text-align: center;
+  width: 20%;
+}
+.topmenu-dropdown:hover button {
+  width: 100%;
+  color: black;
+  background: var(--bcgrnd);
+}
+.topmenu-dropdown .dropbtn {
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  color: #f2f2f2;
+  text-decoration: none;
+  padding: 5px 5px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.dropdown-icon {font-size: 0.9rem;}
+.dropbtn span {pointer-events: none;}
+.dropcontent {
+  display: none;
+  position: absolute;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+  z-index: 6;
+  width: 19.63%;
+}
+.dropcontent a {
+  float: none;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  border: 2px solid var(--dark);
+  background-color: var(--dark);
+}
+.dropcontent a:hover {
+  background-color: var(--bcgrnd);
+}
+
+/* --- Боковое меню -------------------------------------------------- */
+.sidemenu {
+  overflow: hidden;
+  background-color: var(--dark);
+  color: #f2f2f2;
+  position: sticky;
+  z-index: 3;
+  top: 3px;
+  width: 100%;
+  border: 2px solid var(--dark);
+  border-radius: 5px;
+  margin-top: 3px;
+  margin-bottom: 20px;
+}
+.sidemenu-shadow {box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);}
+.sidemenu a {
+  display: block;
+  color: #f2f2f2;
+  padding: 8px 8px;
+  text-decoration: none;
+}
+.sidemenu a:hover {
+  background: var(--bcgrnd);
+  color: black;
+  border-radius: 5px;
+}
+
+#form-i18n select {
+  background-color: var(--dark);
+  padding: 8px 5px;
+  color: white;
+  border: inherit;
+  width: 100%;
+  cursor: pointer;
+}
+#form-i18n select:hover, #form-i18n select:focus {
+  color: black;
+  background-color: var(--bcgrnd);
+  border: inherit;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* --- Таблицы со списками -------------------------------------------------- */
+.table-wrapper {overflow-x: auto;}
+.tablelist {width: 100%;}
+.tablelist tr:not(:last-child) {border-bottom: 1px solid var(--bcgrnd);}
+.tablelist th:first-child {border-top-left-radius: 17px;}
+.tablelist th:last-child {border-top-right-radius: 17px;}
+.tablelist tr:last-child td:first-child {border-bottom-left-radius: 17px;}
+.tablelist tr:last-child td:last-child {border-bottom-right-radius: 17px;}
+.tablelist .rartext {font-size: 1.2rem;}
+.clickable-row {
+  overflow: hidden;
+  width: 100%;
+}
+.clickable-row a, .clickable-row span {
+  display: block;
+  text-decoration: none;
+}
+.clickable-row a:hover {text-decoration: overline;}
+thead.darktable {
+  background-color: var(--dark);
+  color: white;
+}
+thead.darktable th {padding: 8px;}
+.clickable-row td {
+  white-space: nowrap;
+  padding: 5px;
+}
+
+/* --- Пагинация -------------------------------------------------- */
+.my-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  cursor: default;
+}
+.my-pagination-block {
+  background-color: white;
+  border-radius: 5px;
+  border: 0.5px solid var(--grey);
+  margin: 10px 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.my-pagination-item.info .my-page-item {
+  width: 100%;
+  text-align: center;
+}
+.my-pagination-item.pages .my-page-item {float: left;}
+.my-page-item {
+  display: inline-block;
+  text-align: center;
+}
+.my-page-item a {
+  color: var(--dark);
+  display: block;
+  padding: 5px 12px;
+  text-decoration: none;
+}
+.my-page-item.active, .my-page-item.active a {
+  background-color: var(--dark);
+  color: white;
+}
+.my-page-item:not(.active):not(.disabled) {background-color: var(--bcgrnd);}
+.my-page-item:hover:not(.active):not(.disabled) {background-color: #ddd;}
+
+/* --- Формы -------------------------------------------------- */
+.form-search {
+  width: 250px;
+  font-size: 18px;
+}
+.form-error ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+.form-error li {
+  display: block;
+  padding: 6px;
+  margin-right: 5px;
+  border-radius: 5px;
+  background-color: #ff471a;
+  color: white;
+  opacity: 1;
+  float: left;
+  box-shadow: 1px 1px 2px 0 black;
+  max-width: 450px;
+}
+.form-button {
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: center;
+  min-width: 200px;
+  height: 34px;
+  line-height: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: var(--dark);
+  border: 2px solid var(--dark);
+  border-radius: 5px;
+}
+.form-button:hover {
+  background-color: var(--dark);
+  color: white;
+  transition: background-color 0.4s, color 0.4s;
+}
+.form-button:active {background-color: var(--grey);}
+.form-button-green {
+  color: var(--green);
+  border: 2px solid var(--green);
+}
+.form-button-green:hover {
+  color: white;
+  background-color: var(--green);
+}
+.form-button-white {
+  color: white;
+  border: 2px solid white;
+}
+.form-button-white:hover {
+  color: var(--dark);
+  border: 2px solid var(--dark);
+  background-color: white;
+}
+.form-button-red {
+  color: var(--red);
+  border: 2px solid var(--red);
+}
+.form-button-red:hover {
+  color: white;
+  background-color: var(--red);
+}
+.form-button-wide {min-width: 300px;}
+.button-icon {
+  width: 20%;
+  font-size: 1.5rem;
+  padding: 0.190rem 0;
+  text-align: center;
+  border-right: 1px solid var(--dark);
+  border-right-color: inherit;
+}
+.button-text {
+  width: 80%;
+  padding: 0.375rem 0;
+  text-align: center;
+}
+hr.form-separator {
+  margin: 1px 0;
+  color: var(--dark);
+  height: 0.5px;
+}
+.form-input {
+  width: 100%;
+  font-size: 16px;
+  margin: 8px 0;
+  padding: 5px 5px;
+  border: 2px solid var(--dark);
+  border-radius: 5px;
+}
+.form-input:focus {
+  outline: 1px solid var(--dark);
+  box-shadow: 2px 2px 5px 0 var(--dark);
+}
+
+.common-form-item {
+  display: flex;
+  width: 650px;
+  flex-direction: column;
+}
+.common-form-field {
+  display: flex;
+  max-height: 100px;
+  justify-content: space-between;
+  align-content: center;
+}
+.help-text {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+.common-form-item .centered {justify-content: center;}
+.common-form-item .form-error li {max-width: 100%;}
+.common-form-label {
+  min-width: 40%;
+  font-weight: bold;
+  margin: 0.7rem 0;
+}
+.search-form-label {width: 100%;}
+
+/* --- Рендер колоды -------------------------------------------------- */
+div.render {
+  width: var(--deck-width);
+  height: var(--deck-width);
+}
+.render-button {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  color: var(--dark);
+  border-radius: 10px;
+}
+.render-button span {
+  font-size: 13.5rem;
+}
+.render-button:hover {
+  transition: background-color 0.4s, color 0.4s;
+  background-color: var(--dark);
+  color: white;
+}
+.render-form {
+  width: var(--deck-width);
+  height: var(--deck-width);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  color: var(--dark);
+  border-radius: 10px;
+}
+.render-form div {
+  padding: 15px;
+  margin: 15px;
+  display: block;
+}
+
+.render-loading {
+  font-size: 13.5rem;
+  padding: 0 3rem;
+  display: block;
+  border-radius: 10px;
+  background-color: white;
+}
+.render-image-wrapper {
+  background-color: var(--dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+}
+.render-image-wrapper:hover {
+  border-color: white;
+  transition: 0.4s;
+}
+.render-image-wrapper img {border-radius: 6px;}
+
+/* --- Tooltips -------------------------------------------------- */
+.mytooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.mytooltip .tooltiptext {
+  visibility: hidden;
+  width: 9rem;
+  display: block;
+  pointer-events: none;
+  background-color: #555;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px 10px;
+  text-align: center;
+  white-space: nowrap;
+  position: absolute;
+  z-index: 3;
+  top: 120%;
+  right: -30%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.mytooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 0.9;
+}
+
+/* --- Колоды -------------------------------------------------- */
+table.deck {
+  border-collapse: separate;
+  border-spacing: 0 0;
+  position: relative;
+  z-index: 1;
+  width: var(--deck-width);
+  max-width: var(--deck-width);
+}
+table.standard::before {
+  content: "";
+  border-radius: 20px;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  z-index: -1;
+  box-shadow: -5px 10px 15px var(--standard), 0px 6px 6px var(--standard);
+}
+table.standard:hover::before {
+  box-shadow: -5px 15px 28px var(--standard), 0px 10px 12px var(--standard);
+  transition: 0.3s;
+}
+table.wild::before {
+  content: "";
+  border-radius: 20px;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  z-index: -1;
+  box-shadow: -5px 10px 15px var(--wild), 0px 6px 6px var(--wild);
+}
+table.wild:hover::before {
+  box-shadow: -5px 15px 28px var(--wild), 0px 10px 12px var(--wild);
+  transition: 0.3s;
+}
+table.classic::before {
+  content: "";
+  border-radius: 20px;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  z-index: -1;
+  box-shadow: -5px 10px 15px var(--classic), 0px 6px 6px var(--classic);
+}
+table.classic:hover::before {
+  box-shadow: -5px 15px 28px var(--classic), 0px 10px 12px var(--classic);
+  transition: 0.3s;
+}
+table.unknown::before {
+  content: "";
+  border-radius: 20px;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  z-index: -1;
+  box-shadow: -5px 10px 15px rgba(0, 0, 0, 0.5), 0px 6px 6px rgba(0, 0, 0, 0.5);
+}
+table.deck td {
+  border: 1px solid #999999;
+  letter-spacing: 1px;
+}
+table.deck td a {display: block;}
+
+/* --- Шапка --- */
+.deck-header {cursor: default;}
+
+/* Шапка */
+.deck-header td.deck-name {
+  position: relative;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border: 2px solid black;
+  border-bottom: none;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+.deck-header td.deck-name::before {
+  content: "";
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.deck-name-text {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+.deck-caption {font-size: 14px;}
+
+/* Управляющие кнопки */
+td.deck-control {
+  border: 2px solid black !important;
+  border-top: none !important;
+}
+td.deck-control .disabled {cursor: not-allowed;}
+td.deck-control span {
+  display: flex;
+  width: 100%;
+}
+td.deck-control * {
+  flex: 1;
+  border: none;
+  color: inherit;
+  background: transparent;
+}
+.deck-control button:hover, .deck-control input:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+.deck-control-icon {font-size: 24px;}
+
+/* --- Карты колоды --- */
+.deck-cards td.deck-number-cell {
+  text-align: center;
+  width: calc(var(--deck-width) * 0.1);
+  overflow: hidden;
+}
+.deck-cards td.deck-card-cell {
+  padding: 4px 8px;
+  width: calc(var(--deck-width) * 0.8);
+  position: relative;
+}
+.deck-card-cell span {display:none;}
+.deck-card-cell:hover span {
+  display: block;
+  position: absolute;
+  top: -600%;
+  left: 110%;
+  z-index: 1000;
+  width: auto;
+  overflow: hidden;
+  pointer-events: none;
+}
+.deck-card-cell:hover span.mobile-tooltip {
+  top: -520%;
+  left: -17%;
+}
+.deck-cards-collapsed {
+  max-height: 0;
+  display: block;
+  overflow-y: hidden;
+  transition: max-height 1s ease-in-out;
+}
+
+/* --- Футер колоды --- */
+.deck-footer td {
+  text-align: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 2px solid black !important;
+  cursor: default;
+}
+
+/* --- Список колод --- */
+.decks-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-row-gap: 50px;
+  padding: 35px 0;
+  justify-content: space-around;
+  overflow: hidden;
+}
+.deck-accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* --- Инфо-блоки ------------------------------------------------------- */
+.center-wrapper {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+.info-item {
+  padding: 20px 20px;
+  margin: 5px 0;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  color: black;
+  background-color: white;
+  transition: 0.3s;
+}
+.info-item:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  outline: 1px solid black;
+}
+.info-item h4 {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+.info-item:hover h4 {text-decoration-line: underline;}
+.info-item .note {
+  width: 100%;
+  padding: 10px;
+  padding-bottom: 0;
+  margin-top: 10px;
+  border-top: 1px solid var(--grey);
+}
+.info-deck {width: 350px;}
+
+.stat-item {font-weight: bold;}
+.stat-item.dim, .stat-item.dim a {color: #999999;}
+
+/* --- Классы Hearthstone ------------------------------------------------------- */
+/* Detail */
+.module {
+  padding: 6px;
+  background-color: var(--bcgrnd);
+  border: 1px solid black;
+  border-radius: 25px;
+}
+.modulewrap {
+  margin-top: 3.5px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 35px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.card-detail {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* List */
+.td-bordered:hover td {
+  box-shadow: 0 0 0 1px var(--dark);
+}
+.mage:hover {
+  background: linear-gradient(305deg, var(--mage-1), var(--mage-2), var(--mage-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.mage {
+  background-color: var(--mage-1);
+  color: black;
+}
+
+.priest:hover {
+  background: linear-gradient(305deg, var(--priest-1), var(--priest-2), var(--priest-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.priest {
+  background-color: var(--priest-1);
+  color: black;
+}
+
+.warlock:hover {
+  background: linear-gradient(305deg, var(--warlock-1), var(--warlock-2), var(--warlock-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.warlock {
+  background-color: var(--warlock-1);
+  color: white;
+}
+tbody.warlock td {border-color: white !important;}
+
+.druid:hover {
+  background: linear-gradient(305deg, var(--druid-1), var(--druid-2), var(--druid-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.druid {
+  background-color: var(--druid-1);
+  color: white;
+}
+tbody.druid td {border-color: white !important;}
+
+.shaman:hover {
+  background: linear-gradient(305deg, var(--shaman-1), var(--shaman-2), var(--shaman-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.shaman {
+  background-color: var(--shaman-1);
+  color: white;
+}
+tbody.shaman td {border-color: white !important;}
+
+.rogue:hover {
+  background: linear-gradient(305deg, var(--rogue-1), var(--rogue-2), var(--rogue-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.rogue {
+  background-color: var(--rogue-1);
+  color: white;
+}
+tbody.rogue td {border-color: white !important;}
+
+.paladin:hover {
+  background: linear-gradient(305deg, var(--paladin-1), var(--paladin-2), var(--paladin-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.paladin {
+  background-color: var(--paladin-1);
+  color: black;
+}
+
+.warrior:hover {
+  background: linear-gradient(305deg, var(--warrior-1), var(--warrior-2), var(--warrior-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.warrior {
+  background-color: var(--warrior-1);
+  color: white;
+}
+tbody.warrior td {border-color: white !important;}
+
+.hunter:hover {
+  background: linear-gradient(305deg, var(--hunter-1), var(--hunter-2), var(--hunter-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.hunter {
+  background-color: var(--hunter-1);
+  color: white;
+}
+tbody.hunter td {border-color: white !important;}
+
+.demonhunter:hover {
+  background: linear-gradient(305deg, var(--demonhunter-1), var(--demonhunter-2), var(--demonhunter-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.demonhunter {
+  background-color: var(--demonhunter-1);
+  color: white;
+}
+tbody.demonhunter td {border-color: white !important;}
+
+.neutral:hover, .neutral-deck:hover {
+  background: linear-gradient(305deg, var(--neutral-1), var(--neutral-2), var(--neutral-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.neutral {background-color: var(--neutral-1);}
+
+.dream:hover {
+  background: linear-gradient(305deg, var(--dream-1), var(--dream-2), var(--dream-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.dream {background-color: var(--dream-1);}
+
+.deathknight:hover {
+  background: linear-gradient(305deg, var(--deathknight-1), var(--deathknight-2), var(--deathknight-1));
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.deathknight {background-color: var(--deathknight-1);}
+
+.multiclass:hover {
+  background: var(--neutral-1);     /* изменяется через JS */
+  background-size: 600% 600%;
+  -webkit-animation: CardLink 4s ease infinite;
+  -moz-animation: CardLink 4s ease infinite;
+  animation: CardLink 4s ease infinite;
+}
+.multiclass {background: var(--neutral-1); /* изменяется через JS */ }
+
+/* --- Редкости ----------------------------------------------------------------- */
+.rartext {
+  letter-spacing: 1px;
+  text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000;
+}
+.legendary, .legendary a {color: var(--legendary);}
+.epic, .epic a {color: var(--epic);}
+.rare, .rare a {color: var(--rare);}
+.common, .common a {color: var(--common);}
+
+/* --- Анимации градиента --------------------------------------------------------- */
+@-webkit-keyframes CardLink {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+@-moz-keyframes CardLink {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+@-o-keyframes CardLink {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+@keyframes CardLink {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* --- Псевдоэлементы ------------------------------------------------------------------- */
+::selection {
+  color: white;
+  background: var(--dark);
+}
+
+::placeholder {opacity: 0.5;}

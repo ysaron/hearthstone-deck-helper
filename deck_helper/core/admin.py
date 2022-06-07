@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import HearthstoneState
+
+
+@admin.register(HearthstoneState)
+class StateAdmin(admin.ModelAdmin):
+    pass

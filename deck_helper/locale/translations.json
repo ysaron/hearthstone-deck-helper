@@ -1,0 +1,496 @@
+{
+  "classes": {
+    "Neutral": {
+      "enUS": "Neutral",
+      "ruRU": "Нейтральный"
+    },
+    "Demon Hunter": {
+      "enUS": "Demon Hunter",
+      "ruRU": "Охотник на демонов"
+    },
+    "Warrior": {
+      "enUS": "Warrior",
+      "ruRU": "Воин"
+    },
+    "Warlock": {
+      "enUS": "Warlock",
+      "ruRU": "Чернокнижник"
+    },
+    "Shaman": {
+      "enUS": "Shaman",
+      "ruRU": "Шаман"
+    },
+    "Rogue": {
+      "enUS": "Rogue",
+      "ruRU": "Разбойник"
+    },
+    "Priest": {
+      "enUS": "Priest",
+      "ruRU": "Жрец"
+    },
+    "Paladin": {
+      "enUS": "Paladin",
+      "ruRU": "Паладин"
+    },
+    "Mage": {
+      "enUS": "Mage",
+      "ruRU": "Маг"
+    },
+    "Hunter": {
+      "enUS": "Hunter",
+      "ruRU": "Охотник"
+    },
+    "Druid": {
+      "enUS": "Druid",
+      "ruRU": "Друид"
+    },
+    "Whizbang": {
+      "enUS": "Whizbang",
+      "ruRU": "Чудастер"
+    },
+    "Dream": {
+      "enUS": "Dream",
+      "ruRU": "Сон"
+    },
+    "Death Knight": {
+      "enUS": "Death Knight",
+      "ruRU": "Рыцарь смерти"
+    }
+  },
+  "tribes": {
+    "All": {
+      "enUS": "All",
+      "ruRU": "Всё"
+    },
+    "Quilboar": {
+      "enUS": "Quilboar",
+      "ruRU": "Свинобраз"
+    },
+    "Dragon": {
+      "enUS": "Dragon",
+      "ruRU": "Дракон"
+    },
+    "Pirate": {
+      "enUS": "Pirate",
+      "ruRU": "Пират"
+    },
+    "Totem": {
+      "enUS": "Totem",
+      "ruRU": "Тотем"
+    },
+    "Beast": {
+      "enUS": "Beast",
+      "ruRU": "Зверь"
+    },
+    "Elemental": {
+      "enUS": "Elemental",
+      "ruRU": "Элементаль"
+    },
+    "Mech": {
+      "enUS": "Mech",
+      "ruRU": "Механизм"
+    },
+    "Demon": {
+      "enUS": "Demon",
+      "ruRU": "Демон"
+    },
+    "Murloc": {
+      "enUS": "Murloc",
+      "ruRU": "Мурлок"
+    },
+    "Naga": {
+      "enUS": "Naga",
+      "ruRU": "Нага"
+    },
+    "Orc": {
+      "enUS": "Orc",
+      "ruRU": "Орк"
+    }
+  },
+  "sets": {
+    "unknown": {
+      "enUS": "unknown",
+      "ruRU": "неизвестно"
+    },
+    "The Grand Tournament": {
+      "enUS": "The Grand Tournament",
+      "ruRU": "Большой турнир"
+    },
+    "Blackrock Mountain": {
+      "enUS": "Blackrock Mountain",
+      "ruRU": "Чёрная гора"
+    },
+    "Hall of Fame": {
+      "enUS": "Hall of Fame",
+      "ruRU": "Зал Славы"
+    },
+    "Ashes of Outland": {
+      "enUS": "Ashes of Outland",
+      "ruRU": "Руины Запределья"
+    },
+    "Madness At The Darkmoon Faire": {
+      "enUS": "Madness At The Darkmoon Faire",
+      "ruRU": "Ярмарка безумия"
+    },
+    "Tavern Brawl": {
+      "enUS": "Tavern Brawl",
+      "ruRU": "Потасовки"
+    },
+    "One Night in Karazhan": {
+      "enUS": "One Night in Karazhan",
+      "ruRU": "Вечеринка в Каражане"
+    },
+    "Legacy": {
+      "enUS": "Legacy",
+      "ruRU": "Старые карты"
+    },
+    "Descent of Dragons": {
+      "enUS": "Descent of Dragons",
+      "ruRU": "Натиск драконов"
+    },
+    "Missions": {
+      "enUS": "Missions",
+      "ruRU": "Миссии"
+    },
+    "Core": {
+      "enUS": "Core",
+      "ruRU": "Основной набор"
+    },
+    "Mean Streets of Gadgetzan": {
+      "enUS": "Mean Streets of Gadgetzan",
+      "ruRU": "Злачный город Прибамбасск"
+    },
+    "Forged in the Barrens": {
+      "enUS": "Forged in the Barrens",
+      "ruRU": "Закалённые степями"
+    },
+    "Kobolds & Catacombs": {
+      "enUS": "Kobolds & Catacombs",
+      "ruRU": "Кобольды и катакомбы"
+    },
+    "Hero Skins": {
+      "enUS": "Hero Skins",
+      "ruRU": "Облики героев"
+    },
+    "The Witchwood": {
+      "enUS": "The Witchwood",
+      "ruRU": "Ведьмин лес"
+    },
+    "Scholomance Academy": {
+      "enUS": "Scholomance Academy",
+      "ruRU": "Некроситет"
+    },
+    "Classic": {
+      "enUS": "Classic",
+      "ruRU": "Классик"
+    },
+    "Naxxramas": {
+      "enUS": "Naxxramas",
+      "ruRU": "Проклятие Наксрамаса"
+    },
+    "Rise of Shadows": {
+      "enUS": "Rise of Shadows",
+      "ruRU": "Возмездие теней"
+    },
+    "Saviors of Uldum": {
+      "enUS": "Saviors of Uldum",
+      "ruRU": "Спасители Ульдума"
+    },
+    "Galakrond's Awakening": {
+      "enUS": "Galakrond's Awakening",
+      "ruRU": "Пробуждение Галакронда"
+    },
+    "The Boomsday Project": {
+      "enUS": "The Boomsday Project",
+      "ruRU": "Проект Бумного Дня"
+    },
+    "Demon Hunter Initiate": {
+      "enUS": "Demon Hunter Initiate",
+      "ruRU": "Иллидари-посвящённый"
+    },
+    "Whispers of the Old Gods": {
+      "enUS": "Whispers of the Old Gods",
+      "ruRU": "Пробуждение древних богов"
+    },
+    "United in Stormwind": {
+      "enUS": "United in Stormwind",
+      "ruRU": "Сплочённые Штормградом"
+    },
+    "Journey to Un'Goro": {
+      "enUS": "Journey to Un'Goro",
+      "ruRU": "Экспедиция в Ун’Горо"
+    },
+    "Goblins vs Gnomes": {
+      "enUS": "Goblins vs Gnomes",
+      "ruRU": "Гоблины и гномы"
+    },
+    "The League of Explorers": {
+      "enUS": "The League of Explorers",
+      "ruRU": "Лига исследователей"
+    },
+    "Battlegrounds": {
+      "enUS": "Battlegrounds",
+      "ruRU": "Поля сражений"
+    },
+    "Credits": {
+      "enUS": "Credits",
+      "ruRU": "Создатели"
+    },
+    "Knights of the Frozen Throne": {
+      "enUS": "Knights of the Frozen Throne",
+      "ruRU": "Рыцари Ледяного Трона"
+    },
+    "Vanilla": {
+      "enUS": "Vanilla",
+      "ruRU": "Ванилла"
+    },
+    "Taverns of Time": {
+      "enUS": "Taverns of Time",
+      "ruRU": "Таверны времени"
+    },
+    "Rastakhan's Rumble": {
+      "enUS": "Rastakhan's Rumble",
+      "ruRU": "Растахановы игрища"
+    },
+    "Mercenaries": {
+      "enUS": "Mercenaries",
+      "ruRU": "Наёмники"
+    },
+    "Fractured in Alterac Valley": {
+      "enUS": "Fractured in Alterac Valley",
+      "ruRU": "Разделённые Альтераком"
+    },
+    "Voyage to the Sunken City": {
+      "enUS": "Voyage to the Sunken City",
+      "ruRU": "Затонувший город"
+    }
+  },
+  "formats": [
+    {"num": 0, "name_en": "Unknown", "name_ru": "Неизвестно"},
+    {"num": 1, "name_en": "Wild", "name_ru": "Вольный"},
+    {"num": 2, "name_en": "Standard", "name_ru": "Стандарт"},
+    {"num": 3, "name_en": "Classic", "name_ru": "Классик"}
+  ],
+  "mechanics": {
+    "Adapt": {
+      "enUS": "Adapt",
+      "ruRU": "Адаптация"
+    },
+    "Combo": {
+      "enUS": "Combo",
+      "ruRU": "Серия приемов"
+    },
+    "Inspire": {
+      "enUS": "Inspire",
+      "ruRU": "Воодушевление"
+    },
+    "Deathrattle": {
+      "enUS": "Deathrattle",
+      "ruRU": "Предсмертный хрип"
+    },
+    "Nature Spell Damage": {
+      "enUS": "Nature Spell Damage",
+      "ruRU": "Урон от заклинаний природы"
+    },
+    "Casts When Drawn": {
+      "enUS": "Casts When Drawn",
+      "ruRU": "При взятии"
+    },
+    "Avenge (X)": {
+      "enUS": "Avenge",
+      "ruRU": "Месть"
+    },
+    "Questline": {
+      "enUS": "Questline",
+      "ruRU": "Цепочка заданий"
+    },
+    "Magnetic": {
+      "enUS": "Magnetic",
+      "ruRU": "Магнетизм"
+    },
+    "AIMustPlay": {
+      "enUS": "AIMustPlay",
+      "ruRU": "AIMustPlay"
+    },
+    "Rush": {
+      "enUS": "Rush",
+      "ruRU": "Натиск"
+    },
+    "Stealth": {
+      "enUS": "Stealth",
+      "ruRU": "Маскировка"
+    },
+    "Corrupt": {
+      "enUS": "Corrupt",
+      "ruRU": "Порча"
+    },
+    "Battlecry": {
+      "enUS": "Battlecry",
+      "ruRU": "Боевой клич"
+    },
+    "Charge": {
+      "enUS": "Charge",
+      "ruRU": "Рывок"
+    },
+    "Taunt": {
+      "enUS": "Taunt",
+      "ruRU": "Провокация"
+    },
+    "Discover": {
+      "enUS": "Discover",
+      "ruRU": "Раскопка"
+    },
+    "Outcast": {
+      "enUS": "Outcast",
+      "ruRU": "Изгой"
+    },
+    "Dredge": {
+      "enUS": "Dredge",
+      "ruRU": "Улов"
+    },
+    "Tradeable": {
+      "enUS": "Tradeable",
+      "ruRU": "Можно обменять"
+    },
+    "Honorable Kill": {
+      "enUS": "Honorable Kill",
+      "ruRU": "Почетная победа"
+    },
+    "Quest": {
+      "enUS": "Quest",
+      "ruRU": "Задача"
+    },
+    "Echo": {
+      "enUS": "Echo",
+      "ruRU": "Эхо"
+    },
+    "Spell Damage": {
+      "enUS": "Spell Damage",
+      "ruRU": "Урон от заклинаний"
+    },
+    "Secret": {
+      "enUS": "Secret",
+      "ruRU": "Секрет"
+    },
+    "Reborn": {
+      "enUS": "Reborn",
+      "ruRU": "Перерождение"
+    },
+    "Aura": {
+      "enUS": "Aura",
+      "ruRU": "Аура"
+    },
+    "Frenzy": {
+      "enUS": "Frenzy",
+      "ruRU": "Бешенство"
+    },
+    "Sidequest": {
+      "enUS": "Sidequest",
+      "ruRU": "Побочная задача"
+    },
+    "Windfury": {
+      "enUS": "Windfury",
+      "ruRU": "Неистовство ветра"
+    },
+    "AffectedBySpellPower": {
+      "enUS": "AffectedBySpellPower",
+      "ruRU": "AffectedBySpellPower"
+    },
+    "Lifesteal": {
+      "enUS": "Lifesteal",
+      "ruRU": "Похищение жизни"
+    },
+    "Jade Golem": {
+      "enUS": "Jade Golem",
+      "ruRU": "Нефритовые големы"
+    },
+    "ImmuneToSpellpower": {
+      "enUS": "ImmuneToSpellpower",
+      "ruRU": "ImmuneToSpellpower"
+    },
+    "Freeze": {
+      "enUS": "Freeze",
+      "ruRU": "Заморозка"
+    },
+    "Spellburst": {
+      "enUS": "Spellburst",
+      "ruRU": "Резонанс"
+    },
+    "Invoke": {
+      "enUS": "Invoke",
+      "ruRU": "Воззвание"
+    },
+    "Poisonous": {
+      "enUS": "Poisonous",
+      "ruRU": "Яд"
+    },
+    "Divine Shield": {
+      "enUS": "Divine Shield",
+      "ruRU": "Божественный щит"
+    },
+    "InvisibleDeathrattle": {
+      "enUS": "InvisibleDeathrattle",
+      "ruRU": "InvisibleDeathrattle"
+    },
+    "Recruit": {
+      "enUS": "Recruit",
+      "ruRU": "Вербовка"
+    },
+    "OneTurnEffect": {
+      "enUS": "OneTurnEffect",
+      "ruRU": "OneTurnEffect"
+    },
+    "Overkill": {
+      "enUS": "Overkill",
+      "ruRU": "Сверхурон"
+    },
+    "Blood Gem": {
+      "enUS": "Blood Gem",
+      "ruRU": "Кровавые самоцветы"
+    },
+    "AdjacentBuff": {
+      "enUS": "Adjacent Buff",
+      "ruRU": "Бафф соседних"
+    },
+    "Colossal +X": {
+      "enUS": "Colossal",
+      "ruRU": "Гигант"
+    },
+    "Silence": {
+      "enUS": "Silence",
+      "ruRU": "Немота"
+    },
+    "Overload": {
+      "enUS": "Overload",
+      "ruRU": "Перегрузка"
+    },
+    "Twinspell": {
+      "enUS": "Twinspell",
+      "ruRU": "Дуплет"
+    },
+    "Lackey": {
+      "enUS": "Lackey",
+      "ruRU": "Прихвостень"
+    },
+    "Dormant": {
+      "enUS": "Dormant",
+      "ruRU": "Спячка"
+    },
+    "Choose One": {
+      "enUS": "Choose One",
+      "ruRU": "Выберите одно"
+    },
+    "Start of Game": {
+      "enUS": "Start of Game",
+      "ruRU": "Начало игры"
+    },
+    "Immune": {
+      "enUS": "Immune",
+      "ruRU": "Неуязвимость"
+    },
+    "Spellcraft": {
+      "enUS": "Spellcraft",
+      "ruRU": "Колдовство"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{% load i18n %}
+<div class="my-pagination">
+<div class="my-pagination-block shade">
+    <div class="my-pagination-item info">
+        <div class="my-page-item disabled"><a>{% trans "Total results" %}: {{ paginator.count }}</a></div>
+    </div>
+    <div class="my-pagination-item pages">
+    <!-- Предыдущий GET-запрос сохраняется при постраничном переходе -->
+    {% if page_obj.has_previous %}
+        <span class="my-page-item"><a class="" href="?{% for key, value in request.GET.items %}{% if key != 'page' and value != '' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}">&lt;</a></span>
+    {% else %}
+        <span class="my-page-item disabled"><a>&lt;</a></span>
+    {% endif %}
+    {% if show_first %}
+        <span class="my-page-item"><a class="" href="?{% for key, value in request.GET.items %}{% if key != 'page' and value != '' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page=1">1</a></span>
+        <span class="my-page-item disabled"><a>...</a></span>
+    {% endif %}
+    {% for p in adjacent_pages %}
+        {% if p == page_obj.number %}
+            <span class="my-page-item active"><a class="">{{ p }}</a></span>
+        {% else %}
+            <span class="my-page-item"><a class="" href="?{% for key, value in request.GET.items %}{% if key != 'page' and value != '' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ p }}">{{ p }}</a></span>
+        {% endif %}
+    {% endfor %}
+    {% if show_last %}
+        <span class="my-page-item disabled"><a>...</a></span>
+        <span class="my-page-item"><a class="" href="?{% for key, value in request.GET.items %}{% if key != 'page' and value != '' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></span>
+    {% endif %}
+    {% if page_obj.has_next %}
+        <span class="my-page-item"><a class="" href="?{% for key, value in request.GET.items %}{% if key != 'page' and value != '' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">&gt;</a></span>
+    {% else %}
+        <span class="my-page-item disabled"><a>&gt;</a></span>
+    {% endif %}
+    </div>
+</div>
+</div>

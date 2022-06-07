@@ -1,0 +1,11 @@
+{% extends 'core/base.html' %}
+{% load custom_filters %}
+{% block title %}{{ title|mktitle }}{% endblock %}
+{% load i18n %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<div class="center-wrapper">
+    <div class="info-item">{% trans "Now you have access to all the features." %}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "core/base.html" %}
+{% load custom_filters %}
+{% load deck_object %}
+{% block title %}{{ title|mktitle }}{% endblock %}
+{% load i18n %}
+
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'core/js/multiclass.js' %}?v=2.0.0"></script>
+    <script src="{% static 'core/js/deck_list.js' %}?v=2.0.0"></script>
+{% endblock %}
+
+{% block content %}
+<div class="modulewrap {{ card|cclass }}">
+<div class="module">
+<div class="detailhead">
+    <h1 class="d-inline-block">{{ card.name }}</h1>
+    {% if card.collectible %}
+        <span class="badge rounded-pill bg-success align-top">{% trans "Collectible" %}</span>
+    {% elif card.battlegrounds %}
+        <span class="badge rounded-pill bg-primary align-top">{% trans "Battlegrounds" %}</span>
+    {% elif not card.collectible %}
+        <span class="badge rounded-pill bg-warning align-top">{% trans "Non-collectible" %}</span>
+    {% endif %}
+</div>
+<div class="card-detail">
+    <div><img src="{{ card|locrender }}" alt="{{ card.name }}" width="300px" height="456px"></div>
+<div>
+<table class="table">
+    <tr>
+        <td><strong>ID</strong></td>
+        <td>{{ card.card_id }}</td>
+    </tr>
+    <tr>
+        <td style="min-width:144px;"><strong>{% trans "Class" %}</strong></td>
+        <td>{% for card_class in card.card_class.all %}<a href="{% url 'cards:card_list' %}?card_class={{ card_class.pk }}&collectible=true" class="intext">{{ card_class }}</a>{% if not forloop.last %} {% endif %}{% endfor %}</td>
+    </tr>
+    {% if card.text %}
+    <tr>
+        <td><strong>{% trans "Text" %}</strong></td>
+        <td>{{ card.text|safe }}</td>
+    </tr>
+    {% endif %}
+    {% if card.flavor %}
+    <tr>
+        <td><strong>{% trans "Flavor" %}</strong></td>
+        <td>{{ card.flavor|safe }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td><strong>{% trans "Type" %}</strong></td>
+        <td><a href="{% url 'cards:card_list' %}?card_type={{ card.card_type }}&collectible=true" class="intext">{{ card.get_card_type_display }}</a></td>
+    </tr>
+    <tr>
+        <td><strong>{% trans "Set" %} / {% trans "Format" %}</strong></td>
+        <td>
+            <a href="{% url 'cards:card_list' %}?card_set={{ card.card_set.pk }}&collectible=true" class="intext">{{ card.card_set }}</a>
+            <a href="{% url 'decks:all_decks' %}?deck_format={{ card.card_set.set_format.pk }}&collectible=true" class="intext">{{ card.card_set.set_format }}</a>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>{% trans "Rarity" %}</strong></td>
+        <td><a href="{% url 'cards:card_list' %}?rarity={{ card.rarity }}&collectible=true" class="intext">{{ card.get_rarity_display }}</a></td>
+    </tr>
+    {% if card.card_type == c_types.MINION and card.tribe.all %}
+    <tr>
+        <td><strong>{% trans "Tribe" %}</strong></td>
+        <td>{% for tribe in card.tribe.all %}<a href="{% url 'cards:card_list' %}?tribe={{ tribe.pk }}&collectible=true" class="intext">{{ tribe }}</a>{% if not forloop.last %} {% endif %}{% endfor %}</td>
+    </tr>
+    {% endif %}
+    {% if card.card_type == c_types.SPELL %}
+    <tr>
+        <td><strong>{% trans "Spell type" %}</strong></td>
+        <td>{{ card.get_spell_school_display }}</td>
+    </tr>
+    {% endif %}
+    {% format_stats card %}
+    {% if card.mechanic.all %}
+    <tr>
+        <td><strong>{% trans "Mechanics" context "list" %}</strong></td>
+        <td>{% for mech in card.mechanic.all %}<a href="{% url 'cards:card_list' %}?mechanic={{ mech.pk }}&collectible=true" class="intext">{{ mech }}</a>{% if not forloop.last %} {% endif %}{% endfor %}</td>
+    </tr>
+    {% endif %}
+    {% if card.artist %}
+    <tr>
+        <td><strong>{% trans "Artist" %}</strong></td>
+        <td>{{ card.artist }}</td>
+    </tr>
+    {% endif %}
+</table>
+</div>
+</div>
+{% if card.collectible %}
+    <h1>{% trans 'Related decks' %}</h1>
+    <div class="decks-grid">
+    {% for inclusion in card.inclusions.nameless %}
+        {% deck_obj inclusion.deck %}
+    {% empty %}
+        <div class="info-item">{% trans "This card hasn't been found in known decks." %}</div>
+    {% endfor %}
+    </div>
+{% endif %}
+</div>
+</div>
+
+{% endblock %}

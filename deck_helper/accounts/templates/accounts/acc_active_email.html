@@ -1,0 +1,4 @@
+{% load i18n %}
+<h2>{{ user.username }}, {% trans 'to confirm your registration, follow the link below' %}.</h2>
+<p>http://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}</p>
+<p>{% blocktrans %}If you have not registered on {{ domain }} - ignore this letter.{% endblocktrans %}</p>

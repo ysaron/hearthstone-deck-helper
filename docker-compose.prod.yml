@@ -7,9 +7,11 @@ services:
       dockerfile: Dockerfile.prod
     command: gunicorn deck_helper.wsgi:application --bind 0.0.0.0:8000
     container_name: HS-Deck-Helper
+    restart: always
     volumes:
       - static_volume:/home/deck_helper/web/static
       - media_volume:/home/deck_helper/web/media
+      - logfiles:/home/deck_helper/web/logs
     expose:
       - "8000"
     env_file:
@@ -29,6 +31,7 @@ services:
     volumes:
       - static_volume:/home/deck_helper/web/static
       - media_volume:/home/deck_helper/web/media
+      - logfiles:/home/deck_helper/web/logs
     ports:
       - "80:80"
     depends_on:
@@ -37,3 +40,4 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
+  logfiles:

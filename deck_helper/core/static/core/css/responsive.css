@@ -1,0 +1,49 @@
+@media screen and (max-width: 600px) {
+  h2 {text-align: center;}
+  .topmenu {position: static;}
+  .topmenu a, .topmenu-dropdown {
+    float: none;
+    width: 100%;
+  }
+  .dropcontent {
+    width: 35%;
+    right: 33%;
+  }
+  .common-form-item {max-width: 300px;}
+  .common-form-field {
+    max-height: 1000px;
+    flex-direction: column;
+  }
+  .common-form-field button, .common-form-field a {margin: 2px 0;}
+  .common-form-label {
+    min-width: 0;
+    margin: 0 0;
+  }
+  .form-button {margin-bottom: 2px;}
+  .card-detail {flex-direction: column;}
+  .modulewrap {
+    padding: 5px;
+    border-radius: 30px;
+  }
+  .deck-card-cell:hover span {
+    top: -520%;
+    left: -25%;
+  }
+  .deck-card-cell:hover span img {
+    height: 90%;
+    width: 90%;
+  }
+  .decks-grid {grid-row-gap: 30px;}
+  a.intext {font-size: 1.2rem;}
+}
+
+@media screen and (max-width: 1250px) {
+  .decks-grid {grid-template-columns: auto auto;}
+  .my-pagination-block {
+    display: inline-flex;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 800px) {
+  .decks-grid {grid-template-columns: auto;}
+}

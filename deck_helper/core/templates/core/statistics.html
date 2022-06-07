@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+{% load custom_filters %}
+{% block title %}{{ title|mktitle }}{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<h2>{{ statistics.cards.header }}</h2>
+<div class="decks-grid" style="padding: 0 0 20px 0;">
+    {% for cell in statistics.cards.cells %}
+        <div class="info-item info-deck">
+            <h4>{{ cell.header }}</h4>
+            <hr style="color: #333;">
+            <ul>
+              {% for item in cell.items_ %}
+                  <li class="stat-item {{ item.css }}" style="margin: 5px 0;"><a class="intext" href="{{ item.link }}">{{ item.label }}</a>{% if item.value %}: {{ item.value }}{% endif %}</li>
+              {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+
+<h2>{{ statistics.decks.header }}</h2>
+<div class="decks-grid" style="padding: 0 0 20px 0;">
+    {% for cell in statistics.decks.cells %}
+        <div class="info-item info-deck">
+            <h4>{{ cell.header }}</h4>
+            <hr style="color: #333;">
+            <ul>
+              {% for item in cell.items_ %}
+                  <li class="stat-item {{ item.css }}" style="margin: 5px 0;"><a class="intext" href="{{ item.link }}">{{ item.label }}</a>{% if item.value %}: {{ item.value }}{% endif %}</li>
+              {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

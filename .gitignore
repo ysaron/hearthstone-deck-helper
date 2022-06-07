@@ -9,8 +9,6 @@ venv
 
 db.sqlite3
 
-migrations
-
 deck_helper/media/*
 deck_helper/static
 

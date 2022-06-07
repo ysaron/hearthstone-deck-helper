@@ -1,0 +1,53 @@
+{% load i18n %}
+<div class="sidemenu sidemenu-shadow">
+    {% if user.is_authenticated %}
+        <a>
+            <span>
+                <i class="fas fa-user-check"></i>
+            </span>
+            <span>
+                <b>{{ user.username }}</b>
+            </span>
+        </a>
+        <a id="logout" href="{% url 'accounts:signout' %}">
+            <span style="margin: 0 2px;">
+                <i class="fas fa-sign-out-alt"></i>
+            </span>
+            <span>
+                {% trans "Log out" %}
+            </span>
+        </a>
+    {% else %}
+        <a href="{% url 'accounts:signin' %}">
+            <span style="margin: 0 2px;">
+                <i class="fas fa-sign-in-alt"></i>
+            </span>
+            <span>
+                {% trans "Sign In" %}
+            </span>
+        </a>
+        <a href="{% url 'accounts:signup' %}">
+            <span>
+                <i class="fas fa-user-plus"></i>
+            </span>
+            <span>
+                {% trans "Sign Up" %}
+            </span>
+        </a>
+    {% endif %}
+    <hr style="margin: 0px 0px;">
+    <form action="{% url 'set_language' %}" method="post" id="form-i18n">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}">
+        <select name="language" onchange="if(this.value != 0) { this.form.submit(); }">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
