@@ -1,0 +1,1386 @@
+[
+{
+  "model": "cards.cardclass",
+  "pk": 1,
+  "fields": {
+    "name": "Death Knight",
+    "name_en": "Death Knight",
+    "name_ru": "Рыцарь смерти",
+    "service_name": "Death Knight",
+    "collectible": false,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 2,
+  "fields": {
+    "name": "Druid",
+    "name_en": "Druid",
+    "name_ru": "Друид",
+    "service_name": "Druid",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 3,
+  "fields": {
+    "name": "Hunter",
+    "name_en": "Hunter",
+    "name_ru": "Охотник",
+    "service_name": "Hunter",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 4,
+  "fields": {
+    "name": "Mage",
+    "name_en": "Mage",
+    "name_ru": "Маг",
+    "service_name": "Mage",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 5,
+  "fields": {
+    "name": "Paladin",
+    "name_en": "Paladin",
+    "name_ru": "Паладин",
+    "service_name": "Paladin",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 6,
+  "fields": {
+    "name": "Priest",
+    "name_en": "Priest",
+    "name_ru": "Жрец",
+    "service_name": "Priest",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 7,
+  "fields": {
+    "name": "Rogue",
+    "name_en": "Rogue",
+    "name_ru": "Разбойник",
+    "service_name": "Rogue",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 8,
+  "fields": {
+    "name": "Shaman",
+    "name_en": "Shaman",
+    "name_ru": "Шаман",
+    "service_name": "Shaman",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 9,
+  "fields": {
+    "name": "Warlock",
+    "name_en": "Warlock",
+    "name_ru": "Чернокнижник",
+    "service_name": "Warlock",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 10,
+  "fields": {
+    "name": "Warrior",
+    "name_en": "Warrior",
+    "name_ru": "Воин",
+    "service_name": "Warrior",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 11,
+  "fields": {
+    "name": "Dream",
+    "name_en": "Dream",
+    "name_ru": "Сон",
+    "service_name": "Dream",
+    "collectible": false,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 12,
+  "fields": {
+    "name": "Neutral",
+    "name_en": "Neutral",
+    "name_ru": "Нейтральный",
+    "service_name": "Neutral",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 13,
+  "fields": {
+    "name": "Whizbang",
+    "name_en": "Whizbang",
+    "name_ru": "Чудастер",
+    "service_name": "Whizbang",
+    "collectible": false,
+    "image": ""
+  }
+},
+{
+  "model": "cards.cardclass",
+  "pk": 14,
+  "fields": {
+    "name": "Demon Hunter",
+    "name_en": "Demon Hunter",
+    "name_ru": "Охотник на демонов",
+    "service_name": "Demon Hunter",
+    "collectible": true,
+    "image": ""
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 1,
+  "fields": {
+    "name": "Orc",
+    "name_en": "Orc",
+    "name_ru": "Орк",
+    "service_name": "Orc"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 2,
+  "fields": {
+    "name": "Murloc",
+    "name_en": "Murloc",
+    "name_ru": "Мурлок",
+    "service_name": "Murloc"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 3,
+  "fields": {
+    "name": "Demon",
+    "name_en": "Demon",
+    "name_ru": "Демон",
+    "service_name": "Demon"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 4,
+  "fields": {
+    "name": "Mech",
+    "name_en": "Mech",
+    "name_ru": "Механизм",
+    "service_name": "Mech"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 5,
+  "fields": {
+    "name": "Elemental",
+    "name_en": "Elemental",
+    "name_ru": "Элементаль",
+    "service_name": "Elemental"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 6,
+  "fields": {
+    "name": "Beast",
+    "name_en": "Beast",
+    "name_ru": "Зверь",
+    "service_name": "Beast"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 7,
+  "fields": {
+    "name": "Totem",
+    "name_en": "Totem",
+    "name_ru": "Тотем",
+    "service_name": "Totem"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 8,
+  "fields": {
+    "name": "Pirate",
+    "name_en": "Pirate",
+    "name_ru": "Пират",
+    "service_name": "Pirate"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 9,
+  "fields": {
+    "name": "Dragon",
+    "name_en": "Dragon",
+    "name_ru": "Дракон",
+    "service_name": "Dragon"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 10,
+  "fields": {
+    "name": "All",
+    "name_en": "All",
+    "name_ru": "Всё",
+    "service_name": "All"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 11,
+  "fields": {
+    "name": "Quilboar",
+    "name_en": "Quilboar",
+    "name_ru": "Свинобраз",
+    "service_name": "Quilboar"
+  }
+},
+{
+  "model": "cards.tribe",
+  "pk": 12,
+  "fields": {
+    "name": "Naga",
+    "name_en": "Naga",
+    "name_ru": "Нага",
+    "service_name": "Naga"
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 1,
+  "fields": {
+    "name": "Fractured in Alterac Valley",
+    "name_en": "Fractured in Alterac Valley",
+    "name_ru": "Разделённые Альтераком",
+    "service_name": "Fractured in Alterac Valley",
+    "set_format": 3
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 2,
+  "fields": {
+    "name": "Journey to Un'Goro",
+    "name_en": "Journey to Un'Goro",
+    "name_ru": "Экспедиция в Ун’Горо",
+    "service_name": "Journey to Un'Goro",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 3,
+  "fields": {
+    "name": "Missions",
+    "name_en": "Missions",
+    "name_ru": "Миссии",
+    "service_name": "Missions",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 4,
+  "fields": {
+    "name": "Credits",
+    "name_en": "Credits",
+    "name_ru": "Создатели",
+    "service_name": "Credits",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 5,
+  "fields": {
+    "name": "Vanilla",
+    "name_en": "Vanilla",
+    "name_ru": "Ванилла",
+    "service_name": "Vanilla",
+    "set_format": 4
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 6,
+  "fields": {
+    "name": "Hero Skins",
+    "name_en": "Hero Skins",
+    "name_ru": "Облики героев",
+    "service_name": "Hero Skins",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 7,
+  "fields": {
+    "name": "Taverns of Time",
+    "name_en": "Taverns of Time",
+    "name_ru": "Таверны времени",
+    "service_name": "Taverns of Time",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 8,
+  "fields": {
+    "name": "Rise of Shadows",
+    "name_en": "Rise of Shadows",
+    "name_ru": "Возмездие теней",
+    "service_name": "Rise of Shadows",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 9,
+  "fields": {
+    "name": "Goblins vs Gnomes",
+    "name_en": "Goblins vs Gnomes",
+    "name_ru": "Гоблины и гномы",
+    "service_name": "Goblins vs Gnomes",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 10,
+  "fields": {
+    "name": "Forged in the Barrens",
+    "name_en": "Forged in the Barrens",
+    "name_ru": "Закалённые степями",
+    "service_name": "Forged in the Barrens",
+    "set_format": 3
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 11,
+  "fields": {
+    "name": "Legacy",
+    "name_en": "Legacy",
+    "name_ru": "Старые карты",
+    "service_name": "Legacy",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 12,
+  "fields": {
+    "name": "United in Stormwind",
+    "name_en": "United in Stormwind",
+    "name_ru": "Сплочённые Штормградом",
+    "service_name": "United in Stormwind",
+    "set_format": 3
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 13,
+  "fields": {
+    "name": "Galakrond's Awakening",
+    "name_en": "Galakrond's Awakening",
+    "name_ru": "Пробуждение Галакронда",
+    "service_name": "Galakrond's Awakening",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 14,
+  "fields": {
+    "name": "Hall of Fame",
+    "name_en": "Hall of Fame",
+    "name_ru": "Зал Славы",
+    "service_name": "Hall of Fame",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 15,
+  "fields": {
+    "name": "One Night in Karazhan",
+    "name_en": "One Night in Karazhan",
+    "name_ru": "Вечеринка в Каражане",
+    "service_name": "One Night in Karazhan",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 16,
+  "fields": {
+    "name": "Voyage to the Sunken City",
+    "name_en": "Voyage to the Sunken City",
+    "name_ru": "Затонувший город",
+    "service_name": "Voyage to the Sunken City",
+    "set_format": 3
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 17,
+  "fields": {
+    "name": "Mean Streets of Gadgetzan",
+    "name_en": "Mean Streets of Gadgetzan",
+    "name_ru": "Злачный город Прибамбасск",
+    "service_name": "Mean Streets of Gadgetzan",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 18,
+  "fields": {
+    "name": "The Grand Tournament",
+    "name_en": "The Grand Tournament",
+    "name_ru": "Большой турнир",
+    "service_name": "The Grand Tournament",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 19,
+  "fields": {
+    "name": "Tavern Brawl",
+    "name_en": "Tavern Brawl",
+    "name_ru": "Потасовки",
+    "service_name": "Tavern Brawl",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 20,
+  "fields": {
+    "name": "Mercenaries",
+    "name_en": "Mercenaries",
+    "name_ru": "Наёмники",
+    "service_name": "Mercenaries",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 21,
+  "fields": {
+    "name": "The Witchwood",
+    "name_en": "The Witchwood",
+    "name_ru": "Ведьмин лес",
+    "service_name": "The Witchwood",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 22,
+  "fields": {
+    "name": "Scholomance Academy",
+    "name_en": "Scholomance Academy",
+    "name_ru": "Некроситет",
+    "service_name": "Scholomance Academy",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 23,
+  "fields": {
+    "name": "Battlegrounds",
+    "name_en": "Battlegrounds",
+    "name_ru": "Поля сражений",
+    "service_name": "Battlegrounds",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 24,
+  "fields": {
+    "name": "Knights of the Frozen Throne",
+    "name_en": "Knights of the Frozen Throne",
+    "name_ru": "Рыцари Ледяного Трона",
+    "service_name": "Knights of the Frozen Throne",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 25,
+  "fields": {
+    "name": "Kobolds & Catacombs",
+    "name_en": "Kobolds & Catacombs",
+    "name_ru": "Кобольды и катакомбы",
+    "service_name": "Kobolds & Catacombs",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 26,
+  "fields": {
+    "name": "The Boomsday Project",
+    "name_en": "The Boomsday Project",
+    "name_ru": "Проект Бумного Дня",
+    "service_name": "The Boomsday Project",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 27,
+  "fields": {
+    "name": "Descent of Dragons",
+    "name_en": "Descent of Dragons",
+    "name_ru": "Натиск драконов",
+    "service_name": "Descent of Dragons",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 28,
+  "fields": {
+    "name": "Saviors of Uldum",
+    "name_en": "Saviors of Uldum",
+    "name_ru": "Спасители Ульдума",
+    "service_name": "Saviors of Uldum",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 29,
+  "fields": {
+    "name": "Core",
+    "name_en": "Core",
+    "name_ru": "Основной набор",
+    "service_name": "Core",
+    "set_format": 3
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 30,
+  "fields": {
+    "name": "Madness At The Darkmoon Faire",
+    "name_en": "Madness At The Darkmoon Faire",
+    "name_ru": "Ярмарка безумия",
+    "service_name": "Madness At The Darkmoon Faire",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 31,
+  "fields": {
+    "name": "Ashes of Outland",
+    "name_en": "Ashes of Outland",
+    "name_ru": "Руины Запределья",
+    "service_name": "Ashes of Outland",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 32,
+  "fields": {
+    "name": "The League of Explorers",
+    "name_en": "The League of Explorers",
+    "name_ru": "Лига исследователей",
+    "service_name": "The League of Explorers",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 33,
+  "fields": {
+    "name": "Classic",
+    "name_en": "Classic",
+    "name_ru": "Классик",
+    "service_name": "Classic",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 34,
+  "fields": {
+    "name": "Blackrock Mountain",
+    "name_en": "Blackrock Mountain",
+    "name_ru": "Чёрная гора",
+    "service_name": "Blackrock Mountain",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 35,
+  "fields": {
+    "name": "Basic",
+    "name_en": "Basic",
+    "name_ru": "Basic",
+    "service_name": "Basic",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 36,
+  "fields": {
+    "name": "Naxxramas",
+    "name_en": "Naxxramas",
+    "name_ru": "Проклятие Наксрамаса",
+    "service_name": "Naxxramas",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 37,
+  "fields": {
+    "name": "Rastakhan's Rumble",
+    "name_en": "Rastakhan's Rumble",
+    "name_ru": "Растахановы игрища",
+    "service_name": "Rastakhan's Rumble",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 38,
+  "fields": {
+    "name": "Whispers of the Old Gods",
+    "name_en": "Whispers of the Old Gods",
+    "name_ru": "Пробуждение древних богов",
+    "service_name": "Whispers of the Old Gods",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 39,
+  "fields": {
+    "name": "Demon Hunter Initiate",
+    "name_en": "Demon Hunter Initiate",
+    "name_ru": "Иллидари-посвящённый",
+    "service_name": "Demon Hunter Initiate",
+    "set_format": 2
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 40,
+  "fields": {
+    "name": "Unknown",
+    "name_en": "Unknown",
+    "name_ru": "Unknown",
+    "service_name": "Unknown",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.cardset",
+  "pk": 41,
+  "fields": {
+    "name": "unknown",
+    "name_en": "unknown",
+    "name_ru": "неизвестно",
+    "service_name": "unknown",
+    "set_format": 1
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 1,
+  "fields": {
+    "name": "Dormant",
+    "name_en": "Dormant",
+    "name_ru": "Спячка",
+    "service_name": "Dormant",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 2,
+  "fields": {
+    "name": "Corrupt",
+    "name_en": "Corrupt",
+    "name_ru": "Порча",
+    "service_name": "Corrupt",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 3,
+  "fields": {
+    "name": "Quest",
+    "name_en": "Quest",
+    "name_ru": "Задача",
+    "service_name": "Quest",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 4,
+  "fields": {
+    "name": "Honorable Kill",
+    "name_en": "Honorable Kill",
+    "name_ru": "Почетная победа",
+    "service_name": "Honorable Kill",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 5,
+  "fields": {
+    "name": "Recruit",
+    "name_en": "Recruit",
+    "name_ru": "Вербовка",
+    "service_name": "Recruit",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 6,
+  "fields": {
+    "name": "Freeze",
+    "name_en": "Freeze",
+    "name_ru": "Заморозка",
+    "service_name": "Freeze",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 7,
+  "fields": {
+    "name": "Echo",
+    "name_en": "Echo",
+    "name_ru": "Эхо",
+    "service_name": "Echo",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 8,
+  "fields": {
+    "name": "Overkill",
+    "name_en": "Overkill",
+    "name_ru": "Сверхурон",
+    "service_name": "Overkill",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 9,
+  "fields": {
+    "name": "Spell Damage",
+    "name_en": "Spell Damage",
+    "name_ru": "Урон от заклинаний",
+    "service_name": "Spell Damage",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 10,
+  "fields": {
+    "name": "Sidequest",
+    "name_en": "Sidequest",
+    "name_ru": "Побочная задача",
+    "service_name": "Sidequest",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 11,
+  "fields": {
+    "name": "Battlecry",
+    "name_en": "Battlecry",
+    "name_ru": "Боевой клич",
+    "service_name": "Battlecry",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 12,
+  "fields": {
+    "name": "Secret",
+    "name_en": "Secret",
+    "name_ru": "Секрет",
+    "service_name": "Secret",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 13,
+  "fields": {
+    "name": "Jade Golem",
+    "name_en": "Jade Golem",
+    "name_ru": "Нефритовые големы",
+    "service_name": "Jade Golem",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 14,
+  "fields": {
+    "name": "AffectedBySpellPower",
+    "name_en": "AffectedBySpellPower",
+    "name_ru": "AffectedBySpellPower",
+    "service_name": "AffectedBySpellPower",
+    "hidden": true
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 15,
+  "fields": {
+    "name": "OneTurnEffect",
+    "name_en": "OneTurnEffect",
+    "name_ru": "OneTurnEffect",
+    "service_name": "OneTurnEffect",
+    "hidden": true
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 16,
+  "fields": {
+    "name": "Avenge",
+    "name_en": "Avenge",
+    "name_ru": "Месть",
+    "service_name": "Avenge (X)",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 17,
+  "fields": {
+    "name": "Outcast",
+    "name_en": "Outcast",
+    "name_ru": "Изгой",
+    "service_name": "Outcast",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 18,
+  "fields": {
+    "name": "Lifesteal",
+    "name_en": "Lifesteal",
+    "name_ru": "Похищение жизни",
+    "service_name": "Lifesteal",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 19,
+  "fields": {
+    "name": "Deathrattle",
+    "name_en": "Deathrattle",
+    "name_ru": "Предсмертный хрип",
+    "service_name": "Deathrattle",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 20,
+  "fields": {
+    "name": "Dredge",
+    "name_en": "Dredge",
+    "name_ru": "Улов",
+    "service_name": "Dredge",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 21,
+  "fields": {
+    "name": "Questline",
+    "name_en": "Questline",
+    "name_ru": "Цепочка заданий",
+    "service_name": "Questline",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 22,
+  "fields": {
+    "name": "Casts When Drawn",
+    "name_en": "Casts When Drawn",
+    "name_ru": "При взятии",
+    "service_name": "Casts When Drawn",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 23,
+  "fields": {
+    "name": "Magnetic",
+    "name_en": "Magnetic",
+    "name_ru": "Магнетизм",
+    "service_name": "Magnetic",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 24,
+  "fields": {
+    "name": "Stealth",
+    "name_en": "Stealth",
+    "name_ru": "Маскировка",
+    "service_name": "Stealth",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 25,
+  "fields": {
+    "name": "Poisonous",
+    "name_en": "Poisonous",
+    "name_ru": "Яд",
+    "service_name": "Poisonous",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 26,
+  "fields": {
+    "name": "Silence",
+    "name_en": "Silence",
+    "name_ru": "Немота",
+    "service_name": "Silence",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 27,
+  "fields": {
+    "name": "Reborn",
+    "name_en": "Reborn",
+    "name_ru": "Перерождение",
+    "service_name": "Reborn",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 28,
+  "fields": {
+    "name": "Inspire",
+    "name_en": "Inspire",
+    "name_ru": "Воодушевление",
+    "service_name": "Inspire",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 29,
+  "fields": {
+    "name": "ImmuneToSpellpower",
+    "name_en": "ImmuneToSpellpower",
+    "name_ru": "ImmuneToSpellpower",
+    "service_name": "ImmuneToSpellpower",
+    "hidden": true
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 30,
+  "fields": {
+    "name": "Invoke",
+    "name_en": "Invoke",
+    "name_ru": "Воззвание",
+    "service_name": "Invoke",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 31,
+  "fields": {
+    "name": "InvisibleDeathrattle",
+    "name_en": "InvisibleDeathrattle",
+    "name_ru": "InvisibleDeathrattle",
+    "service_name": "InvisibleDeathrattle",
+    "hidden": true
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 32,
+  "fields": {
+    "name": "Adapt",
+    "name_en": "Adapt",
+    "name_ru": "Адаптация",
+    "service_name": "Adapt",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 33,
+  "fields": {
+    "name": "Blood Gem",
+    "name_en": "Blood Gem",
+    "name_ru": "Кровавые самоцветы",
+    "service_name": "Blood Gem",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 34,
+  "fields": {
+    "name": "Discover",
+    "name_en": "Discover",
+    "name_ru": "Раскопка",
+    "service_name": "Discover",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 35,
+  "fields": {
+    "name": "Frenzy",
+    "name_en": "Frenzy",
+    "name_ru": "Бешенство",
+    "service_name": "Frenzy",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 36,
+  "fields": {
+    "name": "Spellburst",
+    "name_en": "Spellburst",
+    "name_ru": "Резонанс",
+    "service_name": "Spellburst",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 37,
+  "fields": {
+    "name": "Twinspell",
+    "name_en": "Twinspell",
+    "name_ru": "Дуплет",
+    "service_name": "Twinspell",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 38,
+  "fields": {
+    "name": "Spellcraft",
+    "name_en": "Spellcraft",
+    "name_ru": "Колдовство",
+    "service_name": "Spellcraft",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 39,
+  "fields": {
+    "name": "Nature Spell Damage",
+    "name_en": "Nature Spell Damage",
+    "name_ru": "Урон от заклинаний природы",
+    "service_name": "Nature Spell Damage",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 40,
+  "fields": {
+    "name": "Aura",
+    "name_en": "Aura",
+    "name_ru": "Аура",
+    "service_name": "Aura",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 41,
+  "fields": {
+    "name": "Divine Shield",
+    "name_en": "Divine Shield",
+    "name_ru": "Божественный щит",
+    "service_name": "Divine Shield",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 42,
+  "fields": {
+    "name": "Tradeable",
+    "name_en": "Tradeable",
+    "name_ru": "Можно обменять",
+    "service_name": "Tradeable",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 43,
+  "fields": {
+    "name": "Charge",
+    "name_en": "Charge",
+    "name_ru": "Рывок",
+    "service_name": "Charge",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 44,
+  "fields": {
+    "name": "Windfury",
+    "name_en": "Windfury",
+    "name_ru": "Неистовство ветра",
+    "service_name": "Windfury",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 45,
+  "fields": {
+    "name": "Colossal",
+    "name_en": "Colossal",
+    "name_ru": "Гигант",
+    "service_name": "Colossal +X",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 46,
+  "fields": {
+    "name": "Overload",
+    "name_en": "Overload",
+    "name_ru": "Перегрузка",
+    "service_name": "Overload",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 47,
+  "fields": {
+    "name": "AIMustPlay",
+    "name_en": "AIMustPlay",
+    "name_ru": "AIMustPlay",
+    "service_name": "AIMustPlay",
+    "hidden": true
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 48,
+  "fields": {
+    "name": "Combo",
+    "name_en": "Combo",
+    "name_ru": "Серия приемов",
+    "service_name": "Combo",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 49,
+  "fields": {
+    "name": "Taunt",
+    "name_en": "Taunt",
+    "name_ru": "Провокация",
+    "service_name": "Taunt",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 50,
+  "fields": {
+    "name": "Adjacent Buff",
+    "name_en": "Adjacent Buff",
+    "name_ru": "Бафф соседних",
+    "service_name": "AdjacentBuff",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 51,
+  "fields": {
+    "name": "Rush",
+    "name_en": "Rush",
+    "name_ru": "Натиск",
+    "service_name": "Rush",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 52,
+  "fields": {
+    "name": "Lackey",
+    "name_en": "Lackey",
+    "name_ru": "Прихвостень",
+    "service_name": "Lackey",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 53,
+  "fields": {
+    "name": "Choose One",
+    "name_en": "Choose One",
+    "name_ru": "Выберите одно",
+    "service_name": "Choose One",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 54,
+  "fields": {
+    "name": "Start of Game",
+    "name_en": "Start of Game",
+    "name_ru": "Начало игры",
+    "service_name": "Start of Game",
+    "hidden": false
+  }
+},
+{
+  "model": "cards.mechanic",
+  "pk": 55,
+  "fields": {
+    "name": "Immune",
+    "name_en": "Immune",
+    "name_ru": "Неуязвимость",
+    "service_name": "Immune",
+    "hidden": false
+  }
+},
+{
+  "model": "decks.format",
+  "pk": 1,
+  "fields": {
+    "name": "Unknown",
+    "name_en": "Unknown",
+    "name_ru": "Неизвестно",
+    "numerical_designation": 0
+  }
+},
+{
+  "model": "decks.format",
+  "pk": 2,
+  "fields": {
+    "name": "Wild",
+    "name_en": "Wild",
+    "name_ru": "Вольный",
+    "numerical_designation": 1
+  }
+},
+{
+  "model": "decks.format",
+  "pk": 3,
+  "fields": {
+    "name": "Standard",
+    "name_en": "Standard",
+    "name_ru": "Стандарт",
+    "numerical_designation": 2
+  }
+},
+{
+  "model": "decks.format",
+  "pk": 4,
+  "fields": {
+    "name": "Classic",
+    "name_en": "Classic",
+    "name_ru": "Классик",
+    "numerical_designation": 3
+  }
+}
+]

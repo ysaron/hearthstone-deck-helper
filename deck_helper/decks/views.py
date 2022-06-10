@@ -166,6 +166,9 @@ def deck_view(request, deck_id):
                 deck.name = new_name
                 deck.save()
         else:
+            if not request.user.is_authenticated:
+                return redirect(reverse_lazy('accounts:signin'))
+
             # доступно сохранение колоды (т.е. создание именованного экземпляра той же колоды)
             deck_to_save = Deck.from_deckstring(request.POST['string_to_save'], named=True)
             deck_to_save.user = request.user
