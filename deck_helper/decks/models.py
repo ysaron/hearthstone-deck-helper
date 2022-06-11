@@ -43,7 +43,7 @@ class Format(models.Model):
         verbose_name_plural = _('Formats')
 
     def __str__(self):
-        return f'{self.name_en} | {self.name_ru}'
+        return 'unknown' if self.numerical_designation == 0 else self.name
 
 
 class Deck(models.Model):
