@@ -92,13 +92,20 @@
 </div>
 {% if card.collectible %}
     <h1>{% trans 'Related decks' %}</h1>
+    {% if page_obj.has_other_pages %}
+        {% load custom_pagination %}
+        {% formatted_pages 4 %}
+    {% endif %}
     <div class="decks-grid">
-    {% for inclusion in card.inclusions.nameless %}
+    {% for inclusion in page_obj %}
         {% deck_obj inclusion.deck %}
     {% empty %}
         <div class="info-item">{% trans "This card hasn't been found in known decks." %}</div>
     {% endfor %}
     </div>
+    {% if page_obj.has_other_pages %}
+        {% formatted_pages 4 %}
+    {% endif %}
 {% endif %}
 </div>
 </div>

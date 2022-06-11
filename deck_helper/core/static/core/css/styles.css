@@ -317,6 +317,7 @@ thead.darktable th {padding: 8px;}
 .my-page-item {
   display: inline-block;
   text-align: center;
+  color: var(--dark) !important;
 }
 .my-page-item a {
   color: var(--dark);

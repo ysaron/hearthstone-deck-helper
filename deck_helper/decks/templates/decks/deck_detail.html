@@ -259,13 +259,20 @@
 
 <div class="center-wrapper"></div>
 
-{% if similar %}
-<h1>{% trans 'Similar decks' %}</h1>
-<div class="decks-grid">
-    {% for deck in similar %}
-        {% deck_obj deck %}
-    {% endfor %}
-</div>
+{% if page_obj %}
+    <h1>{% trans 'Similar decks' %}</h1>
+    {% if page_obj.has_other_pages %}
+        {% load custom_pagination %}
+        {% formatted_pages 4 %}
+    {% endif %}
+    <div class="decks-grid">
+        {% for deck in page_obj %}
+            {% deck_obj deck %}
+        {% endfor %}
+    </div>
+    {% if page_obj.has_other_pages %}
+        {% formatted_pages 4 %}
+    {% endif %}
 {% endif %}
 {% else %}
 <div style="padding: 200px 0;"></div>

@@ -8,6 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from django.db import transaction
+from django.core.paginator import Paginator
 
 from random import choice
 
@@ -25,7 +26,7 @@ def create_deck(request: HttpRequest):
     title = _('Decoding')
 
     if request.method == 'POST':
-        if 'deckstring' in request.POST:        # код колоды отправлен с формы DeckstringForm
+        if 'deckstring' in request.POST:  # код колоды отправлен с формы DeckstringForm
             deckstring_form = DeckstringForm(request.POST)
             if deckstring_form.is_valid():
                 try:
@@ -43,7 +44,7 @@ def create_deck(request: HttpRequest):
                 except UnsupportedCards as u:
                     msg = _('%(error)s. The database will be updated shortly.') % {'error': u}
                     deckstring_form.add_error(None, msg)
-        if 'deck_name' in request.POST:         # название колоды отправлено с формы DeckSaveForm
+        if 'deck_name' in request.POST:  # название колоды отправлено с формы DeckSaveForm
             deck = Deck.from_deckstring(request.POST['string_to_save'], named=True)
             deck.user = request.user
             deck.name = request.POST['deck_name']
@@ -176,16 +177,23 @@ def deck_view(request, deck_id):
             deck_to_save.save()
             return redirect(deck_to_save)
 
-    context = {'title': deck,
-               'deck': deck,
-               'deck_save_form': deck_save_form,
-               'similar': find_similar_decks(deck)}
+    similar = find_similar_decks(deck)
+    paginator = Paginator(similar, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'title': deck,
+        'deck': deck,
+        'deck_save_form': deck_save_form,
+        'paginator': paginator,
+        'page_obj': page_obj,
+    }
 
     return render(request, template_name='decks/deck_detail.html', context=context)
 
 
 class DeckDelete(SuccessMessageMixin, generic.DeleteView):
-
     model = Deck
     pk_url_kwarg = 'deck_id'
     success_url = reverse_lazy('decks:user_decks')
