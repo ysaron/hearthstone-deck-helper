@@ -43,7 +43,7 @@ class Format(models.Model):
         verbose_name_plural = _('Formats')
 
     def __str__(self):
-        return self.name
+        return f'{self.name_en} | {self.name_ru}'
 
 
 class Deck(models.Model):
