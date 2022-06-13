@@ -4,7 +4,7 @@ services:
   web:
     build: ./deck_helper
     command: python manage.py runserver 0.0.0.0:8000
-    container_name: HS-Deck-Helper
+    container_name: app
     volumes:
       - media_volume_dev:/usr/src/deck_helper/media
       - log_volume_dev:/usr/src/deck_helper/logs
@@ -12,15 +12,38 @@ services:
       - "8000:8000"
     env_file:
       - .env.dev
+    depends_on:
+      - db
+      - celery
   db:
     image: postgres:14
+    container_name: database
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=local_user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=local_db
+  broker:
+    image: redis:7
+    container_name: broker
+    ports:
+      - "6379:6379"
+    volumes:
+      - broker_dev:/data
+  celery:
+    build: ./deck_helper
+    container_name: celery
+    command: celery -A deck_helper worker -l info
+    volumes:
+      - media_volume_dev:/usr/src/deck_helper/media
+      - log_volume_dev:/usr/src/deck_helper/logs
+    env_file:
+      - .env.dev
+    depends_on:
+      - broker
 volumes:
   postgres_data_dev:
   media_volume_dev:
   log_volume_dev:
+  broker_dev:

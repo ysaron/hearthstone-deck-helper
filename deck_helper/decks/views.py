@@ -9,13 +9,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from django.db import transaction
 from django.core.paginator import Paginator
+from celery.result import AsyncResult
 
 from random import choice
 
 from .models import Deck
 from .forms import DeckstringForm, DeckFilterForm, DeckSaveForm
+from core.tasks import generate_deck_render
 from core.services.deck_codes import get_clean_deckstring
-from core.services.deck_utils import find_similar_decks, get_render
+from core.services.deck_utils import find_similar_decks
 from core.exceptions import DecodeError, UnsupportedCards
 
 
@@ -72,17 +74,35 @@ def get_random_deckstring(request: HttpRequest):
     return redirect(reverse_lazy('decks:index'))
 
 
-def get_deck_render(request: HttpRequest):
-    """ AJAX-view для получения рендера колоды """
+def run_deck_render_task(request: HttpRequest):
+    """ AJAX-view для запуска таска получения рендера колоды """
     if all([
         request.GET.get('render'),
         deck_id := request.GET.get('deck_id'),
         request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest',
     ]):
-        response = get_render(deck_id, name=request.GET.get('name'), language=request.GET.get('language'))
-        return JsonResponse(response)
+        result: AsyncResult = generate_deck_render.delay(
+            deck_id=deck_id,
+            name=request.GET.get('name'),
+            language=request.GET.get('language')
+        )
+
+        return JsonResponse({'task_id': result.id}, status=202)
 
     return redirect(reverse_lazy('decks:index'))
+
+
+def get_deck_render(request: HttpRequest, task_id):
+    """ AJAX-view для проверки статуса таска рендеринга колоды и получения рендера """
+    if request.META.get('HTTP_X_REQUESTED_WITH') != 'XMLHttpRequest':
+        return redirect(reverse_lazy('decks:index'))
+    task_result = AsyncResult(task_id)
+    result = {
+        'task_id': task_id,
+        'task_status': task_result.status,
+        'task_result': task_result.result,
+    }
+    return JsonResponse(result, status=200)
 
 
 class NamelessDecksListView(generic.ListView):

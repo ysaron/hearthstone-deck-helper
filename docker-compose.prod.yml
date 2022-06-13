@@ -6,7 +6,7 @@ services:
       context: ./deck_helper
       dockerfile: Dockerfile.prod
     command: gunicorn deck_helper.wsgi:application --bind 0.0.0.0:8000
-    container_name: HS-Deck-Helper
+    container_name: app
     restart: always
     volumes:
       - static_volume:/home/deck_helper/web/static
@@ -18,16 +18,17 @@ services:
       - .env.prod
     depends_on:
       - db
+      - celery
   db:
     image: postgres:14
-    container_name: Postgres
+    container_name: database
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - .env.prod.db
   nginx:
     build: ./nginx
-    container_name: Nginx
+    container_name: nginx
     volumes:
       - static_volume:/home/deck_helper/web/static
       - media_volume:/home/deck_helper/web/media
@@ -36,8 +37,29 @@ services:
       - "80:80"
     depends_on:
       - web
+  broker:
+    image: redis:7
+    container_name: broker
+    ports:
+      - "6379:6379"
+    volumes:
+      - broker:/data
+  celery:
+    build:
+      context: ./deck_helper
+      dockerfile: Dockerfile.prod
+    container_name: celery
+    command: celery -A deck_helper worker -l info
+    volumes:
+      - media_volume:/home/deck_helper/web/media
+      - logfiles:/home/deck_helper/web/logs
+    env_file:
+      - .env.prod
+    depends_on:
+      - broker
 volumes:
   postgres_data:
   static_volume:
   media_volume:
   logfiles:
+  broker:

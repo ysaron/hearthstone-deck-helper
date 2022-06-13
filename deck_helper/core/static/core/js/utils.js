@@ -95,7 +95,6 @@ function showRenderForm() {
 }
 
 function render() {
-
     document.getElementById('renderForm').style.display = "none";
     let loading = document.getElementById('deckRenderLoading');
     loading.style.display = "block";
@@ -105,6 +104,7 @@ function render() {
     let deckId = btn.attr('datasrc');
     let name = $('#renderName').val();
     let lang = $('input[name=renderLang]:checked', btn.find('form')).val();
+
     $.ajax({
         data: {
             render: true,
@@ -114,37 +114,60 @@ function render() {
         },
         url: 'get_render/',
         success: function(response) {
-            let a = document.createElement("a");
-            a.setAttribute("href", response.render);
-            a.setAttribute("target", "_blank");
-            a.setAttribute("display", "block");
-            a.setAttribute("width", "100%");
-            a.setAttribute("height", "100%");
+            getRenderData(response.task_id);
+        },
+        error: function(response) {console.log(response.responseJSON.errors);}
+    });
+}
 
-            let deckRender = document.createElement("img");
-            deckRender.src = response.render;
-
-            let div = document.getElementById("deckRenderPlaceholder");
-
-            let width = "";
-            let height = "";
-            if (response.width >= response.height) {
-                width = "308px";
-                height = "auto";
+function getRenderData(taskID) {
+    $.ajax({
+        url: 'get_render/' + taskID + '/',
+        success: function(response) {
+            let taskStatus = response.task_status;
+            /*
+            Проверяем статус таска
+            Если не выполнен - проверяем снова через 1с
+            */
+            if (['PENDING', 'STARTED', 'RETRY'].includes(taskStatus)) {
+                setTimeout(function() {
+                    return getRenderData(response.task_id);
+                }, 1000);
             }
             else {
-                width = "auto";
-                height = "308px";
-            }
-            deckRender.setAttribute("width", width);
-            deckRender.setAttribute("height", height);
-            deckRender.setAttribute("alt", "Deck Render");
+                let a = document.createElement("a");
+                a.setAttribute("href", response.task_result.render);
+                a.setAttribute("target", "_blank");
+                a.setAttribute("display", "block");
+                a.setAttribute("width", "100%");
+                a.setAttribute("height", "100%");
 
-            a.appendChild(deckRender);
+                let deckRender = document.createElement("img");
+                deckRender.src = response.task_result.render;
 
-            loading.style.display = "none";
-            div.style.display = "flex";
-            div.appendChild(a);
+                let div = document.getElementById("deckRenderPlaceholder");
+
+                let width = "";
+                let height = "";
+                if (response.task_result.width >= response.task_result.height) {
+                    width = "308px";
+                    height = "auto";
+                }
+                else {
+                    width = "auto";
+                    height = "308px";
+                }
+                deckRender.setAttribute("width", width);
+                deckRender.setAttribute("height", height);
+                deckRender.setAttribute("alt", "Deck Render");
+
+                a.appendChild(deckRender);
+
+                let loading = document.getElementById('deckRenderLoading');
+                loading.style.display = "none";
+                div.style.display = "flex";
+                div.appendChild(a);
+            };
         },
         error: function(response) {console.log(response.responseJSON.errors);}
     });
