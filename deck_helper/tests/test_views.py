@@ -57,39 +57,6 @@ class TestDeckViews:
             pytest.fail('get_random_deckstring вернул некорректный код')
 
     @pytest.mark.django_db
-    def test_get_deck_render_ajax_view(self, client, deck):
-        response = client.get(reverse_lazy('decks:deck_render'))
-        assert response.status_code == status.HTTP_302_FOUND, 'Должно быть доступно только для AJAX-запросов'
-        response = client.get(
-            path=reverse_lazy('decks:deck_render'),
-            data={
-                'render': True,
-                'deck_id': deck.pk,
-                'name': 'test deck',
-                'language': 'en',
-            },
-        )
-        assert response.status_code == status.HTTP_302_FOUND, 'Должно быть доступно только для AJAX-запросов'
-        response = client.get(
-            path=reverse_lazy('decks:deck_render'),
-            data={
-                'render': True,
-                'deck_id': deck.pk,
-                'name': 'test deck',
-                'language': 'en',
-            },
-            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-        )
-        assert response.status_code == status.HTTP_200_OK, 'не работает получение рендера колоды через AJAX'
-        assert isinstance(response, JsonResponse), 'ответ должен иметь тип JsonResponse'
-        data = json.loads(response.content)
-        assert 'render' in data, 'get_deck_render вернул ответ без "render"'
-        assert 'width' in data, 'get_deck_render вернул ответ без "width"'
-        assert 'height' in data, 'get_deck_render вернул ответ без "height"'
-
-        deck.renders.first().render.delete(save=True)  # удаление тестового рендера вручную
-
-    @pytest.mark.django_db
     def test_deck_detail_view(self, client, deck):
         response = client.get(reverse_lazy('decks:deck_detail', kwargs={'deck_id': deck.pk}))
         assert response.status_code == status.HTTP_200_OK, 'просмотр тестовой колоды недоступен'
