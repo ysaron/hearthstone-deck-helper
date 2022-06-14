@@ -16,6 +16,7 @@
 - Django 4
 - Django REST Framework
 - PostgreSQL 14
+- Celery
 - Docker & docker-compose
 - Nginx
 - Gunicorn
@@ -53,6 +54,8 @@
   - Сброс пароля через email
 - **Логирование ошибок в Django Middleware**
 - **Юнит-тестирование (pytest)**
+- **Celery с Redis в качестве брокера и бэкенда**
+  - Рендеринг колоды в таске
 - **Контейнеризация (Docker, docker-compose)**
 - **Деплой (Nginx + Gunicorn)**
   
