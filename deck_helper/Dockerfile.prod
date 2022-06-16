@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /usr/src/deck_helper/
 
 RUN apt update \
-    && apt upgrade \
+    && apt upgrade -y \
     && apt install postgresql gcc python3-dev musl-dev -y
 
 RUN pip install --upgrade pip
