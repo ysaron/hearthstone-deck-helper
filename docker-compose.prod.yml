@@ -51,6 +51,21 @@ services:
       dockerfile: Dockerfile.prod
     container_name: celery
     command: celery -A deck_helper worker -l info
+    restart: always
+    volumes:
+      - media_volume:/home/deck_helper/web/media
+      - logfiles:/home/deck_helper/web/logs
+    env_file:
+      - .env.prod
+    depends_on:
+      - broker
+  celery-beat:
+    build:
+      context: ./deck_helper
+      dockerfile: Dockerfile.prod
+    container_name: celery-beat
+    command: celery -A deck_helper beat -l info
+    restart: always
     volumes:
       - media_volume:/home/deck_helper/web/media
       - logfiles:/home/deck_helper/web/logs

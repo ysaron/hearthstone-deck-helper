@@ -44,7 +44,8 @@ ADDITIONAL_MECHANICS = ['Lackey', 'Dormant', 'Choose One', 'Start of Game', 'Imm
 
 class Updater:
 
-    def __init__(self, writer, rewrite: bool = False, reload_images: bool = False):
+    def __init__(self, writer, progress_bars: bool = True, rewrite: bool = False, reload_images: bool = False):
+        self.__bar = progress_bars
         self.__rewrite = rewrite
         self.__reload_images = reload_images
         self.__writer = writer
@@ -68,6 +69,12 @@ class Updater:
         }
 
         self.__get_data()
+
+    @staticmethod
+    def __prepare_update():
+        state = HearthstoneState.load()
+        state.success = False
+        state.save()
 
     def __get_data(self):
         """ Формирует данные карт для записи в БД """
@@ -258,7 +265,8 @@ class Updater:
 
     def __write_cards(self):
         """ Обновляет карты в БД """
-        for j_card in tqdm(self.__en_cards, desc='Cards', ncols=100):
+        card_sequence = tqdm(self.__en_cards, desc='Cards', ncols=100) if self.__bar else self.__en_cards
+        for index, j_card in enumerate(card_sequence, start=1):
             image_en = CardRender(name=j_card['cardId'], language='en')
             image_ru = CardRender(name=j_card['cardId'], language='ru')
             thumbnail = Thumbnail(name=j_card['cardId'])
@@ -413,6 +421,8 @@ class Updater:
 
     def update(self):
         """ Выполняет обновление БД """
+
+        self.__prepare_update()
 
         with transaction.atomic():
             if self.__rewrite:

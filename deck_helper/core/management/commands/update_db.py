@@ -11,12 +11,22 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('-r', '--rewrite', action='store_true', help='Rewrite all cards')
         parser.add_argument('-i', '--images', action='store_true', help='Reload all card renders')
+        parser.add_argument(
+            '-d', '--disableprogressbars',
+            action='store_true',
+            help='Disable progress bars when recording cards. Do not use this manually.',
+        )
 
     def handle(self, *args, **options):
         start = time.perf_counter()
         self.stdout.write('Starting database update...')
         try:
-            upd = Updater(self.stdout.write, rewrite=options['rewrite'], reload_images=options['images'])
+            upd = Updater(
+                self.stdout.write,
+                progress_bars=not options['disableprogressbars'],
+                rewrite=options['rewrite'],
+                reload_images=options['images'],
+            )
             upd.update()
         except UpdateError as ue:
             self.stdout.write(f'Error during update: {ue}')

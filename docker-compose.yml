@@ -42,6 +42,17 @@ services:
       - .env.dev
     depends_on:
       - broker
+  celery-beat:
+    build: ./deck_helper
+    container_name: celery-beat
+    command: celery -A deck_helper beat -l info
+    volumes:
+      - media_volume_dev:/usr/src/deck_helper/media
+      - log_volume_dev:/usr/src/deck_helper/logs
+    env_file:
+      - .env.dev
+    depends_on:
+      - broker
 volumes:
   postgres_data_dev:
   media_volume_dev:

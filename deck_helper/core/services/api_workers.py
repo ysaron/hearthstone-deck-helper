@@ -1,8 +1,13 @@
 import requests
 import jmespath
 from abc import ABCMeta, abstractmethod
+from collections import namedtuple
 
 from django.conf import settings
+
+from core.models import HearthstoneState
+
+UpdateInfo = namedtuple('UpdateInfo', ['current_version', 'api_version', 'is_equal'])
 
 
 class HsApiWorker(metaclass=ABCMeta):
@@ -25,6 +30,10 @@ class HsApiWorker(metaclass=ABCMeta):
 
     @abstractmethod
     def check_api(self):
+        pass
+
+    @abstractmethod
+    def check_for_updates(self):
         pass
 
     @abstractmethod
@@ -54,6 +63,17 @@ class HsRapidApiWorker(HsApiWorker):
         r = requests.get(url=url, headers=self.__headers)
         if r.status_code != 200:
             raise ConnectionError('RapidAPI is not available')
+
+    def check_for_updates(self) -> UpdateInfo:
+        url = self.__base_url + 'info'
+        r = requests.get(url=url, headers=self.__headers, stream=True)
+        api_version: str = jmespath.search('patch', data=r.json())
+        current_version: HearthstoneState = HearthstoneState.load()
+        return UpdateInfo(
+            current_version=current_version.version,
+            api_version=api_version,
+            is_equal=current_version == api_version,
+        )
 
     def get_raw_json(self):
         url = f'{self.__base_url}cards'
