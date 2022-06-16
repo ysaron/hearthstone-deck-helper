@@ -13,6 +13,6 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'check_for_hs_api_updates': {
         'task': 'core.tasks.check_for_hs_api_updates',
-        'schedule': crontab(minute='*/10'),
+        'schedule': crontab(minute=0, hour=0),      # ежедневно в полночь
     }
 }
