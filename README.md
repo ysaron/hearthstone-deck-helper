@@ -16,7 +16,7 @@
 - Django 4
 - Django REST Framework
 - PostgreSQL 14
-- Celery
+- Celery & celery-beat
 - Docker & docker-compose
 - Nginx
 - Gunicorn
@@ -56,6 +56,7 @@
 - **Юнит-тестирование (pytest)**
 - **Celery с Redis в качестве брокера и бэкенда**
   - Рендеринг колоды в таске
+  - Периодические проверки обновлений hearthstone API посредством celery-beat
 - **Контейнеризация (Docker, docker-compose)**
 - **Деплой (Nginx + Gunicorn)**
   
