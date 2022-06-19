@@ -3,6 +3,8 @@ from celery.utils.log import get_task_logger
 from django.conf import settings
 from django.core.management import call_command
 
+from datetime import datetime, timedelta
+
 from decks.models import Deck, Render
 from core.services.images import DeckRender
 from core.services.api_workers import HsRapidApiWorker
@@ -37,13 +39,25 @@ def generate_deck_render(deck_id: str, name: str, language: str) -> dict:
 @app.task
 def check_for_hs_api_updates():
     logger.info('Checking for updates...')
-    api = HsRapidApiWorker()
+    try:
+        api = HsRapidApiWorker()
+    except ConnectionError:
+        logger.warning('RapidAPI is unreachable!')
+        return
+
     response = api.check_for_updates()
     logger.info(f'DB version {response.current_version} | {response.api_version} API version')
     if response.is_equal:
         logger.info('Updating the database is not necessary.')
         return False
-    else:
-        logger.info('Versions vary. Calling "update_db" command...')
-        call_command('update_db', '--disableprogressbars')
-        return True
+
+    # API с данными обновилось. Перед обновлением БД ждем обновления API с изображениями
+    tomorrow = datetime.now() + timedelta(hours=23)
+    logger.info(f'Versions vary. The database update is scheduled for {tomorrow:%d.%m.%Y %H:%M}')
+    run_update_db.apply_async(eta=tomorrow)
+    return True
+
+
+@app.task
+def run_update_db():
+    call_command('update_db', '--disableprogressbars')
