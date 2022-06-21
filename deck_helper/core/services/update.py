@@ -274,7 +274,7 @@ class Updater:
             if all([
                 not self.__rewrite,
                 (r_card_queryset := Card.objects.filter(card_id=j_card['cardId'])).exists(),
-                self.__is_equivalent(r_card_queryset.first(), j_card),
+                unchanged := self.__is_equivalent(r_card_queryset.first(), j_card),
                 not(j_card.get('collectible', False) and not image_en.exists),
                 not(j_card.get('collectible', False) and not image_ru.exists),
                 not(j_card.get('collectible', False) and not thumbnail.exists),
@@ -358,7 +358,7 @@ class Updater:
             if all([
                 r_card.collectible,
                 not card_created,
-                not self.__is_equivalent(r_card, j_card),
+                not unchanged,
             ]):
                 # если коллекционная карта уже была в БД и теперь изменяется - перезакачиваем рендеры
                 try:
