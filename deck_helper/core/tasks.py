@@ -60,4 +60,17 @@ def check_for_hs_api_updates():
 
 @app.task
 def run_update_db():
+    """ Вызывает команду обновления БД, если версии БД и Hearthstone API различаются """
+    try:
+        api = HsRapidApiWorker()
+    except ConnectionError:
+        logger.warning('RapidAPI is unreachable!')
+        return
+
+    response = api.check_for_updates()
+    if response.is_equal:
+        logger.info('Updating the database is not necessary.')
+        return False
+
     call_command('update_db', '--disableprogressbars')
+    return True
