@@ -88,4 +88,8 @@ def parse_deckstring(deckstring) -> tuple[CardIncludeList, CardList, int]:
         count = _read_varint(data)
         cards.append((card_id, count))
 
+    # TODO: добавить поддержку нового типа колод с 40 картами
+    if sum(c[1] for c in cards) != 30:
+        raise DecodeError(_('Unsupported deckstring version'))
+
     return cards, heroes, format_
