@@ -170,7 +170,8 @@ class DeckRender(Picture):
         """ Устанавливает разрешение и координаты плейсхолдеров в зависимости от кол-ва карт """
         cards = self.deck.included_cards
         amount = cards.count()
-        vertical_num = 3
+        vertical_num = 3 if amount <= 30 else (amount + 9) // 10
+        self.height += 362 * (vertical_num - 3)
         horizontal_num = (amount + vertical_num - 1) // vertical_num    # деление с округлением вверх
         if horizontal_num < 6:
             horizontal_num = 6
@@ -337,6 +338,10 @@ class DeckRender(Picture):
             if not value:
                 # улучшение отображения столбца, соотв. 0 карт
                 rect_area[1] -= 3
+
+            if (rect_area[3] - rect_area[1]) < font_2.size + 5:
+                value = 0
+
             cost_text_area = [
                 x0 + col_width / 2 + (col_width + gap) * cost + gap,
                 (y1 + rect_area[3] + gap - 10) / 2
