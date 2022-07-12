@@ -6,7 +6,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     container_name: app
     volumes:
-      - media_volume_dev:/usr/src/deck_helper/media
+      - media_volume:/usr/src/deck_helper/media
       - log_volume_dev:/usr/src/deck_helper/logs
     ports:
       - "8000:8000"
@@ -36,7 +36,7 @@ services:
     container_name: celery
     command: celery -A deck_helper worker -l info
     volumes:
-      - media_volume_dev:/usr/src/deck_helper/media
+      - media_volume:/usr/src/deck_helper/media
       - log_volume_dev:/usr/src/deck_helper/logs
     env_file:
       - .env.dev
@@ -47,7 +47,7 @@ services:
     container_name: celery-beat
     command: celery -A deck_helper beat -l info
     volumes:
-      - media_volume_dev:/usr/src/deck_helper/media
+      - media_volume:/usr/src/deck_helper/media
       - log_volume_dev:/usr/src/deck_helper/logs
     env_file:
       - .env.dev
@@ -55,6 +55,6 @@ services:
       - broker
 volumes:
   postgres_data_dev:
-  media_volume_dev:
+  media_volume:
   log_volume_dev:
   broker_dev:
