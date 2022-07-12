@@ -2,7 +2,7 @@ from rest_framework import generics, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import CardListSerializer, CardDetailSerializer, DeckSerializer
+from .serializers import CardListSerializer, CardDetailSerializer, DeckListSerializer, DeckDetailSerializer
 from .services.filters import CardFilter, DeckFilter
 from .services.utils import DjangoFilterBackend
 from core.services.deck_codes import get_clean_deckstring
@@ -29,7 +29,7 @@ class DeckListAPIView(generics.ListAPIView):
     """ Getting a list of decks """
 
     queryset = Deck.nameless.all()
-    serializer_class = DeckSerializer
+    serializer_class = DeckListSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = DeckFilter
 
@@ -37,7 +37,7 @@ class DeckListAPIView(generics.ListAPIView):
 class DeckDetailAPIView(generics.RetrieveAPIView):
     """ Getting a specific deck """
     queryset = Deck.nameless.all()
-    serializer_class = DeckSerializer
+    serializer_class = DeckDetailSerializer
 
 
 class DecodeDeckAPIView(APIView):
@@ -48,7 +48,7 @@ class DecodeDeckAPIView(APIView):
             try:
                 deckstring = get_clean_deckstring(deckstring)
                 deck = Deck.from_deckstring(deckstring)
-                serializer = DeckSerializer(deck)
+                serializer = DeckDetailSerializer(deck)
                 return Response(serializer.data)
             except DecodeError as de:
                 return Response({'error': str(de)})

@@ -22,6 +22,7 @@ class BaseCardSerializer(serializers.ModelSerializer):
     rarity = serializers.CharField(source='get_rarity_display')
     tribe = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
     spell_school = serializers.CharField(source='get_spell_school_display')
+    mechanic = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
 
 
 class CardListSerializer(BaseCardSerializer):
@@ -29,8 +30,7 @@ class CardListSerializer(BaseCardSerializer):
     class Meta:
         list_serializer_class = FilterCardListSerializer
         model = Card
-        fields = ('dbf_id', 'card_id', 'name', 'collectible', 'card_type', 'cost', 'attack', 'health', 'durability',
-                  'armor', 'card_class', 'card_set', 'text', 'rarity')
+        fields = ('dbf_id', 'card_id', 'name', 'collectible', 'card_type', 'card_class', 'rarity')
         ref_name = 'CardList'
 
 
@@ -38,8 +38,10 @@ class CardDetailSerializer(BaseCardSerializer):
 
     class Meta:
         model = Card
-        fields = ('dbf_id', 'card_id', 'name', 'collectible', 'battlegrounds', 'card_type', 'cost', 'attack', 'health',
-                  'durability', 'armor', 'card_class', 'card_set', 'text', 'flavor', 'rarity', 'tribe', 'spell_school')
+        fields = ('dbf_id', 'card_id', 'name', 'collectible', 'battlegrounds',
+                  'card_type', 'cost', 'attack', 'health', 'durability', 'armor',
+                  'card_class', 'card_set', 'text', 'flavor', 'rarity', 'tribe',
+                  'spell_school', 'artist', 'mechanic')
         ref_name = 'Card'
 
 
@@ -47,8 +49,8 @@ class CardInDeckSerializer(BaseCardSerializer):
 
     class Meta:
         model = Card
-        fields = ('dbf_id', 'card_id', 'name', 'card_type', 'cost', 'attack', 'health', 'durability', 'armor',
-                  'card_class', 'card_set', 'text', 'flavor', 'rarity', 'tribe', 'spell_school')
+        fields = ('dbf_id', 'card_id', 'name', 'card_type', 'cost', 'attack',
+                  'health', 'durability', 'armor', 'card_class', 'card_set', 'rarity')
         ref_name = 'CardInDeck'
 
 
@@ -70,6 +72,17 @@ class DeckSerializer(serializers.ModelSerializer):
     cards = InclusionSerializer(source='inclusions', many=True)
     created = serializers.DateTimeField(format='%d.%m.%Y')
 
+
+class DeckListSerializer(DeckSerializer):
+
+    class Meta:
+        model = Deck
+        fields = ('id', 'deck_format', 'deck_class', 'string', 'created')
+
+
+class DeckDetailSerializer(DeckSerializer):
+
     class Meta:
         model = Deck
         fields = ('id', 'deck_format', 'deck_class', 'string', 'created', 'cards')
+
