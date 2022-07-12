@@ -85,4 +85,3 @@ class DeckDetailSerializer(DeckSerializer):
     class Meta:
         model = Deck
         fields = ('id', 'deck_format', 'deck_class', 'string', 'created', 'cards')
-
