@@ -27,15 +27,18 @@ def _read_varint(stream: IO) -> int:
     shift = 0
     result = 0
     while True:
-        c = stream.read(1)      # считываем по 1 байту в строку (1 символ)
-        if c == "":
-            raise EOFError("Unexpected EOF")
-        i = ord(c)
+        try:
+            c = stream.read(1)      # считываем по 1 байту в строку (1 символ)
+            if c == "":
+                raise EOFError("Unexpected EOF")
+            i = ord(c)
 
-        result |= (i & 0x7f) << shift   # 0x7f = 0b01111111
-        shift += 7
-        if not (i & 0x80):              # если 0 < i < 128
-            break
+            result |= (i & 0x7f) << shift   # 0x7f = 0b01111111
+            shift += 7
+            if not (i & 0x80):              # если 0 < i < 128
+                break
+        except Exception:
+            raise DecodeError(_('Invalid deck code'))
 
     return result
 
