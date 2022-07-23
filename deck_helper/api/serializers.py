@@ -69,8 +69,12 @@ class DeckSerializer(serializers.ModelSerializer):
 
     deck_class = serializers.SlugRelatedField(slug_field='name', read_only=True)
     deck_format = serializers.SlugRelatedField(slug_field='name', read_only=True)
-    cards = InclusionSerializer(source='inclusions', many=True)
+    cards = serializers.SerializerMethodField()
     created = serializers.DateTimeField(format='%d.%m.%Y')
+
+    def get_cards(self, instance):
+        cards = instance.inclusions.all().order_by('card__cost', 'card__name')
+        return InclusionSerializer(cards, many=True).data
 
 
 class DeckListSerializer(DeckSerializer):
