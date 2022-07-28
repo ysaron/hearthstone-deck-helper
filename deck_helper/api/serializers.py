@@ -71,10 +71,14 @@ class DeckSerializer(serializers.ModelSerializer):
     deck_format = serializers.SlugRelatedField(slug_field='name', read_only=True)
     cards = serializers.SerializerMethodField()
     created = serializers.DateTimeField(format='%d.%m.%Y')
+    cost = serializers.SerializerMethodField()
 
     def get_cards(self, instance):
         cards = instance.inclusions.all().order_by('card__cost', 'card__name')
         return InclusionSerializer(cards, many=True).data
+
+    def get_cost(self, instance):
+        return instance.craft_cost['basic']
 
 
 class DeckListSerializer(DeckSerializer):
@@ -88,4 +92,4 @@ class DeckDetailSerializer(DeckSerializer):
 
     class Meta:
         model = Deck
-        fields = ('id', 'deck_format', 'deck_class', 'string', 'created', 'cards')
+        fields = ('id', 'deck_format', 'deck_class', 'string', 'created', 'cost', 'cards')
