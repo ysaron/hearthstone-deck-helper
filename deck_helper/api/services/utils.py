@@ -50,6 +50,7 @@ class DjangoFilterBackend(BaseDjangoFilterBackend):
 def generate_choicefield_description(model, enum_choice: str) -> str:
     """
     Возвращает описание полей с выбором вариантов для генератора документации к API
+
     :param model: фильтруемая модель
     :param enum_choice: строка с именем подкласса django.db.models.TextChoices
     """

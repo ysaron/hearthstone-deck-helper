@@ -84,6 +84,8 @@ def format_stats(context, card):
             second_param = Parameter(_('Durability'), f'{svg_path}durability.svg', card.durability)
         case Card.CardTypes.HERO:
             second_param = Parameter(_('Armor'), f'{svg_path}armor.svg', card.armor)
+        case Card.CardTypes.LOCATION:
+            second_param = Parameter(_('Health'), f'{svg_path}health.svg', card.health)
 
     context.update({'params': [p for p in (cost, first_param, second_param) if p.name]})
 

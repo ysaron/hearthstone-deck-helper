@@ -20,6 +20,7 @@ C_TYPES = {
     'weapon': Card.CardTypes.WEAPON,
     'hero': Card.CardTypes.HERO,
     'hero power': Card.CardTypes.HEROPOWER,
+    'location': Card.CardTypes.LOCATION,
 }
 RARITIES = {
     'free': Card.Rarities.NO_RARITY,

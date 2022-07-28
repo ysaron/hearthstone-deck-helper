@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-05 13:54+0700\n"
+"POT-Creation-Date: 2022-07-28 11:18+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,9 @@ msgstr "Теперь у вас есть доступ ко всему функц�
 
 #: .\accounts\templates\accounts\acc_active_done.html:9
 msgid "Please confirm your email to complete your registration."
-msgstr "Пожалуйста, подтвердите свой адрес электронной почты, чтобы завершить регистрацию."
+msgstr ""
+"Пожалуйста, подтвердите свой адрес электронной почты, чтобы завершить "
+"регистрацию."
 
 #: .\accounts\templates\accounts\acc_active_email.html:2
 msgid "to confirm your registration, follow the link below"
@@ -81,7 +83,9 @@ msgstr "Подтвердить"
 #: .\accounts\templates\accounts\password_reset_confirm.html:35
 msgid ""
 "The password reset link is invalid. You can try to request a reset again."
-msgstr "Ссылка для сброса пароля недействительна. Вы можете попробовать запросить сброс еще раз."
+msgstr ""
+"Ссылка для сброса пароля недействительна. Вы можете попробовать запросить "
+"сброс еще раз."
 
 #: .\accounts\templates\accounts\password_reset_done.html:10
 msgid "We have sent you instructions on how to reset your password by email."
@@ -91,7 +95,9 @@ msgstr "Мы отправили вам инструкции по изменен�
 msgid ""
 "If a few minutes have passed and there are still no instructions, check your "
 "Spam folder."
-msgstr "Если прошло несколько минут, а инструкций по-прежнему нет, проверьте папку Спам."
+msgstr ""
+"Если прошло несколько минут, а инструкций по-прежнему нет, проверьте папку "
+"Спам."
 
 #: .\accounts\templates\accounts\password_reset_email.html:2
 #, python-format
@@ -172,48 +178,48 @@ msgid "The password has been changed"
 msgstr "Пароль был изменен"
 
 #: .\cards\forms.py:9 .\cards\models.py:49 .\cards\models.py:68
-#: .\cards\models.py:84 .\cards\models.py:101 .\cards\models.py:144
+#: .\cards\models.py:84 .\cards\models.py:101 .\cards\models.py:145
 #: .\cards\templates\cards\card_list.html:80 .\decks\forms.py:23
 #: .\decks\forms.py:26 .\decks\models.py:36 .\decks\models.py:52
 #: .\decks\models.py:241 .\decks\templates\decks\deck_detail.html:187
 msgid "Name"
 msgstr "Название"
 
-#: .\cards\forms.py:11 .\cards\models.py:52 .\cards\models.py:201
+#: .\cards\forms.py:11 .\cards\models.py:52 .\cards\models.py:202
 #: .\cards\templates\cards\card_detail.html:19 .\core\services\statistics.py:29
 msgid "Collectible"
 msgstr "Коллекционные"
 
-#: .\cards\forms.py:14 .\cards\models.py:148
-#: .\cards\templates\cards\card_detail.html:47
+#: .\cards\forms.py:14 .\cards\models.py:149
+#: .\cards\templates\cards\card_detail.html:51
 #: .\cards\templates\cards\card_list.html:81
 msgid "Type"
 msgstr "Тип"
 
-#: .\cards\forms.py:17 .\cards\models.py:58 .\cards\models.py:149
-#: .\cards\models.py:190 .\cards\templates\cards\card_detail.html:31
+#: .\cards\forms.py:17 .\cards\models.py:58 .\cards\models.py:150
+#: .\cards\models.py:191 .\cards\templates\cards\card_detail.html:35
 #: .\cards\templates\cards\card_list.html:82 .\decks\forms.py:32
 #: .\decks\models.py:60
 msgid "Class"
 msgstr "Класс"
 
-#: .\cards\forms.py:20 .\cards\models.py:92 .\cards\models.py:198
-#: .\cards\templates\cards\card_detail.html:51
+#: .\cards\forms.py:20 .\cards\models.py:92 .\cards\models.py:199
+#: .\cards\templates\cards\card_detail.html:55
 #: .\cards\templates\cards\card_list.html:83
 msgid "Set"
 msgstr "Набор"
 
-#: .\cards\forms.py:23 .\cards\models.py:168
-#: .\cards\templates\cards\card_detail.html:55
+#: .\cards\forms.py:23 .\cards\models.py:169
+#: .\cards\templates\cards\card_detail.html:62
 msgid "Rarity"
 msgstr "Редкость"
 
-#: .\cards\forms.py:26 .\cards\models.py:75 .\cards\models.py:170
-#: .\cards\templates\cards\card_detail.html:60
+#: .\cards\forms.py:26 .\cards\models.py:75 .\cards\models.py:171
+#: .\cards\templates\cards\card_detail.html:67
 msgid "Tribe"
 msgstr "Раса"
 
-#: .\cards\forms.py:29 .\cards\models.py:109 .\cards\models.py:177
+#: .\cards\forms.py:29 .\cards\models.py:109 .\cards\models.py:178
 #: .\decks\templates\decks\deck_detail.html:236
 msgid "Mechanics"
 msgstr "Механики"
@@ -234,8 +240,8 @@ msgstr "Классы"
 msgid "Tribes"
 msgstr "Расы"
 
-#: .\cards\models.py:87 .\decks\forms.py:35 .\decks\models.py:42
-#: .\decks\models.py:63
+#: .\cards\models.py:87 .\cards\templates\cards\card_detail.html:55
+#: .\decks\forms.py:35 .\decks\models.py:42 .\decks\models.py:63
 msgid "Format"
 msgstr "Формат"
 
@@ -251,7 +257,7 @@ msgstr "Скрыто"
 msgid "Mechanic"
 msgstr "Механика"
 
-#: .\cards\models.py:119 .\cards\models.py:127 .\cards\models.py:135
+#: .\cards\models.py:119 .\cards\models.py:128 .\cards\models.py:136
 msgid "---------"
 msgstr "---------"
 
@@ -275,176 +281,181 @@ msgstr "Оружие"
 msgid "Hero power"
 msgstr "Сила героя"
 
-#: .\cards\models.py:128
+#: .\cards\models.py:125
+msgid "Location"
+msgstr "Область"
+
+#: .\cards\models.py:129
 msgid "No rarity"
 msgstr "Без редкости"
 
-#: .\cards\models.py:129 .\core\services\statistics.py:67
+#: .\cards\models.py:130 .\core\services\statistics.py:67
 msgid "Common"
 msgstr "Обычная"
 
-#: .\cards\models.py:130 .\core\services\statistics.py:61
+#: .\cards\models.py:131 .\core\services\statistics.py:61
 msgid "Rare"
 msgstr "Редкая"
 
-#: .\cards\models.py:131 .\core\services\statistics.py:55
+#: .\cards\models.py:132 .\core\services\statistics.py:55
 msgid "Epic"
 msgstr "Эпическая"
 
-#: .\cards\models.py:132 .\core\services\statistics.py:49
+#: .\cards\models.py:133 .\core\services\statistics.py:49
 msgid "Legendary"
 msgstr "Легендарная"
 
-#: .\cards\models.py:136
+#: .\cards\models.py:137
 msgid "Holy"
 msgstr "Свет"
 
-#: .\cards\models.py:137
+#: .\cards\models.py:138
 msgid "Shadow"
 msgstr "Тьма"
 
-#: .\cards\models.py:138
+#: .\cards\models.py:139
 msgid "Nature"
 msgstr "Природа"
 
-#: .\cards\models.py:139
+#: .\cards\models.py:140
 msgid "Fel"
 msgstr "Скверна"
 
-#: .\cards\models.py:140
+#: .\cards\models.py:141
 msgid "Fire"
 msgstr "Огонь"
 
-#: .\cards\models.py:141
+#: .\cards\models.py:142
 msgid "Frost"
 msgstr "Лед"
 
-#: .\cards\models.py:142
+#: .\cards\models.py:143
 msgid "Arcane"
 msgstr "Тайная магия"
 
-#: .\cards\models.py:150
+#: .\cards\models.py:151
 msgid "Mana cost"
 msgstr "Стоимость ед. маны"
 
-#: .\cards\models.py:152 .\core\templatetags\custom_filters.py:80
+#: .\cards\models.py:153 .\core\templatetags\custom_filters.py:80
 #: .\core\templatetags\custom_filters.py:83
 msgid "Attack"
 msgstr "Атака"
 
-#: .\cards\models.py:153
+#: .\cards\models.py:154
 msgid "For minions and weapons only."
 msgstr "Только для существ и оружия."
 
-#: .\cards\models.py:155 .\core\templatetags\custom_filters.py:81
+#: .\cards\models.py:156 .\core\templatetags\custom_filters.py:81
+#: .\core\templatetags\custom_filters.py:88
 msgid "Health"
 msgstr "Здоровье"
 
-#: .\cards\models.py:156
+#: .\cards\models.py:157
 msgid "For minions only."
 msgstr "Только для существ."
 
-#: .\cards\models.py:158 .\core\templatetags\custom_filters.py:84
+#: .\cards\models.py:159 .\core\templatetags\custom_filters.py:84
 msgid "Durability"
 msgstr "Прочность"
 
-#: .\cards\models.py:159
+#: .\cards\models.py:160
 msgid "For weapons only."
 msgstr "Только для оружия"
 
-#: .\cards\models.py:161 .\core\templatetags\custom_filters.py:86
+#: .\cards\models.py:162 .\core\templatetags\custom_filters.py:86
 msgid "Armor"
 msgstr "Броня"
 
-#: .\cards\models.py:162
+#: .\cards\models.py:163
 msgid "For hero cards only."
 msgstr "Только для карт героев."
 
-#: .\cards\models.py:164 .\cards\templates\cards\card_detail.html:36
+#: .\cards\models.py:165 .\cards\templates\cards\card_detail.html:40
 msgid "Text"
 msgstr "Текст"
 
-#: .\cards\models.py:165
+#: .\cards\models.py:166
 msgid "The text of the card that defines its properties."
 msgstr "Текст карты, определяющий ее свойства."
 
-#: .\cards\models.py:166 .\cards\templates\cards\card_detail.html:42
+#: .\cards\models.py:167 .\cards\templates\cards\card_detail.html:46
 msgid "Flavor"
 msgstr "Описание"
 
-#: .\cards\models.py:167
+#: .\cards\models.py:168
 msgid "Free text."
 msgstr "Произвольный текст."
 
-#: .\cards\models.py:170
+#: .\cards\models.py:171
 msgid "For creatures only."
 msgstr "Только для существ."
 
-#: .\cards\models.py:172
+#: .\cards\models.py:173
 msgid "Spell school"
 msgstr "Школа магии"
 
-#: .\cards\models.py:172
+#: .\cards\models.py:173
 msgid "For spells only."
 msgstr "Только для заклинаний."
 
-#: .\cards\models.py:174
+#: .\cards\models.py:175
 msgid "Date of creation"
 msgstr "Дата создания"
 
-#: .\cards\models.py:175
+#: .\cards\models.py:176
 msgid "Battlegrounds card"
 msgstr "Карта Полей сражений"
 
-#: .\cards\models.py:176
+#: .\cards\models.py:177
 msgid "Mercenaries card"
 msgstr "Карта Наемников"
 
-#: .\cards\models.py:178
+#: .\cards\models.py:179
 msgid "Card mechanics"
 msgstr "Механики карты"
 
-#: .\cards\models.py:196
+#: .\cards\models.py:197
 msgid "Integer ID of an existing card"
 msgstr "Целочисленный ID карты"
 
-#: .\cards\models.py:197
+#: .\cards\models.py:198
 msgid "String ID of an existing card"
 msgstr "Строковый ID карты"
 
-#: .\cards\models.py:200 .\cards\templates\cards\card_detail.html:79
+#: .\cards\models.py:201 .\cards\templates\cards\card_detail.html:86
 msgid "Artist"
 msgstr "Художник"
 
-#: .\cards\models.py:203
+#: .\cards\models.py:204
 msgid "Image (enUS)"
 msgstr "Изображение (enUS)"
 
-#: .\cards\models.py:203
+#: .\cards\models.py:204
 msgid "Rendered card image (en)"
 msgstr "Рендер карты (en)"
 
-#: .\cards\models.py:205
+#: .\cards\models.py:206
 msgid "Image (ruRU)"
 msgstr "Изображение (ruRU)"
 
-#: .\cards\models.py:205
+#: .\cards\models.py:206
 msgid "Rendered card image (ru)"
 msgstr "Рендер карты (ru)"
 
-#: .\cards\models.py:207
+#: .\cards\models.py:208
 msgid "Thumbnail"
 msgstr "Миниатюра"
 
-#: .\cards\models.py:207
+#: .\cards\models.py:208
 msgid "Card thumbnail to display in the deck"
 msgstr "Миниатюра карты для отображения в колоде"
 
-#: .\cards\models.py:214
+#: .\cards\models.py:215
 msgid "Hearthstone card"
 msgstr "Карта Hearthstone"
 
-#: .\cards\models.py:215 .\cards\views.py:28
+#: .\cards\models.py:216 .\cards\views.py:28
 msgid "Hearthstone cards"
 msgstr "Карты Hearthstone"
 
@@ -456,20 +467,20 @@ msgstr "Поля сражений"
 msgid "Non-collectible"
 msgstr "Неколлекционные"
 
-#: .\cards\templates\cards\card_detail.html:66
+#: .\cards\templates\cards\card_detail.html:73
 msgid "Spell type"
 msgstr "Тип заклинания"
 
-#: .\cards\templates\cards\card_detail.html:73
+#: .\cards\templates\cards\card_detail.html:80
 msgctxt "list"
 msgid "Mechanics"
 msgstr "Механики"
 
-#: .\cards\templates\cards\card_detail.html:87
+#: .\cards\templates\cards\card_detail.html:94
 msgid "Related decks"
 msgstr "Связанные колоды"
 
-#: .\cards\templates\cards\card_detail.html:92
+#: .\cards\templates\cards\card_detail.html:103
 msgid "This card hasn't been found in known decks."
 msgstr "В известных колодах карта не найдена."
 
@@ -511,11 +522,12 @@ msgstr "Успешно обновлено"
 msgid "Whether the last update was successful"
 msgstr "Было ли последнее обновление успешным"
 
-#: .\core\services\deck_codes.py:52 .\core\services\deck_codes.py:57
+#: .\core\services\deck_codes.py:41 .\core\services\deck_codes.py:55
+#: .\core\services\deck_codes.py:60
 msgid "Invalid deck code"
 msgstr "Некорректный код колоды"
 
-#: .\core\services\deck_codes.py:62
+#: .\core\services\deck_codes.py:65
 msgid "Unsupported deckstring version"
 msgstr "Неподдерживаемая версия кода колоды"
 
@@ -568,7 +580,7 @@ msgstr "Карты"
 
 #: .\core\services\statistics.py:182
 #: .\core\templates\core\includes\header.html:7 .\decks\models.py:73
-#: .\decks\views.py:100 .\decks\views.py:132
+#: .\decks\views.py:121 .\decks\views.py:153
 msgid "Decks"
 msgstr "Колоды"
 
@@ -612,15 +624,15 @@ msgstr "Войти"
 msgid "Cost"
 msgstr "Стоимость"
 
-#: .\core\templatetags\custom_filters.py:119
+#: .\core\templatetags\custom_filters.py:121
 msgid "DH"
 msgstr "ДХ"
 
-#: .\deck_helper\settings.py:104
+#: .\deck_helper\settings.py:108
 msgid "English"
 msgstr "Английский"
 
-#: .\deck_helper\settings.py:105
+#: .\deck_helper\settings.py:109
 msgid "Russian"
 msgstr "Русский"
 
@@ -741,11 +753,6 @@ msgstr "Сохранить с этим названием"
 msgid "Craft"
 msgstr "Крафт"
 
-#: .\decks\templates\decks\deck_detail.html:173
-#: .\decks\templates\decks\tags\deck-accordion.html:62
-msgid "gold"
-msgstr "в золоте"
-
 #: .\decks\templates\decks\deck_detail.html:199
 msgid "Draw"
 msgstr "Сгенерировать"
@@ -781,20 +788,23 @@ msgstr "Открыть страницу с подробной информаци
 msgid "Expand"
 msgstr "Развернуть"
 
-#: .\decks\views.py:25
+#: .\decks\views.py:28
 msgid "Decoding"
 msgstr "Расшифровка"
 
-#: .\decks\views.py:41
+#: .\decks\views.py:44
 #, python-format
 msgid "Error: %(error)s"
 msgstr "Ошибка: %(error)s"
 
-#: .\decks\views.py:44
+#: .\decks\views.py:47
 #, python-format
 msgid "%(error)s. The database will be updated shortly."
 msgstr "%(error)s. База данных будет обновлена в ближайшее время."
 
-#: .\decks\views.py:189
+#: .\decks\views.py:220
 msgid "Deck has been removed"
 msgstr "Колода была удалена"
+
+#~ msgid "gold"
+#~ msgstr "в золоте"

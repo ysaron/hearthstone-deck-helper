@@ -122,6 +122,7 @@ class BaseCard(Model):
         HERO = 'H', _('Hero')
         WEAPON = 'W', _('Weapon')
         HEROPOWER = 'HP', _('Hero power')
+        LOCATION = 'L', _('Location')
 
     class Rarities(models.TextChoices):
         UNKNOWN = '', _('---------')
