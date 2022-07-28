@@ -38,12 +38,12 @@ class HsApiWorker(metaclass=ABCMeta):
 
     @abstractmethod
     def get_raw_json(self):
-        """ Получает ответ API и сохраняет в self.__raw_json """
+        """ Получает ответ API и сохраняет в ``self.__raw_json`` """
         pass
 
     @abstractmethod
     def clear_data(self):
-        """ Приводит self.data в вид, пригодный для обновления БД """
+        """ Приводит ``self.data`` в вид, пригодный для обновления БД """
         pass
 
     @abstractmethod

@@ -6,7 +6,8 @@ register = template.Library()
 @register.inclusion_tag('core/tags/pagination.html', takes_context=True, name='formatted_pages')
 def page_formatter(context, adjacent_pages: int = 3):
     """
-    Кастомный включающий тег шаблона для улучшения пагинации
+    Улучшение пагинации Django
+
     :param context: контекст
     :param adjacent_pages: кол-во отображаемых соседних страниц
     :return: переменные контекста для отображения первой, последней и соседних страниц по отношению к текущей

@@ -24,8 +24,9 @@ COMPONENTS = Path(__file__).resolve().parent / 'components'
 class Picture:
     """
     Класс для работы с изображениями в проекте.
+
     Объединяет в одну сущность изображение, адрес в файловой системе, удаленный адрес,
-    возможность скачивания, удаления и сохранения в Django ImageField
+    возможность скачивания, удаления и сохранения в Django ``ImageField``
     """
 
     def __init__(self, language: str = 'en'):
@@ -42,7 +43,7 @@ class Picture:
             raise ValueError(f'Unsupported language: {self.language}. Allowed: {", ".join(languages_list)}')
 
     def download(self):
-        """ Скачивает файл по URL в файлоподобный объект self.data """
+        """ Скачивает файл по URL в файлоподобный объект ``self.data`` """
         try:
             r = requests.get(self.url, stream=True)
         except Exception as e:
@@ -65,9 +66,11 @@ class Picture:
     @property
     def for_imagefield(self):
         """
-        Возвращает словарь с именованными аргументами для ImageField (для распаковки **).
+        Возвращает словарь с именованными аргументами для ``ImageField`` (для распаковки **).
+
         Пример:
-        model.image.save(**picture.for_imagefield)
+
+        ``model.image.save(**picture.for_imagefield)``
         """
         return {'name': self.path.name, 'content': File(self.data)}
 
@@ -76,9 +79,7 @@ class Picture:
 
 
 class CardRender(Picture):
-    """
-    Локализованное изображение карты Hearthstone
-    """
+    """ Локализованное изображение карты Hearthstone """
 
     def __init__(self, name: str, language: str = 'en'):
         super().__init__(language=language)
@@ -99,6 +100,7 @@ class Thumbnail(Picture):
     def fade(self, from_perc: int = 20, to_perc: int = 50):
         """
         Добавляет изображению затухание справа налево
+
         :param from_perc: % от ширины изображения (отсчет слева направо), определяющий место начала затухания
         :param to_perc: % от ширины изображения (отсчет слева направо), определяющий место конца затухания
         """
@@ -124,9 +126,7 @@ class Thumbnail(Picture):
 
 
 class DeckRender(Picture):
-    """
-    Детализированное изображение колоды
-    """
+    """ Детализированное изображение колоды """
 
     def __init__(self, name: str, deck: Deck, language: str):
         super().__init__(language=language)
@@ -247,7 +247,7 @@ class DeckRender(Picture):
         self.__draw_qr()
 
     def __calc_footer_params_v1(self):
-        """ Рассчитывает размеры и положение инфо-окон нижнего колонтитула (рендер шире 2000px) """
+        """ Рассчитывает размеры и положение инфо-окон нижнего колонтитула (рендер *шире* 2000px) """
         max_window_height = 330
         max_window_width = 550
         qr_size = Size(x=max_window_height, y=max_window_height)    # квадрат со стороной == макс. высоте
@@ -277,7 +277,7 @@ class DeckRender(Picture):
         self.stats = Window(size=stats_size, top_left=stats_topleft)
 
     def __calc_footer_params_v2(self):
-        """ Рассчитывает размеры и положение инфо-окон нижнего колонтитула (рендер уже 2000px) """
+        """ Рассчитывает размеры и положение инфо-окон нижнего колонтитула (рендер *уже* 2000px) """
         max_window_height = 330
         max_window_width = 550
         craft_width = 230
@@ -571,6 +571,7 @@ class DeckRender(Picture):
     def __contrast(image: Image, factor: float = 1):
         """
         Возвращает копию изображения с измененным контрастом
+
         :param image: изображение
         :param factor: 1 - без эффекта, меньше - уменьшить контраст, больше - увеличить
         """
@@ -581,6 +582,7 @@ class DeckRender(Picture):
     def __calc_cost_distribution(cards) -> tuple[int, ...]:
         """
         Возвращает кортеж с распределением карт по стоимости.
+
         Индексы - стоимости карт, значения - количества карт данной стоимости
         """
         cost_distribution = []

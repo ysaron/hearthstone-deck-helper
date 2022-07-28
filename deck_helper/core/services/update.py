@@ -398,7 +398,7 @@ class Updater:
         return equivalent
 
     def __extract_ru_card(self, key: str, value) -> dict:
-        """ Извлекает карту-словарь из списка ru_cards """
+        """ Извлекает карту-словарь из списка ``ru_cards`` """
         for index, d in enumerate(self.__ru_cards):
             if d[key] == value:
                 return self.__ru_cards.pop(index)

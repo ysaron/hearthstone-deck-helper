@@ -183,7 +183,8 @@ class BaseCard(Model):
 
     def display_card_class(self):
         """
-        Создает строку для поля card_class.
+        Создает строку для поля ``card_class``
+
         Необходимо для отображения поля типа ManyToMany в списке в админ-панели
         """
         return ', '.join([cardclass.name for cardclass in self.card_class.all()])

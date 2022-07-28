@@ -106,12 +106,12 @@ class Deck(models.Model):
 
     @property
     def is_named(self):
-        """ Возвращает True, если колода была сохранена пользователем """
+        """ Возвращает ``True``, если колода была сохранена пользователем """
         return self.name != '' and self.user is not None
 
     @property
     def included_cards(self):
-        """ Queryset 'cards', дополненный данными о количестве экземпляров в колоде """
+        """ Queryset ``cards``, дополненный данными о количестве экземпляров в колоде """
 
         decklist = self.cards.all().prefetch_related(
             'card_class',
@@ -151,7 +151,7 @@ class Deck(models.Model):
     def __get_statistics(self, field: str) -> list[dict]:
         """
         Возвращает данные о количестве карт в колоде,
-        соответствующих различным значением поля field
+        соответствующих различным значением поля ``field``
         """
         lst = []
         result = []

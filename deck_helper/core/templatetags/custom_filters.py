@@ -67,7 +67,7 @@ def get_format_style(deck) -> str:
 
 @register.inclusion_tag('cards/tags/stat_cell.html', takes_context=True, name='format_stats')
 def format_stats(context, card):
-    """ Формирует строку <tr> таблицы card-detail с числовыми параметрами карты """
+    """ Формирует строку ``<tr>`` таблицы card-detail с числовыми параметрами карты """
 
     svg_path = 'core/svg/'
     cost = Parameter(_('Cost'), f'{svg_path}cost.svg', card.cost)

@@ -46,6 +46,7 @@ def _read_varint(stream: IO) -> int:
 def parse_deckstring(deckstring) -> tuple[CardIncludeList, CardList, int]:
     """
     Расшифровка кода колоды
+
     :param deckstring: строка ASCII или байты
     :return: список кортежей[dbf_id, count]; список[dbf_id]; значение енума формата
     """

@@ -7,8 +7,9 @@ from .utils import generate_choicefield_description as gcd
 
 class CharInFilter(filters.BaseInFilter, filters.CharFilter):
     """
-    BaseInFilter - валидация разделенных запятыми входящих значений
-    CharFilter - фильтрация по тексту (по умолчанию фильтрация по id)
+    ``BaseInFilter`` - валидация разделенных запятыми входящих значений
+
+    ``CharFilter`` - фильтрация по тексту (по умолчанию фильтрация по id)
     """
     pass
 
@@ -51,7 +52,7 @@ class DeckFilter(filters.FilterSet):
         fields = ('dformat', 'dclass', 'date', 'cards')
 
     def filter_decks_by_cards(self, queryset, name, value):
-        """ Позволяет фильтровать колоды по картам, указывая их dbf_id через запятую """
+        """ Позволяет фильтровать колоды по картам, указывая их ``dbf_id`` через запятую """
 
         for dbf_id in value.split(","):
             queryset = queryset.filter(cards__dbf_id=dbf_id)

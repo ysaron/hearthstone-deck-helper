@@ -13,7 +13,7 @@ class LoggingMiddleware:
         return response
 
     def process_exception(self, request, exception):
-        """ Вызывается при любом неотловленном исключении во views """
+        """ Вызывается при любом неотловленном исключении во ``views`` """
         msg = f'{exception}\nRequest: {request}\nRequest.META: {request.META}'
         logger.exception(msg=msg)
         return None

@@ -14,7 +14,7 @@ class DeckstringForm(forms.Form):
 
 
 class DeckStringCopyForm(forms.Form):
-    """ Форма, показываемая при невозможности копирования кода через navigator.clipboard """
+    """ Форма, показываемая при невозможности копирования кода через *navigator.clipboard* """
     deckstring = forms.CharField(max_length=30)
     deckstring.widget.attrs.update({'class': 'deck-control-element'})
 

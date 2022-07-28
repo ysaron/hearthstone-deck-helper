@@ -61,7 +61,7 @@ class DeckAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def get_queryset(self, request):
-        """ Переопределение для изменения используемого менеджера Deck """
+        """ Переопределение для изменения используемого менеджера ``Deck`` """
         qs = self.model.objects.get_queryset()
         ordering = self.get_ordering(request)
         if ordering:

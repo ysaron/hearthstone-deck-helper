@@ -4,7 +4,7 @@ import warnings
 
 
 class DjangoFilterBackend(BaseDjangoFilterBackend):
-    """ Обеспечивает совместимость RangeFilter с drf-yasg """
+    """ Обеспечивает совместимость ``RangeFilter`` с ``drf-yasg`` """
 
     def get_schema_fields(self, view):
         assert compat.coreapi is not None, 'coreapi must be installed to use `get_schema_fields()`'
