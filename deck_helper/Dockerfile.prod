@@ -42,8 +42,7 @@ RUN mkdir $DECKHELPER_HOME \
     && mkdir $MEDIA_DIR/cards/en \
     && mkdir $MEDIA_DIR/cards/ru \
     && mkdir $MEDIA_DIR/cards/thumbnails \
-    && mkdir $MEDIA_DIR/decks \
-    && mkdir $DECKHELPER_HOME/logs
+    && mkdir $MEDIA_DIR/decks
 WORKDIR $DECKHELPER_HOME
 
 # установка зависимостей из предыдущего этапа (builder)
