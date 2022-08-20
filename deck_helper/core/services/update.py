@@ -276,9 +276,9 @@ class Updater:
                 not self.__rewrite,
                 (r_card_queryset := Card.objects.filter(card_id=j_card['cardId'])).exists(),
                 unchanged := self.__is_equivalent(r_card_queryset.first(), j_card),
-                not(j_card.get('collectible', False) and not image_en.exists),
-                not(j_card.get('collectible', False) and not image_ru.exists),
-                not(j_card.get('collectible', False) and not thumbnail.exists),
+                not (j_card.get('collectible', False) and not image_en.exists),
+                not (j_card.get('collectible', False) and not image_ru.exists),
+                not (j_card.get('collectible', False) and not thumbnail.exists),
             ]):
                 # Карта обновляется, если соблюдено хотя бы 1 из условий:
                 # - установлен флаг `--rewrite` (данные о картах полностью переписываются)
