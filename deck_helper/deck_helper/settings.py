@@ -165,12 +165,32 @@ LOGGING = {
             'format': '\n\n\n[{server_time}]\nlogger:{name} | level:{levelname}\nMsg:\n{message}\n',
             'style': '{',
         },
+        'info': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[{server_time}] | logger:{name} | level:{levelname} | Msg: {message}',
+            'style': '{',
+        },
+        'err': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '\n\n[{server_time}]\nlogger:{name} | level:{levelname}\nMsg:\n{message}\n\n',
+            'style': '{',
+        },
     },
     'handlers': {
         'console': {
             'level': 'INFO',
             'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
+        },
+        'info': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'info',
+        },
+        'err': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+            'formatter': 'err',
         },
         'file': {
             'level': 'INFO',
@@ -187,12 +207,12 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['file', 'file_err'],
+            'handlers': ['info', 'err'],
             'level': 'WARNING',
             'propagate': True,
         },
         'deck_helper.custom': {
-            'handlers': ['file_err'],
+            'handlers': ['err'],
             'level': 'ERROR',
             'propagate': False,
         },
