@@ -228,7 +228,7 @@ X_RAPIDARI_KEY = os.environ.get('X_RAPIDARI_KEY')
 
 MODEL_TRANSLATION_FILE = BASE_DIR / 'locale' / 'translations.json'
 
-# Celery
+# Celery & Redis
 REDIS_HOST_NAME = 'broker'           # имя сервиса с Redis в docker-compose
 REDIS_PORT = os.environ.get('REDIS_PORT', default='6379')
 REDIS_HOST_PASSWORD = os.environ.get('REDIS_HOST_PASSWORD', '')
@@ -240,3 +240,13 @@ CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/1'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/2',
+    }
+}
+
+# Время жизни кэша (в секундах)
+CACHE_TTL = 60

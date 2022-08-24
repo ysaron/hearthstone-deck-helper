@@ -2,10 +2,12 @@ from django.http import HttpRequest, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.decorators.cache import cache_page
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.db import transaction
 from django.core.paginator import Paginator
@@ -19,6 +21,7 @@ from core.tasks import generate_deck_render
 from core.services.deck_codes import get_clean_deckstring
 from core.services.deck_utils import find_similar_decks
 from core.exceptions import DecodeError, UnsupportedCards
+from core.mixins import CacheMixin
 
 
 def create_deck(request: HttpRequest):
@@ -105,7 +108,7 @@ def get_deck_render(request: HttpRequest, task_id):
     return JsonResponse(result, status=200)
 
 
-class NamelessDecksListView(generic.ListView):
+class NamelessDecksListView(CacheMixin, generic.ListView):
     """ Вывод списка всех имеющихся в базе уникальных колод """
     model = Deck
     context_object_name = 'decks'
@@ -168,6 +171,7 @@ class UserDecksListView(LoginRequiredMixin, generic.ListView):
         return object_list
 
 
+@cache_page(settings.CACHE_TTL)
 def deck_view(request, deck_id):
     """ Просмотр конкретной колоды """
 

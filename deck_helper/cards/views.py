@@ -4,9 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Card
 from .forms import CardSearchFilterForm
+from core.mixins import CacheMixin
 
 
-class CardListView(generic.ListView):
+class CardListView(CacheMixin, generic.ListView):
     """ Список карт Hearthsone """
     model = Card
     context_object_name = 'cards'
@@ -71,7 +72,7 @@ class CardListView(generic.ListView):
         return object_list
 
 
-class CardDetailView(generic.DetailView):
+class CardDetailView(CacheMixin, generic.DetailView):
     """ Детальная информация о карте Hearthstone """
     model = Card
     slug_url_kwarg = 'card_slug'
