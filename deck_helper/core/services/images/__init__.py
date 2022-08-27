@@ -2,7 +2,7 @@ import requests
 import time
 from pathlib import Path
 from io import BytesIO
-from PIL import Image, ImageDraw, ImageFont, ImageEnhance
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance, PyAccess
 from collections import namedtuple
 from qrcode import QRCode, constants
 
@@ -110,7 +110,7 @@ class Thumbnail(Picture):
         with Image.open(self.path) as orig:
             orig.putalpha(255)          # добавление альфа-канала без прозрачности
             width, height = orig.size
-            pixels = orig.load()        # получение r/w доступа к изображению на уровне пикселей
+            pixels: PyAccess.PyAccess = orig.load()        # получение r/w доступа к изображению на уровне пикселей
 
             from_, to_ = from_perc / 100, to_perc / 100
 
@@ -325,11 +325,11 @@ class DeckRender(Picture):
         font_1 = ImageFont.truetype(str(path), 44, encoding='utf-8')
         font_2 = ImageFont.truetype(str(path), 26, encoding='utf-8')
 
-        self.__draw.rounded_rectangle([x0, y0, x1, y1], radius=10, outline='#ffffff', fill='#333', width=2)
+        self.__draw.rounded_rectangle((x0, y0, x1, y1), radius=10, outline='#ffffff', fill='#333', width=2)
 
         x0 += gap // 2      # корректировка положения столбцов по горизонтали
         for cost, value in enumerate(cost_distribution):
-            rect_area = [
+            rect_area: list = [
                 x0 + (col_width + gap) * cost + gap,
                 y1 - (self.manacurve.size.y - col_max_height) - one_card_height * value + gap,
                 x0 + (col_width + gap) * cost + gap + col_width,
@@ -342,17 +342,21 @@ class DeckRender(Picture):
             if (rect_area[3] - rect_area[1]) < font_2.size + 5:
                 value = 0
 
-            cost_text_area = [
+            cost_text_area: list = [
                 x0 + col_width / 2 + (col_width + gap) * cost + gap,
                 (y1 + rect_area[3] + gap - 10) / 2
             ]
-            value_text_area = [
+            value_text_area: list = [
                 cost_text_area[0],
                 rect_area[1] - 10 + (one_card_height + gap) / 2,
             ]
             if value_text_area[1] < (max_y := rect_area[1] + 3 * gap):
                 value_text_area[1] = max_y
             cost_digit = str(cost) if cost < 10 else '+'
+
+            rect_area: tuple[float, float, float, float] = tuple(rect_area)
+            cost_text_area: tuple[float, float] = tuple(cost_text_area)
+            value_text_area: tuple[float, float] = tuple(value_text_area)
 
             self.__draw.rectangle(rect_area, outline='#000000', fill='#ffffff', width=1)
             self.__draw.text(
@@ -371,7 +375,7 @@ class DeckRender(Picture):
 
         x0, y0 = self.craft.top_left.x, self.craft.top_left.y
         x1, y1 = self.craft.top_left.x + self.craft.size.x, self.craft.top_left.y + self.craft.size.y
-        self.__draw.rounded_rectangle([x0, y0, x1, y1], radius=10, outline='#ffffff', fill='#333', width=2)
+        self.__draw.rounded_rectangle((x0, y0, x1, y1), radius=10, outline='#ffffff', fill='#333', width=2)
 
         with Image.open(COMPONENTS / 'craft.png', 'r') as craft_cost_icon:
             w, h = craft_cost_icon.size
@@ -397,7 +401,7 @@ class DeckRender(Picture):
         """ Добавляет на рендер QR-код с кодом колоды """
         x0, y0 = self.qr.top_left.x, self.qr.top_left.y
         x1, y1 = self.qr.top_left.x + self.qr.size.x, self.qr.top_left.y + self.qr.size.y
-        self.__draw.rounded_rectangle([x0, y0, x1, y1], radius=10, outline='#ffffff', fill='#333', width=2)
+        self.__draw.rounded_rectangle((x0, y0, x1, y1), radius=10, outline='#ffffff', fill='#333', width=2)
 
         qr = QRCode(
             version=None,
@@ -441,7 +445,7 @@ class DeckRender(Picture):
         fmt = Window(size=fmt_area_size, top_left=fmt_top_left)
         x0, y0 = fmt.top_left.x, fmt.top_left.y
         x1, y1 = fmt.top_left.x + fmt.size.x, fmt.top_left.y + fmt.size.y
-        self.__draw.rounded_rectangle([x0, y0, x1, y1], radius=10, outline='#ffffff', fill='#333', width=2)
+        self.__draw.rounded_rectangle((x0, y0, x1, y1), radius=10, outline='#ffffff', fill='#333', width=2)
 
         path: Path = COMPONENTS / BASE_FONT
         font = ImageFont.truetype(str(path), 54, encoding='utf-8')
@@ -472,7 +476,7 @@ class DeckRender(Picture):
         types = Window(size=types_area_size, top_left=types_top_left)
         x0, y0 = types.top_left.x, types.top_left.y
         x1, y1 = types.top_left.x + types.size.x, types.top_left.y + types.size.y
-        self.__draw.rounded_rectangle([x0, y0, x1, y1], radius=10, outline='#ffffff', fill='#333', width=2)
+        self.__draw.rounded_rectangle((x0, y0, x1, y1), radius=10, outline='#ffffff', fill='#333', width=2)
 
         vertical = [(x0 + x1) // 2, y0 + 10, (x0 + x1) // 2, y1 - 10]
         self.__draw.line(vertical, fill='#ffffff')
@@ -524,7 +528,7 @@ class DeckRender(Picture):
         rarities = Window(size=rar_area_size, top_left=rar_top_left)
         x0, y0 = rarities.top_left.x, rarities.top_left.y
         x1, y1 = rarities.top_left.x + rarities.size.x, rarities.top_left.y + rarities.size.y
-        self.__draw.rounded_rectangle([x0, y0, x1, y1], radius=10, outline='#ffffff', fill='#333', width=2)
+        self.__draw.rounded_rectangle((x0, y0, x1, y1), radius=10, outline='#ffffff', fill='#333', width=2)
 
         vertical = [(x0 + x1) // 2, y0 + 10, (x0 + x1) // 2, y1 - 10]
         self.__draw.line(vertical, fill='#ffffff')
