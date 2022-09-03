@@ -286,10 +286,8 @@ class Updater:
                 # - карта есть в БД, но не совпадает с данными API по ключевым параметрам (карта понерфлена)
                 # - карта коллекционная, но не имеет сохраненного рендера или миниатюры
                 continue
-            r_card, card_created = Card.objects.get_or_create(
-                card_id=j_card['cardId'],
-                dbf_id=int(j_card['dbfId']),
-            )
+            r_card, card_created = Card.objects.get_or_create(dbf_id=int(j_card['dbfId']))
+            r_card.card_id = j_card['cardId']
             r_card.name = j_card['name']
             r_card.service_name = r_card.name
             r_card.card_type = self.__align_card_type(j_card.get('type', ''))
