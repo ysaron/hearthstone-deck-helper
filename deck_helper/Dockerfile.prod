@@ -11,7 +11,8 @@ RUN apt update \
     && apt upgrade -y \
     && apt install postgresql gcc python3-dev musl-dev -y
 
-RUN pip install --upgrade pip
+#RUN pip install --upgrade pip
+RUN pip install pip==22.1
 
 # настройка линтера: игнорируем E501 (строка кода слишком длинная)
 RUN pip install flake8
@@ -19,7 +20,7 @@ COPY . .
 RUN flake8 --ignore=E501 .
 
 COPY ./req.txt .
-RUN pip install -r req.txt
+RUN pip install --default-timeout=100 -r req.txt
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/deck_helper/wheels -r req.txt
 
 # ----------------------------------------------------------------------------------------

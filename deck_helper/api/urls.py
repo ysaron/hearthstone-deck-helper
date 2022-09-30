@@ -1,13 +1,17 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
+
 from . import views
 
 app_name = 'api'
 
+card_router = routers.SimpleRouter()
+card_router.register(r'cards', views.CardViewSet, basename='cards')
+
+deck_router = routers.SimpleRouter()
+deck_router.register(r'decks', views.DeckViewSet, basename='decks')
 
 urlpatterns = [
-    path('cards/', views.CardViewSet.as_view({'get': 'list'}), name='card_list'),
-    path('cards/<int:dbf_id>/', views.CardViewSet.as_view({'get': 'retrieve'}), name='card_retrieve'),
-    path('decks/', views.DeckListAPIView.as_view(), name='deck_list'),
-    path('decks/<int:pk>/', views.DeckDetailAPIView.as_view(), name='deck_retrieve'),
-    path('decode_deck/', views.DecodeDeckAPIView.as_view(), name='deck_decode'),
+    path('', include(card_router.urls)),
+    path('', include(deck_router.urls)),
 ]

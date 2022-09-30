@@ -1,12 +1,8 @@
-from rest_framework import generics, viewsets
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets, mixins
 
-from .serializers import CardListSerializer, CardDetailSerializer, DeckListSerializer, DeckDetailSerializer
+from . import serializers
 from .services.filters import CardFilter, DeckFilter
 from .services.utils import DjangoFilterBackend
-from core.services.deck_codes import get_clean_deckstring
-from core.exceptions import DecodeError, UnsupportedCards
 from cards.models import Card
 from decks.models import Deck
 
@@ -20,39 +16,31 @@ class CardViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_serializer_class(self):
         if self.action == 'list':
-            return CardListSerializer
+            return serializers.CardListSerializer
         elif self.action == 'retrieve':
-            return CardDetailSerializer
+            return serializers.CardDetailSerializer
 
 
-class DeckListAPIView(generics.ListAPIView):
-    """ Getting a list of decks """
-
-    queryset = Deck.nameless.all()
-    serializer_class = DeckListSerializer
+class DeckViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet,
+):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = DeckFilter
 
+    def get_serializer_class(self):
+        match self.action:
+            case 'list':
+                return serializers.DeckListSerializer
+            case 'create':
+                return serializers.DeckCreateSerializer
+            case _:
+                return serializers.DeckDetailSerializer
 
-class DeckDetailAPIView(generics.RetrieveAPIView):
-    """ Getting a specific deck """
-    queryset = Deck.nameless.all()
-    serializer_class = DeckDetailSerializer
-
-
-class DecodeDeckAPIView(APIView):
-    """ Decoding the deck from code """
-
-    def post(self, request):
-        if deckstring := request.data.get('d'):
-            try:
-                deckstring = get_clean_deckstring(deckstring)
-                deck = Deck.from_deckstring(deckstring)
-                serializer = DeckDetailSerializer(deck)
-                return Response(serializer.data)
-            except DecodeError as de:
-                return Response({'error': str(de)})
-            except UnsupportedCards as u:
-                return Response({'error': str(u)})
-
-        return Response()
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        if pk:
+            return Deck.nameless.filter(pk=pk)
+        return Deck.nameless.all()

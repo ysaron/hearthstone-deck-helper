@@ -1,6 +1,9 @@
 from rest_framework import serializers
+from rest_framework.exceptions import APIException
 
 from cards.models import Card
+from core.services.deck_codes import get_clean_deckstring
+from core.exceptions import DecodeError, UnsupportedCards
 from decks.models import Deck, Inclusion
 
 
@@ -93,3 +96,22 @@ class DeckDetailSerializer(DeckSerializer):
     class Meta:
         model = Deck
         fields = ('id', 'deck_format', 'deck_class', 'string', 'created', 'cost', 'cards')
+
+
+class DeckCreateSerializer(DeckSerializer):
+
+    class Meta:
+        model = Deck
+        fields = ('string',)
+
+    def create(self, validated_data):
+        try:
+            deckstring = get_clean_deckstring(validated_data['string'])
+            deck = Deck.from_deckstring(deckstring)
+        except (DecodeError, UnsupportedCards) as e:
+            raise APIException(e)
+        return deck
+
+    def to_representation(self, instance):
+        # Для ответа - другой сериализатор
+        return DeckDetailSerializer(instance=instance).data
