@@ -13,6 +13,7 @@ IMAGE_CLASS_MAP = {
     'Mage': {'stripe': 'mage_stripe.png'},
     'Hunter': {'stripe': 'hunter_stripe.png'},
     'Druid': {'stripe': 'druid_stripe.png'},
+    'Death Knight': {'stripe': 'deathknight_stripe.png'},
 }
 
 BASE_FONT = 'AvrileSans-Medium.ttf'

@@ -37,7 +37,7 @@
   --standard: rgba(24, 24, 129, 0.6);
   --wild: rgba(64, 64, 64, 0.7);
   --classic: rgba(0, 102, 0, 0.6);
-  --deck-width: 310px;
+  --deck-width: 320px;
 }
 
 html, body {
@@ -605,7 +605,6 @@ table.deck td a {display: block;}
 /* --- Шапка --- */
 .deck-header {
   cursor: default;
-  overflow: hidden;
 }
 
 /* Шапка */
@@ -628,8 +627,12 @@ table.deck td a {display: block;}
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 4px;
+  overflow: hidden;
 }
-.deck-caption {font-size: 14px;}
+.deck-caption {
+  font-size: 14px;
+  overflow: hidden;
+}
 
 /* Управляющие кнопки */
 td.deck-control {
