@@ -102,6 +102,10 @@
       "enUS": "Naga",
       "ruRU": "Нага"
     },
+    "Undead": {
+      "enUS": "Undead",
+      "ruRU": "Нежить"
+    },
     "Orc": {
       "enUS": "Orc",
       "ruRU": "Орк"
@@ -267,6 +271,14 @@
     "Murder at Castle Nathria": {
       "enUS": "Murder at Castle Nathria",
       "ruRU": "Убийство в замке Нафрия"
+    },
+    "Path of Arthas": {
+      "enUS": "Path of Arthas",
+      "ruRU": "Путь Артаса"
+    },
+    "March of the Lich King": {
+      "enUS": "March of the Lich King",
+      "ruRU": "Марш Короля-лича"
     }
   },
   "formats": [
@@ -495,6 +507,14 @@
     "Spellcraft": {
       "enUS": "Spellcraft",
       "ruRU": "Колдовство"
+    },
+    "Infuse": {
+      "enUS": "Infuse",
+      "ruRU": "Насыщение"
+    },
+    "Corpse": {
+      "enUS": "Corpse",
+      "ruRU": "Труп"
     }
   }
 }
