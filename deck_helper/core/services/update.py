@@ -259,10 +259,13 @@ class Updater:
             r_card.card_class.add(CardClass.objects.get(service_name=j_card['playerClass']))
 
     @staticmethod
-    def __write_tribe_to_card(r_card: Card, j_card: dict):
+    def __write_tribes_to_card(r_card: Card, j_card: dict):
         """ Связывает карту с расами (m2m) """
         if 'race' in j_card:
             r_card.tribe.add(Tribe.objects.get(service_name=j_card['race']))
+        if 'otherRaces' in j_card:
+            for tribe in j_card['otherRaces']:
+                r_card.tribe.add(Tribe.objects.get(service_name=tribe))
 
     def __write_cards(self):
         """ Обновляет карты в БД """
@@ -376,7 +379,7 @@ class Updater:
             # --- Заполнение ManyToMany-полей ---------------------------------
             self.__write_mechanics_to_card(r_card, j_card)
             self.__write_classes_to_card(r_card, j_card)
-            self.__write_tribe_to_card(r_card, j_card)
+            self.__write_tribes_to_card(r_card, j_card)
 
     def __is_equivalent(self, r_card: Card, j_card: dict) -> bool:
         """ Проверяет, была ли карта понерфлена """
