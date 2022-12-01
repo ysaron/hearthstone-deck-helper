@@ -26,8 +26,8 @@
   --demonhunter-2: #00cc99;
   --neutral-1: #bfbfbf;
   --neutral-2: #f2f2f2;
-  --deathknight-1: #1e1e2f;
-  --deathknight-2: #7373a5;
+  --deathknight-1: #46466d;
+  --deathknight-2: #8383af;
   --dream-1: #cc33ff;
   --dream-2: #f9e6ff;
   --legendary: #ffa31a;
@@ -603,7 +603,10 @@ table.deck td {
 table.deck td a {display: block;}
 
 /* --- Шапка --- */
-.deck-header {cursor: default;}
+.deck-header {
+  cursor: default;
+  overflow: hidden;
+}
 
 /* Шапка */
 .deck-header td.deck-name {
@@ -927,7 +930,11 @@ tbody.demonhunter td {border-color: white !important;}
   -moz-animation: CardLink 4s ease infinite;
   animation: CardLink 4s ease infinite;
 }
-.deathknight {background-color: var(--deathknight-1);}
+.deathknight {
+  background-color: var(--deathknight-1);
+  color: white;
+}
+tbody.deathknight td {border-color: white !important;}
 
 .multiclass:hover {
   background: var(--neutral-1);     /* изменяется через JS */
