@@ -121,8 +121,11 @@ class NamelessDecksListView(CacheMixin, generic.ListView):
         search_initial_values = {'deck_class': self.request.GET.get('deck_class', ''),
                                  'deck_format': self.request.GET.get('deck_format', '')}
 
-        context |= {'title': _('Decks'),
-                    'form': DeckFilterForm(initial=search_initial_values)}
+        context |= {
+            'title': _('Decks'),
+            'form': DeckFilterForm(initial=search_initial_values),
+            'deck_expanders': settings.KNOWN_EXPANDER_ID_LIST,
+        }
         return context
 
     def get_queryset(self):
@@ -153,8 +156,11 @@ class UserDecksListView(LoginRequiredMixin, generic.ListView):
         search_initial_values = {'deck_class': self.request.GET.get('deck_class', ''),
                                  'deck_format': self.request.GET.get('deck_format', '')}
 
-        context |= {'title': _('Decks'),
-                    'form': DeckFilterForm(initial=search_initial_values)}
+        context |= {
+            'title': _('Decks'),
+            'form': DeckFilterForm(initial=search_initial_values),
+            'deck_expanders': settings.KNOWN_EXPANDER_ID_LIST,
+        }
         return context
 
     def get_queryset(self):
@@ -212,6 +218,7 @@ def deck_view(request, deck_id):
         'deck_save_form': deck_save_form,
         'paginator': paginator,
         'page_obj': page_obj,
+        'deck_expanders': settings.KNOWN_EXPANDER_ID_LIST,
     }
 
     return render(request, template_name='decks/deck_detail.html', context=context)

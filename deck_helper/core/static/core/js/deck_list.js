@@ -12,7 +12,9 @@ function positionCardTooltips() {
     for (let i = 0; i < decks.length; i++) {
         let cards = decks[i].getElementsByClassName("deck-card-cell");
         for (let j = 0; j < cards.length; j++) {
-            cards[j].firstElementChild.lastElementChild.style.top = -100 - 1000 * j / cards.length + '%';
+            for (let z = 0; z < cards[j].children.length; z++) {
+                cards[j].children[z].lastElementChild.style.top = -100 - 1000 * j / cards.length + '%';
+            }
         }
     }
 }

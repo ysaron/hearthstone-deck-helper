@@ -221,6 +221,10 @@ LOGGING = {
 
 DECK_RENDER_MAX_NUMBER = 10     # максимальное число хранимых одновременно рендеров колод
 
+# Список ID карт, расширяющих колоду дополнительными картами.
+# При пустом списке никакие доп. карты не будут отображаться в колоде.
+KNOWN_EXPANDER_ID_LIST = [90749]
+
 # API Hearthstone (RapidAPI)
 RAPIDAPI_BASEURL = 'https://omgvamp-hearthstone-v1.p.rapidapi.com/'
 RAPIDAPI_HOST = 'omgvamp-hearthstone-v1.p.rapidapi.com'

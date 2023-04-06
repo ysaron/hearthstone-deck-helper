@@ -1,6 +1,6 @@
 import pytest
 
-from core.services.deck_codes import parse_deckstring
+from core.services.deck_codes import parse_deckstring, ParsedDeckstring
 from core.services.images import DeckRender
 from core.exceptions import DecodeError
 from decks.models import Deck, Render
@@ -8,7 +8,7 @@ from cards.models import Card, Mechanic
 
 
 def calc_deck_cards(deck: Deck) -> int:
-    cards = deck.included_cards
+    cards = deck.native_cards
     return sum([n * cards.filter(number=n).count() for n in (1, 2)])
 
 
@@ -18,11 +18,10 @@ def test_parse_deckstring(deck_code):
         parse_deckstring('some invalid string')
 
     result = parse_deckstring(deckstring=deck_code)
-    assert isinstance(result, tuple), f'parse_deckstring вернула {type(result)} вместо tuple'
-    assert len(result) == 3, 'данные о колоде должны быть кортежем из 3 элементов'
-    cards, heroes, format_ = result
-    assert isinstance(cards, list), 'cards должно быть списком'
-    for card in cards:
+    assert isinstance(result, ParsedDeckstring), f'parse_deckstring вернула {type(result)} вместо ParsedDeckstring'
+    assert isinstance(result.cards.native, list), 'cards должно быть списком'
+    assert isinstance(result.cards.additional, list), 'cards должно быть списком'
+    for card in result.cards.native:
         assert isinstance(card, tuple), 'данные о карте должны быть кортежем'
         assert len(card) == 2, 'кортеж карты должен содержать 2 элемента: dbf_id и кол-во вхождений в колоду'
         assert all(isinstance(i, int) for i in card), 'элементы кортежа карты должны иметь тип int'

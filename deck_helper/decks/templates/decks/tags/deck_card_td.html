@@ -1,0 +1,14 @@
+{% load custom_filters %}
+{% load deck_card_object %}
+{% load i18n %}
+
+<a href="{{ card.get_absolute_url }}" style="width: 100%;">
+  {{ card.name|truncatechars:truncate }}
+  <span class="{{ tooltip_cls }}"><img src="{{ card|locrender }}"></span>
+</a>
+{% for a_card in additional_cards %}
+  <a href="{{ a_card.get_absolute_url }}" class="additional-card-link">
+    +
+    <span class="{{ tooltip_cls }}"><img src="{{ a_card|locrender }}"></span>
+  </a>
+{% endfor %}

@@ -79,16 +79,21 @@ class DumpDeckListSerializer(serializers.ModelSerializer):
         deck.string = string
         deck.created = created
 
-        cards, heroes, format_ = parse_deckstring(deck.string)
-        deck.deck_class = Card.objects.get(dbf_id=heroes[0]).card_class.all().first()
-        deck.deck_format = Format.objects.get(numerical_designation=format_)
+        parsed_deck = parse_deckstring(deck.string)
+        deck.deck_class = Card.objects.get(dbf_id=parsed_deck.heroes[0]).card_class.all().first()
+        deck.deck_format = Format.objects.get(numerical_designation=parsed_deck.format_)
         deck.save()
 
-        for dbf_id, number in cards:
+        for dbf_id, number in parsed_deck.cards.native:
             card = Card.includibles.get(dbf_id=dbf_id)
             ci = Inclusion(deck=deck, card=card, number=number)
             ci.save()
-            deck.cards.add(card)
+
+        for dbf_id, source_dbf_id, number in parsed_deck.cards.additional:
+            card = Card.includibles.get(dbf_id=dbf_id)
+            source_card = Card.includibles.get(dbf_id=source_dbf_id)
+            ci = Inclusion(deck=deck, card=card, number=number, source_card=source_card, is_native=False)
+            ci.save()
 
 
 def import_decks(writer, path: Path, file: str):

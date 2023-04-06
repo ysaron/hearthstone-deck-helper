@@ -55,8 +55,13 @@ class Deck(models.Model):
                              verbose_name=_('User'))
     string = models.TextField(max_length=1500, verbose_name=_('Deck code'),
                               help_text=_('The string used to identify the cards that make up the deck.'))
-    cards = models.ManyToManyField(Card, through='Inclusion', verbose_name=_('Cards'),
-                                   help_text=_('The cards that make up the deck.'))
+    cards = models.ManyToManyField(
+        Card,
+        through='Inclusion',
+        through_fields=('deck', 'card'),
+        verbose_name=_('Cards'),
+        help_text=_('The cards that make up the deck.'),
+    )
     deck_class = models.ForeignKey(CardClass, on_delete=models.CASCADE, related_name='decks', verbose_name=_('Class'),
                                    help_text=_('The class for which the deck is built.'))
     deck_format = models.ForeignKey(Format, on_delete=models.CASCADE,
@@ -87,12 +92,12 @@ class Deck(models.Model):
             return nameless_deck.first()
 
         instance = cls()
-        cards, heroes, format_ = parse_deckstring(deckstring)
-        instance.deck_class = Card.objects.get(dbf_id=heroes[0]).card_class.all().first()
-        instance.deck_format = Format.objects.get(numerical_designation=format_)
+        parsed_deck = parse_deckstring(deckstring)
+        instance.deck_class = Card.objects.get(dbf_id=parsed_deck.heroes[0]).card_class.all().first()
+        instance.deck_format = Format.objects.get(numerical_designation=parsed_deck.format_)
         instance.string = deckstring
         instance.save()
-        for dbf_id, number in cards:
+        for dbf_id, number in parsed_deck.cards.native:
             try:
                 card = Card.includibles.get(dbf_id=dbf_id)
             except Card.DoesNotExist:
@@ -100,7 +105,16 @@ class Deck(models.Model):
                 raise UnsupportedCards(msg)
             ci = Inclusion(deck=instance, card=card, number=number)
             ci.save()
-            instance.cards.add(card)
+
+        for dbf_id, source_dbf_id, number in parsed_deck.cards.additional:
+            try:
+                card = Card.includibles.get(dbf_id=dbf_id)
+                source_card = Card.includibles.get(dbf_id=source_dbf_id)
+            except Card.DoesNotExist:
+                msg = _('No additional card data')
+                raise UnsupportedCards(msg)
+            ci = Inclusion(deck=instance, card=card, number=number, source_card=source_card, is_native=False)
+            ci.save()
 
         return instance
 
@@ -121,8 +135,24 @@ class Deck(models.Model):
             'card_set',
         ).annotate(
             number=models.F('inclusions__number'),
-        )
-        return decklist.order_by('cost', 'name')
+        ).order_by('cost', 'name')
+        return decklist
+
+    @property
+    def native_cards(self):
+        """ Карты, которые включены в колоду по умолчанию """
+        cards = self.included_cards.filter(inclusions__is_native=True).distinct()
+        return cards
+
+    @property
+    def additional_cards(self):
+        """ Карты, добавленные в колоду посредством другой карты (``source_card``) """
+        cards = self.included_cards.filter(
+            inclusions__is_native=False,
+        ).annotate(
+            source=models.F('inclusions__source_card'),
+        ).distinct()
+        return cards
 
     def get_deckstring_form(self):
         """ Возвращает форму, используемую для копирования кода колоды """
@@ -225,6 +255,15 @@ class Inclusion(models.Model):
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE, related_name='inclusions')
     number = models.PositiveSmallIntegerField(verbose_name=_('Amount'),
                                               help_text=_('The number of card inclusions in the deck.'))
+    is_native = models.BooleanField(default=True, help_text=_('Is the card included in the deck by default'))
+    source_card = models.ForeignKey(
+        Card,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name='inclusion_source',
+        help_text=_('The card by which this card was added.'),
+    )
 
     objects = IncluSionManager.as_manager()
 

@@ -1,14 +1,15 @@
 {% extends "core/base.html" %}
 {% load custom_filters %}
 {% load deck_object %}
+{% load deck_card_object %}
 {% block title %}{{ title|mktitle }}{% endblock %}
 {% load i18n %}
 
 {% block scripts %}
     {% load static %}
-    <script src="{% static 'core/js/multiclass.js' %}?v=2.0.0"></script>
-    <script src="{% static 'core/js/rnd_deckstring.js' %}?v=2.0.0"></script>
-    <script src="{% static 'core/js/deck_list.js' %}?v=2.0.0"></script>
+    <script src="{% static 'core/js/multiclass.js' %}?v=2.0.1"></script>
+    <script src="{% static 'core/js/rnd_deckstring.js' %}?v=2.0.1"></script>
+    <script src="{% static 'core/js/deck_list.js' %}?v=2.0.1"></script>
 {% endblock %}
 
 {% block content %}
@@ -155,14 +156,11 @@
         </tr>
         </tbody>
         <tbody class="deck-cards">
-        {% for card in deck.included_cards %}
+        {% for card in deck.native_cards %}
         <tr class="{{ card|cclass }} {{ card|rar }} rartext">
             <td class="deck-number-cell" style=""><a href="{{ card.get_absolute_url }}">{{ card.cost }}</a></td>
             <td class="deck-card-cell" style="background: no-repeat 115% 30%/90% url({{ card.thumbnail.url }});">
-                <a href="{{ card.get_absolute_url }}">
-                    {{ card.name|truncatechars:22 }}
-                    <span><img src="{{ card|locrender }}"></span>
-                </a>
+                {% deck_card_inclusion_content deck=deck card=card %}
             </td>
             <td class="deck-number-cell" style="width:10%;"><a href="{{ card.get_absolute_url }}">{% if card.rarity == 'L' %}&#9733;{% else %}{{ card.number }}x{% endif %}</a></td>
         </tr>
