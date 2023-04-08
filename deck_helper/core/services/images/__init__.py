@@ -2,7 +2,7 @@ import requests
 import time
 from pathlib import Path
 from io import BytesIO
-from PIL import Image, ImageDraw, ImageFont, ImageEnhance, PyAccess
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance, ImageFilter, ImageChops, PyAccess
 from collections import namedtuple
 from dataclasses import dataclass
 from itertools import groupby
@@ -267,9 +267,11 @@ class DeckRender(Picture):
                 if card.number > 1:
                     cr2 = card_render.rotate(angle=-8, center=(350, 150), resample=Image.BICUBIC, expand=True)
                     cr2 = self.__adjust_brightness(cr2, factor=0.8)
+                    cr2 = self.__dropshadow(cr2, offset=(-3, -1), color='#1a1a1a')
                     self.__render.paste(cr2, c, mask=cr2)
                 card_render = self.__adjust_brightness(card_render, factor=1.2)
                 card_render = self.__contrast(card_render, 1.1)
+                card_render = self.__dropshadow(card_render, offset=(-5, -2))
                 self.__render.paste(card_render, c, mask=card_render)
 
         # --- доп. карты ---------------------------------------------------------------------------------
@@ -278,10 +280,12 @@ class DeckRender(Picture):
                 # рендер источника
                 source_card_render = self.__adjust_brightness(source_card_render, factor=1.2)
                 source_card_render = self.__contrast(source_card_render, 1.1)
+                source_card_render = self.__dropshadow(source_card_render, offset=(-3, -1), color='#cca300')
                 self.__render.paste(source_card_render, group.source.coord, mask=source_card_render)
 
             with Image.open(COMPONENTS / 'arrow.png', 'r') as arrow_icon:
                 # стрелка
+                arrow_icon = self.__dropshadow(arrow_icon, offset=(-2, -1), color='#cca300')
                 self.__render.paste(arrow_icon, group.arrow_coord, mask=arrow_icon)
 
             for cardcoord in group.cards:
@@ -290,9 +294,11 @@ class DeckRender(Picture):
                     if cardcoord.number > 1:
                         cr2 = card_render.rotate(angle=-8, center=(350, 150), resample=Image.BICUBIC, expand=True)
                         cr2 = self.__adjust_brightness(cr2, factor=0.8)
+                        cr2 = self.__dropshadow(cr2, offset=(-2, -1), color='#997a00')
                         self.__render.paste(cr2, cardcoord.coord, mask=cr2)
                     card_render = self.__adjust_brightness(card_render, factor=1.2)
                     card_render = self.__contrast(card_render, 1.1)
+                    card_render = self.__dropshadow(card_render, offset=(-3, -1), color='#cca300')
                     self.__render.paste(card_render, cardcoord.coord, mask=card_render)
 
     def __draw_header(self):
@@ -675,6 +681,24 @@ class DeckRender(Picture):
         """
         enhancer = ImageEnhance.Contrast(image)
         return enhancer.enhance(factor)
+
+    @staticmethod
+    def __dropshadow(image: Image.Image, offset: tuple[int, int], color: str = '#000'):
+        """
+        :param image: изображение
+        :param offset: смещение по X и Y в пикселях
+        :param color: цвет тени
+        :return: копия изображения с тенью, отбрасываемой непрозрачными пикселями
+        """
+        alpha = image.split()[-1]
+        alpha_blur = alpha.filter(ImageFilter.BoxBlur(1.5))
+        x_offset, y_offset = offset
+        with Image.new(mode='RGBA', size=alpha_blur.size, color=color) as shadow:
+            shadow.putalpha(alpha_blur)
+            shadow = ImageChops.offset(shadow, x_offset, y_offset)
+            image = Image.alpha_composite(shadow, image)
+
+        return image
 
     @staticmethod
     def __calc_cost_distribution(cards) -> tuple[int, ...]:
