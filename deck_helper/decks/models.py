@@ -141,7 +141,10 @@ class Deck(models.Model):
     @property
     def native_cards(self):
         """ Карты, которые включены в колоду по умолчанию """
-        cards = self.included_cards.filter(inclusions__is_native=True).distinct()
+        cards = self.included_cards.filter(
+            inclusions__is_native=True,
+            deck=self,
+        ).distinct()
         return cards
 
     @property
@@ -149,6 +152,7 @@ class Deck(models.Model):
         """ Карты, добавленные в колоду посредством другой карты (``source_card``) """
         cards = self.included_cards.filter(
             inclusions__is_native=False,
+            deck=self,
         ).annotate(
             source=models.F('inclusions__source_card'),
         ).distinct()

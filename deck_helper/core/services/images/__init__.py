@@ -4,8 +4,10 @@ from pathlib import Path
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance, PyAccess
 from collections import namedtuple
-from qrcode import QRCode, constants
+from dataclasses import dataclass
+from itertools import groupby
 
+from qrcode import QRCode, constants
 from django.conf import settings
 from django.core.files import File
 from django.db.models import Q
@@ -19,6 +21,29 @@ Size = namedtuple('Size', ['x', 'y'])
 Window = namedtuple('Window', ['size', 'top_left'])     # определяет размеры и положение инфо-окна на рендере
 
 COMPONENTS = Path(__file__).resolve().parent / 'components'
+
+
+@dataclass
+class CardCoord:
+    card: Card
+    number: int = 1
+    coord: Point | None = None
+
+
+@dataclass
+class AdditionalCardGroup:
+    """ Для удобной отрисовки карты-источника и добавляемых ей карт """
+    source: CardCoord
+    cards: list[CardCoord]
+    arrow_coord: Point | None = None
+
+    def get_num_rows(self, num_columns: int) -> int:
+        """
+        :param num_columns: число столбцов на рендере колоды
+        :return: число строк, занимаемых доп. картами на рендере
+        """
+        max_card_in_row = num_columns - 2
+        return (len(self.cards) + max_card_in_row - 1) // max_card_in_row
 
 
 class Picture:
@@ -135,7 +160,8 @@ class DeckRender(Picture):
         self.path = self.__generate_path()
         self.width = 2380
         self.height = 1644
-        self.coord: list[tuple[int, int]] = []
+        self.additional_cards = self.__get_additional_cards()
+        self.coords: list[tuple[int, int]] = []
 
         self.footer = Window(Size(0, 0), Point(0, 0))
         self.manacurve = Window(Size(0, 0), Point(0, 0))
@@ -158,6 +184,26 @@ class DeckRender(Picture):
     def download(self):
         raise NotImplementedError()
 
+    def __get_additional_cards(self) -> list[AdditionalCardGroup]:
+        """ Возвращает дополнительные карты в удобном для отображения виде """
+        if not self.deck.additional_cards.exists():
+            return []
+
+        grouped_cards = groupby(self.deck.additional_cards, key=lambda card: card.source)
+        result = []
+        for source_id, cardlist in grouped_cards:
+            try:
+                source_card = Card.includibles.get(dbf_id=source_id)
+            except Card.DoesNotExist:
+                continue
+            group = AdditionalCardGroup(
+                source=CardCoord(card=source_card),
+                cards=[CardCoord(card=card, number=card.number) for card in cardlist],
+            )
+            result.append(group)
+
+        return result
+
     def create(self):
         """ Создает рендер """
 
@@ -168,30 +214,55 @@ class DeckRender(Picture):
 
     def __pre_format_render(self):
         """ Устанавливает разрешение и координаты плейсхолдеров в зависимости от кол-ва карт """
-        cards = self.deck.included_cards
+        cards = self.deck.native_cards
+
+        # --- расчет разрешения рендера ---------------------------------------------------------------
         amount = cards.count()
         vertical_num = 3 if amount <= 30 else (amount + 9) // 10
-        self.height += 362 * (vertical_num - 3)
         horizontal_num = (amount + vertical_num - 1) // vertical_num    # деление с округлением вверх
         if horizontal_num < 6:
             horizontal_num = 6
+        vertical_num += sum(group.get_num_rows(num_columns=horizontal_num) for group in self.additional_cards)
+        self.height += 362 * (vertical_num - 3)
         self.width = 238 * horizontal_num + 10
 
+        # --- расчет координат карт ---------------------------------------------------------------------
         x, y = 0, 120
+        # координаты карт по умолчанию (список)
         for card in cards:
             if x >= self.width - 238:
                 x = 0
                 y += 360
 
             # исходные PNG карт-героев смещены --> корректировка
-            coords = (x - 8, y - 18) if card.card_type == Card.CardTypes.HERO else (x, y)
-            self.coord.append(coords)
+            coord = (x - 8, y - 18) if card.card_type == Card.CardTypes.HERO else (x, y)
+            self.coords.append(coord)
             x += 238
+
+        # координаты доп. карт (привязываются к картам)
+        for group in self.additional_cards:
+            x = 0
+            y += 360
+            coord = (x - 8, y - 18) if group.source.card.card_type == Card.CardTypes.HERO else (x, y)
+            group.source.coord = coord
+            x += 238
+            group.arrow_coord = (x, y)
+            x += 238
+            for a_card in group.cards:
+                if x >= self.width - 238:
+                    x = 238 * 2
+                    y += 360
+
+                coord = (x - 8, y - 18) if a_card.card.card_type == Card.CardTypes.HERO else (x, y)
+                a_card.coord = coord
+                x += 238
 
     def __draw_cards(self):
         """ Добавляет на рендер колоды рендеры ее карт """
         image_field = SUPPORTED_LANGUAGES[self.language]['field']
-        for card, c in zip(self.deck.included_cards, self.coord):
+
+        # --- карты по умолчанию ----------------------------------------------------------------------------
+        for card, c in zip(self.deck.native_cards, self.coords):
             with Image.open(getattr(card, image_field), 'r') as card_render:
                 if card.number > 1:
                     cr2 = card_render.rotate(angle=-8, center=(350, 150), resample=Image.BICUBIC, expand=True)
@@ -200,6 +271,29 @@ class DeckRender(Picture):
                 card_render = self.__adjust_brightness(card_render, factor=1.2)
                 card_render = self.__contrast(card_render, 1.1)
                 self.__render.paste(card_render, c, mask=card_render)
+
+        # --- доп. карты ---------------------------------------------------------------------------------
+        for group in self.additional_cards:
+            with Image.open(getattr(group.source.card, image_field), 'r') as source_card_render:
+                # рендер источника
+                source_card_render = self.__adjust_brightness(source_card_render, factor=1.2)
+                source_card_render = self.__contrast(source_card_render, 1.1)
+                self.__render.paste(source_card_render, group.source.coord, mask=source_card_render)
+
+            with Image.open(COMPONENTS / 'arrow.png', 'r') as arrow_icon:
+                # стрелка
+                self.__render.paste(arrow_icon, group.arrow_coord, mask=arrow_icon)
+
+            for cardcoord in group.cards:
+                with Image.open(getattr(cardcoord.card, image_field), 'r') as card_render:
+                    # рендер доп. карты
+                    if cardcoord.number > 1:
+                        cr2 = card_render.rotate(angle=-8, center=(350, 150), resample=Image.BICUBIC, expand=True)
+                        cr2 = self.__adjust_brightness(cr2, factor=0.8)
+                        self.__render.paste(cr2, cardcoord.coord, mask=cr2)
+                    card_render = self.__adjust_brightness(card_render, factor=1.2)
+                    card_render = self.__contrast(card_render, 1.1)
+                    self.__render.paste(card_render, cardcoord.coord, mask=card_render)
 
     def __draw_header(self):
         """ Добавляет на рендер шапку с заголовком """
