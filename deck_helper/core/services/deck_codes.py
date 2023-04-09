@@ -124,7 +124,7 @@ def parse_deckstring(deckstring) -> ParsedDeckstring:
 
         # Кол-во доп. карт
         num_cards_additional = _read_varint(data)
-        for _ in range(num_cards_additional):
+        for i in range(num_cards_additional):
             card = ParsedAdditionalCard(dbf_id=_read_varint(data), source_dbf_id=_read_varint(data))
             parsed_cards.additional.append(card)
     except DecodeError:
