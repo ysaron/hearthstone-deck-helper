@@ -110,6 +110,10 @@
 
 ![render02](/pics/render02.png)
 
+---
+
+![render03](/pics/render03.png)
+
 QR-код содержит код колоды.  
 
 ---
