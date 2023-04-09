@@ -3,7 +3,7 @@ import time
 from pathlib import Path
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance, ImageFilter, ImageChops, PyAccess
-from collections import namedtuple
+from typing import NamedTuple
 from dataclasses import dataclass
 from itertools import groupby
 
@@ -16,11 +16,23 @@ from decks.models import Deck
 from cards.models import Card
 from .config import SUPPORTED_LANGUAGES, IMAGE_CLASS_MAP, BASE_FONT
 
-Point = namedtuple('Point', ['x', 'y'])
-Size = namedtuple('Size', ['x', 'y'])
-Window = namedtuple('Window', ['size', 'top_left'])     # определяет размеры и положение инфо-окна на рендере
-
 COMPONENTS = Path(__file__).resolve().parent / 'components'
+
+
+class Point(NamedTuple):
+    x: int
+    y: int
+
+
+class Size(NamedTuple):
+    x: int
+    y: int
+
+
+class Window(NamedTuple):
+    """ Определяет размеры и положение инфо-окна на рендере """
+    size: Size
+    top_left: Point
 
 
 @dataclass
@@ -161,7 +173,7 @@ class DeckRender(Picture):
         self.width = 2380
         self.height = 1644
         self.additional_cards = self.__get_additional_cards()
-        self.coords: list[tuple[int, int]] = []
+        self.coords: list[Point] = []
 
         self.footer = Window(Size(0, 0), Point(0, 0))
         self.manacurve = Window(Size(0, 0), Point(0, 0))
@@ -174,8 +186,8 @@ class DeckRender(Picture):
         self.__draw = ImageDraw.Draw(self.__render)
 
     @property
-    def size(self) -> tuple[int, int]:
-        return self.width, self.height
+    def size(self) -> Size:
+        return Size(self.width, self.height)
 
     def __generate_path(self) -> Path:
         filename = f'{self.deck.pk}{int(time.time()):x}.png'
@@ -235,7 +247,7 @@ class DeckRender(Picture):
                 y += 360
 
             # исходные PNG карт-героев смещены --> корректировка
-            coord = (x - 8, y - 18) if card.card_type == Card.CardTypes.HERO else (x, y)
+            coord = Point(x - 8, y - 18) if card.card_type == Card.CardTypes.HERO else Point(x, y)
             self.coords.append(coord)
             x += 238
 
@@ -243,17 +255,17 @@ class DeckRender(Picture):
         for group in self.additional_cards:
             x = 0
             y += 360
-            coord = (x - 8, y - 18) if group.source.card.card_type == Card.CardTypes.HERO else (x, y)
+            coord = Point(x - 8, y - 18) if group.source.card.card_type == Card.CardTypes.HERO else Point(x, y)
             group.source.coord = coord
             x += 238
-            group.arrow_coord = (x, y)
+            group.arrow_coord = Point(x, y)
             x += 238
             for a_card in group.cards:
                 if x >= self.width - 238:
                     x = 238 * 2
                     y += 360
 
-                coord = (x - 8, y - 18) if a_card.card.card_type == Card.CardTypes.HERO else (x, y)
+                coord = Point(x - 8, y - 18) if a_card.card.card_type == Card.CardTypes.HERO else Point(x, y)
                 a_card.coord = coord
                 x += 238
 
