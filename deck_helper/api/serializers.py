@@ -77,7 +77,7 @@ class DeckSerializer(serializers.ModelSerializer):
     cost = serializers.SerializerMethodField()
 
     def get_cards(self, instance):
-        cards = instance.inclusions.all().order_by('card__cost', 'card__name')
+        cards = instance.inclusions.filter(is_native=True).order_by('card__cost', 'card__name')
         return InclusionSerializer(cards, many=True).data
 
     def get_cost(self, instance):
