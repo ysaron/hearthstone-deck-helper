@@ -285,7 +285,8 @@
     {"num": 0, "name_en": "Unknown", "name_ru": "Неизвестно"},
     {"num": 1, "name_en": "Wild", "name_ru": "Вольный"},
     {"num": 2, "name_en": "Standard", "name_ru": "Стандарт"},
-    {"num": 3, "name_en": "Classic", "name_ru": "Классик"}
+    {"num": 3, "name_en": "Classic", "name_ru": "Классик"},
+    {"num": 4, "name_en": "Twist", "name_ru": "Твист"}
   ],
   "mechanics": {
     "Adapt": {

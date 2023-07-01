@@ -52,7 +52,7 @@ COPY --from=builder /usr/src/deck_helper/wheels /wheels
 COPY --from=builder /usr/src/deck_helper/req.txt .
 RUN pip install --no-cache /wheels/*
 
-RUN apt update && apt install -y netcat
+RUN apt update && apt install -y netcat-traditional
 
 COPY entrypoint.prod.sh $DECKHELPER_HOME
 
