@@ -9,7 +9,7 @@ WORKDIR /usr/src/deck_helper/
 
 RUN apt update \
     && apt upgrade -y \
-    && apt install netcat postgresql gcc python3-dev musl-dev -y
+    && apt install netcat-traditional postgresql gcc python3-dev musl-dev -y
 
 RUN pip install --upgrade pip
 
