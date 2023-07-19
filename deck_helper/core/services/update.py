@@ -250,13 +250,27 @@ class Updater:
             r_card.mechanic.add(Mechanic.objects.get(service_name=m))
 
     @staticmethod
-    def __write_classes_to_card(r_card: Card, j_card: dict):
-        """ Связывает карту с классами (m2m) """
+    def __get_classes(j_card: dict) -> list[str]:
         if 'classes' in j_card:
-            for cls in j_card['classes']:
-                r_card.card_class.add(CardClass.objects.get(service_name=cls))
+            return j_card['classes']
+        elif 'multiClassGroup' in j_card:
+            return j_card['multiClassGroup'].split('/')
         elif 'playerClass' in j_card:
-            r_card.card_class.add(CardClass.objects.get(service_name=j_card['playerClass']))
+            return [j_card['playerClass']]
+        return []
+
+    def __write_classes_to_card(self, r_card: Card, j_card: dict):
+        """ Связывает карту с классами (m2m) """
+        for cls in self.__get_classes(j_card):
+            r_card.card_class.add(CardClass.objects.get(service_name=cls))
+        # if 'classes' in j_card:
+        #     for cls in j_card['classes']:
+        #         r_card.card_class.add(CardClass.objects.get(service_name=cls))
+        # elif 'multiClassGroup' in j_card:
+        #     for cls in j_card['multiClassGroup'].split('/'):
+        #         r_card.card_class.add(CardClass.objects.get(service_name=cls))
+        # elif 'playerClass' in j_card:
+        #     r_card.card_class.add(CardClass.objects.get(service_name=j_card['playerClass']))
 
     @staticmethod
     def __write_tribes_to_card(r_card: Card, j_card: dict):
@@ -387,14 +401,17 @@ class Updater:
         if not r_card:
             return False
 
-        equivalent = all([r_card.name == j_card['name'],
-                          r_card.text == _clear_unreadable(j_card.get('text', '')),
-                          r_card.spell_school == self.__align_spellschool(j_card.get('spellSchool', '')),
-                          r_card.cost == int(j_card.get('cost', 0)),
-                          r_card.attack == int(j_card.get('attack', 0)),
-                          r_card.health == int(j_card.get('health', 0)),
-                          r_card.durability == int(j_card.get('durability', 0)),
-                          r_card.armor == int(j_card.get('armor', 0))])
+        equivalent = all([
+            r_card.name == j_card['name'],
+            r_card.text == _clear_unreadable(j_card.get('text', '')),
+            r_card.spell_school == self.__align_spellschool(j_card.get('spellSchool', '')),
+            r_card.cost == int(j_card.get('cost', 0)),
+            r_card.attack == int(j_card.get('attack', 0)),
+            r_card.health == int(j_card.get('health', 0)),
+            r_card.durability == int(j_card.get('durability', 0)),
+            r_card.armor == int(j_card.get('armor', 0)),
+            r_card.card_class.count() == len(self.__get_classes(j_card)),
+        ])
 
         return equivalent
 
