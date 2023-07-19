@@ -33,7 +33,7 @@
     </tr>
     <tr>
         <td style="min-width:144px;"><strong>{% trans "Class" %}</strong></td>
-        <td>{% for card_class in card.card_class.all %}<a href="{% url 'cards:card_list' %}?card_class={{ card_class.pk }}&collectible=true" class="intext">{{ card_class }}</a>{% if not forloop.last %} {% endif %}{% endfor %}</td>
+        <td>{% for card_class in card.card_class.all %}<a href="{% url 'cards:card_list' %}?card_class={{ card_class.pk }}&collectible=true" class="intext {{card|cclass}}">{{ card_class }}</a>{% if not forloop.last %} {% endif %}{% endfor %}</td>
     </tr>
     {% if card.text %}
     <tr>
@@ -60,7 +60,7 @@
     </tr>
     <tr>
         <td><strong>{% trans "Rarity" %}</strong></td>
-        <td><a href="{% url 'cards:card_list' %}?rarity={{ card.rarity }}&collectible=true" class="intext">{{ card.get_rarity_display }}</a></td>
+        <td><a href="{% url 'cards:card_list' %}?rarity={{ card.rarity }}&collectible=true" class="intext rartext {{card|rar}}">{{ card.get_rarity_display }}</a></td>
     </tr>
     {% if card.card_type == c_types.MINION and card.tribe.all %}
     <tr>

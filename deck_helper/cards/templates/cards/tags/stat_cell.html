@@ -8,7 +8,7 @@
     </td>
     <td>
     {% for p in params %}
-        {{ p.value }}{% if not forloop.last %} | {% endif %}
+        <span class="rartext common">{{ p.value }}</span>{% if not forloop.last %} | {% endif %}
     {% endfor %}
     </td>
 </tr>

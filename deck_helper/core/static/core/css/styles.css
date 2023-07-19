@@ -817,8 +817,8 @@ td.deck-control * {
   animation: CardLink 4s ease infinite;
 }
 .mage {
-  background-color: var(--mage-1);
-  color: black;
+  background-color: var(--mage-1) !important;
+  color: black !important;
 }
 
 .priest:hover {
@@ -829,8 +829,8 @@ td.deck-control * {
   animation: CardLink 4s ease infinite;
 }
 .priest {
-  background-color: var(--priest-1);
-  color: black;
+  background-color: var(--priest-1) !important;
+  color: black !important;
 }
 
 .warlock:hover {
@@ -841,8 +841,8 @@ td.deck-control * {
   animation: CardLink 4s ease infinite;
 }
 .warlock {
-  background-color: var(--warlock-1);
-  color: white;
+  background-color: var(--warlock-1) !important;
+  color: white !important;
 }
 tbody.warlock td {border-color: white !important;}
 
@@ -854,8 +854,8 @@ tbody.warlock td {border-color: white !important;}
   animation: CardLink 4s ease infinite;
 }
 .druid {
-  background-color: var(--druid-1);
-  color: white;
+  background-color: var(--druid-1) !important;
+  color: white !important;
 }
 tbody.druid td {border-color: white !important;}
 
@@ -867,8 +867,8 @@ tbody.druid td {border-color: white !important;}
   animation: CardLink 4s ease infinite;
 }
 .shaman {
-  background-color: var(--shaman-1);
-  color: white;
+  background-color: var(--shaman-1) !important;
+  color: white !important;
 }
 tbody.shaman td {border-color: white !important;}
 
@@ -880,8 +880,8 @@ tbody.shaman td {border-color: white !important;}
   animation: CardLink 4s ease infinite;
 }
 .rogue {
-  background-color: var(--rogue-1);
-  color: white;
+  background-color: var(--rogue-1) !important;
+  color: white !important;
 }
 tbody.rogue td {border-color: white !important;}
 
@@ -893,8 +893,8 @@ tbody.rogue td {border-color: white !important;}
   animation: CardLink 4s ease infinite;
 }
 .paladin {
-  background-color: var(--paladin-1);
-  color: black;
+  background-color: var(--paladin-1) !important;
+  color: black !important;
 }
 
 .warrior:hover {
@@ -905,8 +905,8 @@ tbody.rogue td {border-color: white !important;}
   animation: CardLink 4s ease infinite;
 }
 .warrior {
-  background-color: var(--warrior-1);
-  color: white;
+  background-color: var(--warrior-1) !important;
+  color: white !important;
 }
 tbody.warrior td {border-color: white !important;}
 
@@ -918,8 +918,8 @@ tbody.warrior td {border-color: white !important;}
   animation: CardLink 4s ease infinite;
 }
 .hunter {
-  background-color: var(--hunter-1);
-  color: white;
+  background-color: var(--hunter-1) !important;
+  color: white !important;
 }
 tbody.hunter td {border-color: white !important;}
 
@@ -931,8 +931,8 @@ tbody.hunter td {border-color: white !important;}
   animation: CardLink 4s ease infinite;
 }
 .demonhunter {
-  background-color: var(--demonhunter-1);
-  color: white;
+  background-color: var(--demonhunter-1) !important;
+  color: white !important;
 }
 tbody.demonhunter td {border-color: white !important;}
 
@@ -943,7 +943,7 @@ tbody.demonhunter td {border-color: white !important;}
   -moz-animation: CardLink 4s ease infinite;
   animation: CardLink 4s ease infinite;
 }
-.neutral {background-color: var(--neutral-1);}
+.neutral {background-color: var(--neutral-1) !important;}
 
 .dream:hover {
   background: linear-gradient(305deg, var(--dream-1), var(--dream-2), var(--dream-1));
@@ -952,7 +952,7 @@ tbody.demonhunter td {border-color: white !important;}
   -moz-animation: CardLink 4s ease infinite;
   animation: CardLink 4s ease infinite;
 }
-.dream {background-color: var(--dream-1);}
+.dream {background-color: var(--dream-1) !important;}
 
 .deathknight:hover {
   background: linear-gradient(305deg, var(--deathknight-1), var(--deathknight-2), var(--deathknight-1));
@@ -962,8 +962,8 @@ tbody.demonhunter td {border-color: white !important;}
   animation: CardLink 4s ease infinite;
 }
 .deathknight {
-  background-color: var(--deathknight-1);
-  color: white;
+  background-color: var(--deathknight-1) !important;
+  color: white !important;
 }
 tbody.deathknight td {border-color: white !important;}
 
@@ -981,10 +981,10 @@ tbody.deathknight td {border-color: white !important;}
   letter-spacing: 1px;
   text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000;
 }
-.legendary, .legendary a {color: var(--legendary);}
-.epic, .epic a {color: var(--epic);}
-.rare, .rare a {color: var(--rare);}
-.common, .common a {color: var(--common);}
+.legendary, .legendary a {color: var(--legendary) !important;}
+.epic, .epic a {color: var(--epic) !important;}
+.rare, .rare a {color: var(--rare) !important;}
+.common, .common a {color: var(--common) !important;}
 
 /* --- Анимации градиента --------------------------------------------------------- */
 @-webkit-keyframes CardLink {
